@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError,
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerMessage, StickerSendMessage, TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction,
+    MessageEvent, TextMessage, TextSendMessage, StickerMessage, StickerSendMessage, TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction, ImageCarouselTemplate, ImageCarouselColumn,
 )
 
 app = Flask(__name__)
@@ -36,25 +36,30 @@ def callback():
 def handle_message(event):
 	line_bot_api.reply_message(
 	   event.reply_token,
-	   confirm_template_message)
-confirm_template_message = TemplateSendMessage(
-    alt_text='Confirm template',
-    template=ConfirmTemplate(
-        text='Are you sure?',
-        actions=[
-            PostbackTemplateAction(
-                label='postback',
-                text='postback text',
-                data='action=buy&itemid=1'
+	   image_carousel_template_message)
+image_carousel_template_message = TemplateSendMessage(
+    alt_text='ImageCarousel template',
+    template=ImageCarouselTemplate(
+        columns=[
+            ImageCarouselColumn(
+                image_url='https://www.picz.in.th/image/7ydhJe',
+                action=PostbackTemplateAction(
+                    label='postback1',
+                    text='postback text1',
+                    data='action=buy&itemid=1'
+                )
             ),
-            MessageTemplateAction(
-                label='message',
-                text='message text'
+            ImageCarouselColumn(
+                image_url='https://www.picz.in.th/image/7yd3hl',
+                action=PostbackTemplateAction(
+                    label='postback2',
+                    text='postback text2',
+                    data='action=buy&itemid=2'
+                )
             )
         ]
     )
 )
-
 
 if __name__ == "__main__":
     app.run(debug=True)
