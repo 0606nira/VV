@@ -42,7 +42,7 @@ image_carousel_template_message = TemplateSendMessage(
     template=ImageCarouselTemplate(
         columns=[
             ImageCarouselColumn(
-                image_url='https://www.picz.in.th/image/7ydhJe',
+                image_url='https://www.picz.in.th/image/7ydhJe?.jpg',
                 action=PostbackTemplateAction(
                     label='postback1',
                     text='postback text1',
@@ -50,7 +50,7 @@ image_carousel_template_message = TemplateSendMessage(
                 )
             ),
             ImageCarouselColumn(
-                image_url='https://www.picz.in.th/image/7yd3hl',
+                image_url='https://www.picz.in.th/image/7yd3hl?.jpg',
                 action=PostbackTemplateAction(
                     label='postback2',
                     text='postback text2',
