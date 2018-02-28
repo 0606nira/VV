@@ -34,10 +34,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = event.message.text
 	line_bot_api.reply_message(
-		event.reply_token,
-		TextSendMessage(text="Hello VV"))
+	   event.reply_token,
+	   TextSendMessage(text="Hello VV"))
 	except linebot.exceptions.LineBotApiError as e:
     		print(e.status_code)
     		print(e.error.message)
