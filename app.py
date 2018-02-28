@@ -32,7 +32,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=StickerMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	line_bot_api.reply_message(
 	   event.reply_token,
