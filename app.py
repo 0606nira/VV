@@ -36,7 +36,8 @@ def callback():
 def handle_message(event):
 	line_bot_api.reply_message(
 	   event.reply_token,
-	   TextSendMessage(text="Hello VV"))
+	   text_message)
+text_message = TextSendMessage(text='Hello, world')
 
 
 if __name__ == "__main__":
