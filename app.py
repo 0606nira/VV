@@ -34,6 +34,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+message = event.message.text
+
+   if(message == 'Home'):
 	line_bot_api.reply_message(
 	   event.reply_token,
 	   image_carousel_template_message)
@@ -44,7 +47,7 @@ image_carousel_template_message = TemplateSendMessage(
             ImageCarouselColumn(
                 image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
                 action=PostbackTemplateAction(
-                    label='postback1',
+                    label='Bed Room',
                     text='postback text1',
                     data='action=buy&itemid=1'
                 )
@@ -52,7 +55,23 @@ image_carousel_template_message = TemplateSendMessage(
             ImageCarouselColumn(
                 image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
                 action=PostbackTemplateAction(
-                    label='postback2',
+                    label='Pet Room',
+                    text='postback text2',
+                    data='action=buy&itemid=2'
+                )
+            ),
+	    ImageCarouselColumn(
+                image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+                action=PostbackTemplateAction(
+                    label='Storage Room',
+                    text='postback text2',
+                    data='action=buy&itemid=2'
+                )
+            ),
+	    ImageCarouselColumn(
+                image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+                action=PostbackTemplateAction(
+                    label='Lawn Home',
                     text='postback text2',
                     data='action=buy&itemid=2'
                 )
@@ -60,6 +79,11 @@ image_carousel_template_message = TemplateSendMessage(
         ]
     )
 )
-
+   
+   else: 
+	line_bot_api.reply_message(
+           event.reply_token,
+           TextSendMessage(text="Who are u?"))
+   
 if __name__ == "__main__":
     app.run(debug=True)
