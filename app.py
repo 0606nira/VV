@@ -40,6 +40,10 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message)
+	else: 
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Who are u?"))
 
 	image_carousel_template_message = TemplateSendMessage(
 		alt_text='ImageCarousel template',
@@ -81,10 +85,7 @@ def handle_message(event):
 			)
 	)
    
-	else: 
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="Who are u?"))
+	
    
 if __name__ == "__main__":
     app.run(debug=True)
