@@ -42,7 +42,7 @@ image_carousel_template_message = TemplateSendMessage(
     template=ImageCarouselTemplate(
         columns=[
             ImageCarouselColumn(
-                image_url='https://www.picz.in.th/image/7ydhJe?.jpg',
+                image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
                 action=PostbackTemplateAction(
                     label='postback1',
                     text='postback text1',
@@ -50,7 +50,7 @@ image_carousel_template_message = TemplateSendMessage(
                 )
             ),
             ImageCarouselColumn(
-                image_url='https://www.picz.in.th/image/7yd3hl?.jpg',
+                image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
                 action=PostbackTemplateAction(
                     label='postback2',
                     text='postback text2',
