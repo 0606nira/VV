@@ -34,12 +34,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-   message = event.message.text
-
-   if(message == 'Home'):
-	line_bot_api.reply_message(
-	   event.reply_token,
-	   image_carousel_template_message)
+	message = event.message.text
+	if(message == 'Home'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message)
 
 			image_carousel_template_message = TemplateSendMessage(
 				alt_text='ImageCarousel template',
@@ -81,10 +80,10 @@ def handle_message(event):
 					)
 			)
    
-   else: 
-	line_bot_api.reply_message(
-           event.reply_token,
-           TextSendMessage(text="Who are u?"))
+	else: 
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Who are u?"))
    
 if __name__ == "__main__":
     app.run(debug=True)
