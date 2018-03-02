@@ -110,7 +110,7 @@ buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://pm1.narvii.com/6363/1f230c4bee1e0397bc3cc6597fcb723fbd2bf691_hq.jpg',
-        title='Menu',
+        title='Light',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -153,7 +153,7 @@ buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/41/fa/34/41fa345556323413a537577aa02bac8c.jpg',
-        title='Menu',
+        title='Curtain',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -173,7 +173,7 @@ buttons_template_message22 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/55/33/08/5533080597ceb7123784cb79287f18a2.jpg',
-        title='Menu',
+        title='Fan',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -197,7 +197,7 @@ buttons_template_message3 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://pm1.narvii.com/6488/ab420e255fdeff5977f7410c6f5e8a36e834e805_hq.jpg',
-        title='Menu',
+        title='Light',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -217,7 +217,7 @@ buttons_template_message4 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://img00.deviantart.net/fbba/i/2016/279/2/0/2016_bts_concept_photos__wings__by_campfeelah16-dak4n6a.png',
-        title='Menu',
+        title='Springer',
         text='Please select',
         actions=[            
             MessageTemplateAction(
