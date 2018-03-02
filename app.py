@@ -69,7 +69,6 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Have a good day"))
 
-
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -110,7 +109,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+        thumbnail_image_url='http://pm1.narvii.com/6362/1c9385f46324487e78a60b32ade5454e18815d55_00.jpg',
         title='Menu',
         text='Please select',
         actions=[            
@@ -132,14 +131,14 @@ image_carousel_template_message2 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+				image_url='https://s-media-cache-ak0.pinimg.com/originals/d8/78/ce/d878ce6e7fccd15fb1415c74c320b50b.jpg',
 				action=MessageTemplateAction(
 					label='Curtain',
 					text='Curtain',
 							)
 					),
 					ImageCarouselColumn(
-						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+						image_url='https://pm1.narvii.com/6553/94deeecd9cf5f409be54478b9c60157bc6697cfd_hq.jpg',
 						action=MessageTemplateAction(
 								label='Fan',
 								text='Fan',								
@@ -149,10 +148,11 @@ image_carousel_template_message2 = TemplateSendMessage(
 		)
 )
 
+# ผ้าม่าน
 buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+        thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/41/fa/34/41fa345556323413a537577aa02bac8c.jpg',
         title='Menu',
         text='Please select',
         actions=[            
@@ -168,10 +168,11 @@ buttons_template_message21 = TemplateSendMessage(
     )
 )
 
+# พัดลม
 buttons_template_message22 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+        thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/55/33/08/5533080597ceb7123784cb79287f18a2.jpg',
         title='Menu',
         text='Please select',
         actions=[            
@@ -191,10 +192,11 @@ buttons_template_message22 = TemplateSendMessage(
     )
 )
 
+# ไฟห้องเก็บของ จากวัดเคลื่อนไหว
 buttons_template_message3 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+        thumbnail_image_url='https://pm1.narvii.com/6488/ab420e255fdeff5977f7410c6f5e8a36e834e805_hq.jpg',
         title='Menu',
         text='Please select',
         actions=[            
@@ -210,10 +212,11 @@ buttons_template_message3 = TemplateSendMessage(
     )
 )
 
+# สปริงเกอร์สนามหญ้า จากความชื้นดิน
 buttons_template_message4 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+        thumbnail_image_url='https://img00.deviantart.net/fbba/i/2016/279/2/0/2016_bts_concept_photos__wings__by_campfeelah16-dak4n6a.png',
         title='Menu',
         text='Please select',
         actions=[            
@@ -227,7 +230,7 @@ buttons_template_message4 = TemplateSendMessage(
             ),
             URITemplateAction(
                 label='Check Humidity',
-                uri='https://www.youtube.com/watch?v=BEMaH9Sm3lQ&index=9&list=PL_Cqw69_m_yzbMVGvQA8QWrL_HdVXJQX7&t=0s'
+                uri='https://www.youtube.com/watch?v=7OX7dIRReSA&list=PL_Cqw69_m_yzbMVGvQA8QWrL_HdVXJQX7&index=15'
             )
         ]
     )
