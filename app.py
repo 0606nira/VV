@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError,
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerMessage, StickerSendMessage, TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction, ImageCarouselTemplate, ImageCarouselColumn,
+    MessageEvent, TextMessage, TextSendMessage, StickerMessage, StickerSendMessage, TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction, ImageCarouselTemplate, ImageCarouselColumn, ButtonsTemplate, URITemplateAction, 
 )
 
 app = Flask(__name__)
@@ -39,53 +39,199 @@ def handle_message(event):
 	if(message == 'Home'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			image_carousel_template_message)
-	else: 
+			image_carousel_template_message1)
+	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Who are u?"))
+			buttons_template_message1)
+	elif(message == 'Pet Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message2)
+	elif(message == 'Storage Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message3)
+	elif(message == 'Lawn Home'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message4)
+	elif(message == 'Curtain'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message21)
+	elif(message == 'Fan'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message22)
+	else:
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Have a good day"))
+			break
 
-image_carousel_template_message = TemplateSendMessage(
+image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
 				image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
-				action=PostbackTemplateAction(
+				action=MessageTemplateAction(
 					label='Bed Room',
-					text='postback text1',
-					data='action=buy&itemid=1'
+					text='Bed Room',
 							)
 					),
 					ImageCarouselColumn(
 						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
-						action=PostbackTemplateAction(
+						action=MessageTemplateAction(
 								label='Pet Room',
-								text='postback text2',
-								data='action=buy&itemid=2'
+								text='Pet Room',								
 							)
 					),
 				ImageCarouselColumn(
 						image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
-						action=PostbackTemplateAction(
+						action=MessageTemplateAction(
 								label='Storage Room',
-								text='postback text2',
-								data='action=buy&itemid=2'
+								text='Storage Room',								
 							)
 					),
 				ImageCarouselColumn(
 						image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
-						action=PostbackTemplateAction(
+						action=MessageTemplateAction(
 								label='Lawn Home',
-								text='postback text2',
-								data='action=buy&itemid=2'
+								text='Lawn Home',								
 							)
 					)
 			]
 		)
 )
-   
-	
+
+# ห้องนอนมีไฟ ตั้งเวลาแจ้งเตือนตอน 9 โมง
+buttons_template_message1 = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[            
+            MessageTemplateAction(
+                label='On',
+                text='Light on'
+            ),
+            MessageTemplateAction(
+                label='Off',
+                text='Light off'
+            )
+        ]
+    )
+)
+
+# ห้องสัตว์เลี้ยง มีม่าน จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
+image_carousel_template_message2 = TemplateSendMessage(
+	alt_text='ImageCarousel template',
+	template=ImageCarouselTemplate(
+		columns=[
+			ImageCarouselColumn(
+				image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+				action=MessageTemplateAction(
+					label='Curtain',
+					text='Curtain',
+							)
+					),
+					ImageCarouselColumn(
+						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+						action=MessageTemplateAction(
+								label='Fan',
+								text='Fan',								
+							)
+					),
+			]
+		)
+)
+
+buttons_template_message21 = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[            
+            MessageTemplateAction(
+                label='On',
+                text='Curtain On'
+            ),
+            MessageTemplateAction(
+                label='Off',
+                text='Curtain Off'
+            )
+        ]
+    )
+)
+
+buttons_template_message22 = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[            
+            MessageTemplateAction(
+                label='On',
+                text='Fan On'
+            ),
+			MessageTemplateAction(
+                label='Off',
+                text='Fan Off'
+            ),
+            URITemplateAction(
+                label='Check Temp',
+                uri='https://www.youtube.com/watch?v=kTlv5_Bs8aw'
+            )
+        ]
+    )
+)
+
+buttons_template_message3 = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[            
+            MessageTemplateAction(
+                label='On',
+                text='Light On'
+            ),
+            MessageTemplateAction(
+                label='Off',
+                text='Light Off'
+            )
+        ]
+    )
+)
+
+buttons_template_message4 = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[            
+            MessageTemplateAction(
+                label='On',
+                text='Springer On'
+            ),
+			MessageTemplateAction(
+                label='Off',
+                text='Springer Off'
+            ),
+            URITemplateAction(
+                label='Check Humidity',
+                uri='https://www.youtube.com/watch?v=BEMaH9Sm3lQ&index=9&list=PL_Cqw69_m_yzbMVGvQA8QWrL_HdVXJQX7&t=0s'
+            )
+        ]
+    )
+)	
    
 if __name__ == "__main__":
     app.run(debug=True)
