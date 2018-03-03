@@ -127,14 +127,14 @@ buttons_template_message1 = TemplateSendMessage(
         text='Please select',
         actions=[
 			{	
-				anto.pub('LED1', 1)
+				anto.pub('LED1', 1),
 				MessageTemplateAction(
 					label='On',
 					text='Light on'
 				)
 			},
 			{
-				anto.pub('LED1', 0)
+				anto.pub('LED1', 0),
 				MessageTemplateAction(
 					label='Off',
 					text='Light off'
