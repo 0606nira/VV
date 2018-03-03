@@ -28,6 +28,9 @@ thing = 'Flower'
 
 anto = antolib.Anto(user, key, thing)
 
+anto.sub('LED1')
+anto.sub('LED2')
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -77,7 +80,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
-	elif(message == 'Light on at Bedroom'):
+	elif(message == 'Light on at Bedroom'): # ตอบกลับเปิดไฟห้องนอน
 		anto.pub('LED1', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -85,8 +88,24 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='144'
 			))
-	elif(message == 'Light off at Bedroom'):
+	elif(message == 'Light off at Bedroom'): # ตอบกลับปิดไฟห้องนอน
 		anto.pub('LED1', 0)
+		line_bot_api.reply_message(
+			event.reply_token,
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='26'
+			))
+	elif(message == 'Light on at Storage Room'): # ตอบกลับเปิดไฟห้องเก็บของ
+		anto.pub('LED2', 1)
+		line_bot_api.reply_message(
+			event.reply_token,
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='144'
+			))
+	elif(message == 'Light off at Storage Room'): # ตอบกลับปิดไฟห้องเก็บของ
+		anto.pub('LED2', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
 			StickerSendMessage(
@@ -266,7 +285,20 @@ buttons_template_message4 = TemplateSendMessage(
             )
         ]
     )
-)	
+)
+
+def notification (event):
+		
+	if(channel.equals('LED1')):
+		value = payload
+		if(value == 1):
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light on at Bedroom'))
+		else:
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light off at Bedroom'))
    
 if __name__ == "__main__":
 	anto.mqtt.connect()
