@@ -287,17 +287,19 @@ buttons_template_message4 = TemplateSendMessage(
     )
 )
 
+to = 'U5db26ce3aad1c4d83691ea5d6992116a'
+
 def notification (event):
 		
 	if(channel.equals('LED1')):
 		value = payload
 		if(value == 1):
 			line_bot_api.push_message(
-			even.to, 
+			to, 
 			TextSendMessage(text='Light on at Bedroom'))
 		else:
 			line_bot_api.push_message(
-			even.to, 
+			to, 
 			TextSendMessage(text='Light off at Bedroom'))
    
 if __name__ == "__main__":
