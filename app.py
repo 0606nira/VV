@@ -126,16 +126,20 @@ buttons_template_message1 = TemplateSendMessage(
         title='Menu',
         text='Please select',
         actions=[
-	    anto.pub('LED1', 1),
-	    MessageTemplateAction(
-		label='On',
-                text='Light on'
-            ),
-	    anto.pub('LED1', 0),
-	    MessageTemplateAction(
-		label='Off',
-                text='Light off'
-            )
+			{	
+				anto.pub('LED1', 1)
+				MessageTemplateAction(
+					label='On',
+					text='Light on'
+				)
+			},
+			{
+				anto.pub('LED1', 0)
+				MessageTemplateAction(
+					label='Off',
+					text='Light off'
+				)
+			}
         ]
     )
 )
@@ -195,7 +199,7 @@ buttons_template_message22 = TemplateSendMessage(
                 label='On',
                 text='Fan On'
             ),
-	    MessageTemplateAction(
+			MessageTemplateAction(
                 label='Off',
                 text='Fan Off'
             ),
@@ -239,7 +243,7 @@ buttons_template_message4 = TemplateSendMessage(
                 label='On',
                 text='Springer On'
             ),
-	    MessageTemplateAction(
+			MessageTemplateAction(
                 label='Off',
                 text='Springer Off'
             ),
@@ -253,4 +257,4 @@ buttons_template_message4 = TemplateSendMessage(
    
 if __name__ == "__main__":
 	anto.mqtt.connect()
-	app.run(debug=True)
+    app.run(debug=True)
