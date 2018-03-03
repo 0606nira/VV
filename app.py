@@ -1,5 +1,7 @@
 from flask import Flask, request, abort
 
+import antolib
+
 from linebot import (
     LineBotApi, WebhookHandler,
 )
@@ -14,6 +16,17 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
+
+# username of anto.io account
+user = 'Nira'
+
+# key of permission, generated on control panel anto.io
+key = 'WNS3El4QsXI2cZe3FbA9Nj72UO70HaN6i2RpKVDU'
+
+# your default thing.
+thing = 'Flower'
+
+anto = antolib.Anto(user, key, thing)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -109,14 +122,16 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://pm1.narvii.com/6363/1f230c4bee1e0397bc3cc6597fcb723fbd2bf691_hq.jpg',
-        title='Light',
+        thumbnail_image_url='http://pm1.narvii.com/6361/c8870439c68313b0d5d4b1896d19b21c55bad03e_hq.jpg',
+        title='Menu',
         text='Please select',
-        actions=[            
+        actions=[
+	    anto.pub('LED1', 1)
             MessageTemplateAction(
                 label='On',
                 text='Light on'
             ),
+	    anto.pub('LED1', 0)
             MessageTemplateAction(
                 label='Off',
                 text='Light off'
@@ -153,7 +168,7 @@ buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/41/fa/34/41fa345556323413a537577aa02bac8c.jpg',
-        title='Curtain',
+        title='Menu',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -173,7 +188,7 @@ buttons_template_message22 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://s-media-cache-ak0.pinimg.com/originals/55/33/08/5533080597ceb7123784cb79287f18a2.jpg',
-        title='Fan',
+        title='Menu',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -197,7 +212,7 @@ buttons_template_message3 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://pm1.narvii.com/6488/ab420e255fdeff5977f7410c6f5e8a36e834e805_hq.jpg',
-        title='Light',
+        title='Menu',
         text='Please select',
         actions=[            
             MessageTemplateAction(
@@ -217,7 +232,7 @@ buttons_template_message4 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
         thumbnail_image_url='https://img00.deviantart.net/fbba/i/2016/279/2/0/2016_bts_concept_photos__wings__by_campfeelah16-dak4n6a.png',
-        title='Springer',
+        title='Menu',
         text='Please select',
         actions=[            
             MessageTemplateAction(
