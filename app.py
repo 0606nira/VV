@@ -307,6 +307,6 @@ def dataCB(channel, msg):
    
 if __name__ == "__main__":
 	anto.mqtt.onConnected(connectedCB)
-    anto.mqtt.onData(dataCB)
+	anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
 	app.run(debug=True)
