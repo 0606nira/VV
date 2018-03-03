@@ -126,13 +126,13 @@ buttons_template_message1 = TemplateSendMessage(
         title='Menu',
         text='Please select',
         actions=[
-	    anto.pub('LED1', 1)
-            MessageTemplateAction(
+			anto.pub('LED1', 1)
+			MessageTemplateAction(
                 label='On',
                 text='Light on'
             ),
-	    anto.pub('LED1', 0)
-            MessageTemplateAction(
+			anto.pub('LED1', 0)
+			MessageTemplateAction(
                 label='Off',
                 text='Light off'
             )
@@ -252,5 +252,5 @@ buttons_template_message4 = TemplateSendMessage(
 )	
    
 if __name__ == "__main__":
-    anto.mqtt.connect()
+	anto.mqtt.connect()
     app.run(debug=True)
