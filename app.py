@@ -77,10 +77,23 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
+	elif(message == 'Light on at Bedroom'):
+		anto.pub('LED1', 1)
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Thx!"))
+	elif(message == 'Light off at Bedroom'):
+		anto.pub('LED1', 0)
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Thx!"))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Have a good day"))
+			StickerSendMessage(
+				package_id='3',
+				sticker_id='247'
+			))
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -125,21 +138,15 @@ buttons_template_message1 = TemplateSendMessage(
         thumbnail_image_url='https://pm1.narvii.com/6363/1f230c4bee1e0397bc3cc6597fcb723fbd2bf691_hq.jpg',
         title='Light',
         text='Please select',
-        actions=[
-			(	
+        actions=[	
 				MessageTemplateAction(
 					label='On',
-					text='Light on'
+					text='Light on at Bedroom'
 				),
-				anto.pub('LED1', 1)
-			),
-			(
 				MessageTemplateAction(
 					label='Off',
-					text='Light off'
-				),
-				anto.pub('LED1', 0)
-			)
+					text='Light off at Bedroom'
+				)
         ]
     )
 )
@@ -221,11 +228,11 @@ buttons_template_message3 = TemplateSendMessage(
         actions=[            
             MessageTemplateAction(
                 label='On',
-                text='Light On'
+                text='Light On at Storage Room'
             ),
             MessageTemplateAction(
                 label='Off',
-                text='Light Off'
+                text='Light Off at Storage Room'
             )
         ]
     )
