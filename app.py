@@ -91,34 +91,34 @@ image_carousel_template_message1 = TemplateSendMessage(
 				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
+							)
+					),
+					ImageCarouselColumn(
+						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+						action=MessageTemplateAction(
+								label='Pet Room',
+								text='Pet Room',								
+							)
+					),
+				ImageCarouselColumn(
+						image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+						action=MessageTemplateAction(
+								label='Storage Room',
+								text='Storage Room',								
+							)
+					),
+				ImageCarouselColumn(
+						image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+						action=MessageTemplateAction(
+								label='Lawn Home',
+								text='Lawn Home',								
+							)
 					)
-				),
-			ImageCarouselColumn(
-				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
-				action=MessageTemplateAction(
-					label='Pet Room',
-					text='Pet Room',								
-					)
-				),
-			ImageCarouselColumn(
-				image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
-				action=MessageTemplateAction(
-					label='Storage Room',
-					text='Storage Room',								
-					)
-				),
-			ImageCarouselColumn(
-				image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
-				action=MessageTemplateAction(
-					label='Lawn Home',
-					text='Lawn Home',								
-					)
-				)
-		]
-	)
+			]
+		)
 )
 
-# ��ͧ�͹��� �����������͹�͹ 9 ���
+# ห้องนอนมีไฟ ตั้งเวลาแจ้งเตือนตอน 9 โมง
 buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -144,7 +144,7 @@ buttons_template_message1 = TemplateSendMessage(
     )
 )
 
-# ��ͧ�ѵ������§ ����ҹ �ҡ�Ѵ�ʧ �Ѻ �Ѵ�� �ҡ�Ѵ�س�����
+# ห้องสัตว์เลี้ยง มีม่าน จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
 image_carousel_template_message2 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -154,20 +154,20 @@ image_carousel_template_message2 = TemplateSendMessage(
 				action=MessageTemplateAction(
 					label='Curtain',
 					text='Curtain',
-					)
-				),
-			ImageCarouselColumn(
-				image_url='https://pm1.narvii.com/6553/94deeecd9cf5f409be54478b9c60157bc6697cfd_hq.jpg',
-				action=MessageTemplateAction(
-					label='Fan',
-					text='Fan',								
-					)
-				),
-		]
-	)
+							)
+					),
+					ImageCarouselColumn(
+						image_url='https://pm1.narvii.com/6553/94deeecd9cf5f409be54478b9c60157bc6697cfd_hq.jpg',
+						action=MessageTemplateAction(
+								label='Fan',
+								text='Fan',								
+							)
+					),
+			]
+		)
 )
 
-# �����ҹ
+# ผ้าม่าน
 buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -187,7 +187,7 @@ buttons_template_message21 = TemplateSendMessage(
     )
 )
 
-# �Ѵ��
+# พัดลม
 buttons_template_message22 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -199,7 +199,7 @@ buttons_template_message22 = TemplateSendMessage(
                 label='On',
                 text='Fan On'
             ),
-	    MessageTemplateAction(
+			MessageTemplateAction(
                 label='Off',
                 text='Fan Off'
             ),
@@ -211,7 +211,7 @@ buttons_template_message22 = TemplateSendMessage(
     )
 )
 
-# ���ͧ�红ͧ �ҡ�Ѵ����͹���
+# ไฟห้องเก็บของ จากวัดเคลื่อนไหว
 buttons_template_message3 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -231,7 +231,7 @@ buttons_template_message3 = TemplateSendMessage(
     )
 )
 
-# ʻ�ԧ����ʹ��˭�� �ҡ������鹴Թ
+# สปริงเกอร์สนามหญ้า จากความชื้นดิน
 buttons_template_message4 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
@@ -243,7 +243,7 @@ buttons_template_message4 = TemplateSendMessage(
                 label='On',
                 text='Springer On'
             ),
-	    MessageTemplateAction(
+			MessageTemplateAction(
                 label='Off',
                 text='Springer Off'
             ),
@@ -257,4 +257,4 @@ buttons_template_message4 = TemplateSendMessage(
    
 if __name__ == "__main__":
 	anto.mqtt.connect()
-    	app.run(debug=True)
+    app.run(debug=True)
