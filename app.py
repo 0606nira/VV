@@ -253,4 +253,4 @@ buttons_template_message4 = TemplateSendMessage(
    
 if __name__ == "__main__":
 	anto.mqtt.connect()
-    app.run(debug=True)
+	app.run(debug=True)
