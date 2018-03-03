@@ -81,18 +81,24 @@ def handle_message(event):
 		anto.pub('LED1', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Thx!"))
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='144'
+			))
 	elif(message == 'Light off at Bedroom'):
 		anto.pub('LED1', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Thx!"))
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='26'
+			))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
 			StickerSendMessage(
-				package_id='3',
-				sticker_id='247'
+				package_id='2',
+				sticker_id='149'
 			))
 
 image_carousel_template_message1 = TemplateSendMessage(
