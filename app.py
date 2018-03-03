@@ -122,23 +122,23 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+        thumbnail_image_url='https://pm1.narvii.com/6363/1f230c4bee1e0397bc3cc6597fcb723fbd2bf691_hq.jpg',
         title='Light',
         text='Please select',
         actions=[
 			(	
-				anto.pub('LED1', 1),
 				MessageTemplateAction(
 					label='On',
 					text='Light on'
-				)
+				),
+				anto.pub('LED1', 1)
 			),
 			(
-				anto.pub('LED1', 0),
 				MessageTemplateAction(
 					label='Off',
 					text='Light off'
-				)
+				),
+				anto.pub('LED1', 0)
 			)
         ]
     )
