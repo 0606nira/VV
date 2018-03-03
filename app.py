@@ -16,6 +16,7 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
+to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 
 # username of anto.io account
 user = 'Nira'
@@ -288,10 +289,9 @@ buttons_template_message4 = TemplateSendMessage(
     )
 )
 
-to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 
-def dataCB(channel, msg):
-	value = int(msg)
+def dataCB(channel):
+	value = int()
 	if(channel == 'LED1'):
 
 		if(value == 1):
@@ -312,8 +312,10 @@ def dataCB(channel, msg):
 			line_bot_api.push_message(
 			to, 
 			TextSendMessage(text='Light off at Storage Room'))
+			
    
 if __name__ == "__main__":
+
 	anto.mqtt.onConnected(connectedCB)
 	anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
