@@ -292,7 +292,7 @@ to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 def notification (event):
 		
 	if(channel.equals('LED1')):
-		value = payload
+		value = antolib.payload()
 		if(value == 1):
 			line_bot_api.push_message(
 			to, 
