@@ -28,8 +28,9 @@ thing = 'Flower'
 
 anto = antolib.Anto(user, key, thing)
 
-anto.sub('LED1')
-anto.sub('LED2')
+def connectedCB():
+    anto.sub("LED1")
+    anto.sub("LED2")
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -289,10 +290,12 @@ buttons_template_message4 = TemplateSendMessage(
 
 to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 
-def notification (event):
+def dataCB(channel, msg):
+	
+	if(channel == 'LED1'):
+
+		value = int(msg)
 		
-	if(channel.equals('LED1')):
-		value = antolib.payload()
 		if(value == 1):
 			line_bot_api.push_message(
 			to, 
@@ -303,5 +306,7 @@ def notification (event):
 			TextSendMessage(text='Light off at Bedroom'))
    
 if __name__ == "__main__":
+	anto.mqtt.onConnected(connectedCB)
+    anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
 	app.run(debug=True)
