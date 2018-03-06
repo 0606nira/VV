@@ -7,7 +7,14 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError,
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerMessage, StickerSendMessage, TemplateSendMessage, ConfirmTemplate, PostbackTemplateAction, MessageTemplateAction, ImageCarouselTemplate, ImageCarouselColumn, ButtonsTemplate, URITemplateAction, 
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,
+ SourceUser, SourceGroup, SourceRoom,
+ TemplateSendMessage, ConfirmTemplate, MessageTemplateAction,
+ ButtonsTemplate, URITemplateAction, PostbackTemplateAction,
+ CarouselTemplate, CarouselColumn, PostbackEvent, ImageCarouselTemplate,
+ StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
+ ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
+ UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent
 )
 
 app = Flask(__name__)
@@ -34,17 +41,8 @@ def callback():
     return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-	profile = line_bot_api.get_profile(event.user_id)
-
-	line_bot_api.reply_message(
-		event.reply_token,
-		TextSendMessage(text='%s' % event.profile.display_name))
-			
-	#print(profile.display_name)
-	#print(profile.user_id)
-	#print(profile.picture_url)
-	#print(profile.status_message)
+def handle_message():
+	line_bot_api.push_message('U5db26ce3aad1c4d83691ea5d6992116a', TextSendMessage(text='Hello World!'))
 	
 if __name__ == "__main__":
     app.run(debug=True)
