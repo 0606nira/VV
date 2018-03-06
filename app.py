@@ -36,7 +36,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	profile = line_bot_api.get_profile(event.user_id)
+	message = event.message.text
 
+	if(message == 'Data'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text=profile.display_name))
+			
 	print(profile.display_name)
 	print(profile.user_id)
 	print(profile.picture_url)
