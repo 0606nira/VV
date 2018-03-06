@@ -40,7 +40,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
+#@handler.add(MessageEvent, message=TextMessage)
 def handle_message():
 	line_bot_api.push_message('U5db26ce3aad1c4d83691ea5d6992116a', TextSendMessage(text='Hello World!'))
 	
