@@ -39,7 +39,7 @@ def handle_message(event):
 
 	line_bot_api.reply_message(
 		event.reply_token,
-		TextSendMessage(text=profile.display_name))
+		TextSendMessage(text='%s' % event.profile.display_name))
 			
 	#print(profile.display_name)
 	#print(profile.user_id)
