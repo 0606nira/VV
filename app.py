@@ -84,7 +84,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
-	elif(message == 'Light on at Bedroom'):
+	elif(message == 'Light On at Bedroom'):
 		anto.pub('LED1', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -92,7 +92,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='144'
 			))
-	elif(message == 'Light off at Bedroom'):
+	elif(message == 'Light Off at Bedroom'):
 		anto.pub('LED1', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -100,7 +100,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='26'
 			))
-	elif(message == 'Light on at Storage Room'):
+	elif(message == 'Light On at Storage Room'):
 		anto.pub('LED2', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -108,7 +108,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='144'
 			))
-	elif(message == 'Light off at Storage Room'):
+	elif(message == 'Light Off at Storage Room'):
 		anto.pub('LED2', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -170,11 +170,11 @@ buttons_template_message1 = TemplateSendMessage(
         actions=[	
 				MessageTemplateAction(
 					label='On',
-					text='Light on at Bedroom'
+					text='Light On at Bedroom'
 				),
 				MessageTemplateAction(
 					label='Off',
-					text='Light off at Bedroom'
+					text='Light Off at Bedroom'
 				)
         ]
     )
