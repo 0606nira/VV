@@ -35,6 +35,10 @@ thing = 'Flower'
 
 anto = antolib.Anto(user, key, thing)
 
+def connectedCB():
+    anto.sub("LED1")
+    anto.sub("LED2")
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -84,7 +88,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
-	elif(message == 'Light On at Bedroom'):
+	elif(message == 'Light On at Bedroom'): # ตอบกลับเปิดไฟห้องนอน
 		anto.pub('LED1', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -92,7 +96,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='144'
 			))
-	elif(message == 'Light Off at Bedroom'):
+	elif(message == 'Light Off at Bedroom'): # ตอบกลับปิดไฟห้องนอน
 		anto.pub('LED1', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -100,7 +104,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='26'
 			))
-	elif(message == 'Light On at Storage Room'):
+	elif(message == 'Light On at Storage Room'): # ตอบกลับเปิดไฟห้องเก็บของ
 		anto.pub('LED2', 1)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -108,7 +112,7 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='144'
 			))
-	elif(message == 'Light Off at Storage Room'):
+	elif(message == 'Light Off at Storage Room'): # ตอบกลับปิดไฟห้องเก็บของ
 		anto.pub('LED2', 0)
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -289,8 +293,36 @@ buttons_template_message4 = TemplateSendMessage(
             )
         ]
     )
-)	
+)
+
+
+def dataCB(channel, msg, event):
+	value = int(msg)
+	to='U5db26ce3aad1c4d83691ea5d6992116a'
+	if(channel == 'LED1'):
+		if(value == 1):
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light on at Bedroom'))
+		else:
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light off at Bedroom'))
+			
+	elif(channel == 'LED2'):
+		if(value == 1):
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light on at Storage Room'))
+		else:
+			line_bot_api.push_message(
+			even.to, 
+			TextSendMessage(text='Light off at Storage Room'))
+			
    
 if __name__ == "__main__":
+
+	anto.mqtt.onConnected(connectedCB)
+	anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
 	app.run(debug=True)
