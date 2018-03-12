@@ -100,6 +100,22 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='26'
 			))
+	elif(message == 'Light on at Storage Room'):
+		anto.pub('LED2', 1)
+		line_bot_api.reply_message(
+			event.reply_token,
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='144'
+			))
+	elif(message == 'Light off at Storage Room'):
+		anto.pub('LED2', 0)
+		line_bot_api.reply_message(
+			event.reply_token,
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='26'
+			))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
