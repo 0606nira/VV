@@ -299,7 +299,7 @@ buttons_template_message4 = TemplateSendMessage(
 def dataCB(channel, msg):
 	#value = int(msg)
 	#to = 'U5db26ce3aad1c4d83691ea5d6992116a'
-		if(Anto.digitalGet("LED1")) == HIGH):
+		if(anto.digitalGet("LED1")) == HIGH):
 			line_bot_api.push_message(
 			U5db26ce3aad1c4d83691ea5d6992116a, 
 			TextSendMessage(text='Light on at Bedroom'))
@@ -311,7 +311,7 @@ def dataCB(channel, msg):
 			
    
 if __name__ == "__main__":
-	anto.mqtt.onConnected(connectedCB)
+	anto.mqtt.isConnected(connectedCB)
 	anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
 	app.run(debug=True)
