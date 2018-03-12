@@ -297,27 +297,17 @@ buttons_template_message4 = TemplateSendMessage(
 
 
 def dataCB(channel, msg):
-	value = int(msg)
-	to = 'U5db26ce3aad1c4d83691ea5d6992116a'
-	if(channel == 'LED1'):
-		if(value == 1):
+	#value = int(msg)
+	#to = 'U5db26ce3aad1c4d83691ea5d6992116a'
+		if(Anto.digitalGet("LED1")) == HIGH):
 			line_bot_api.push_message(
-			to, 
+			U5db26ce3aad1c4d83691ea5d6992116a, 
 			TextSendMessage(text='Light on at Bedroom'))
 		else:
 			line_bot_api.push_message(
-			to, 
+			U5db26ce3aad1c4d83691ea5d6992116a, 
 			TextSendMessage(text='Light off at Bedroom'))
-			
-	elif(channel == 'LED2'):
-		if(value == 1):
-			line_bot_api.push_message(
-			to, 
-			TextSendMessage(text='Light on at Storage Room'))
-		else:
-			line_bot_api.push_message(
-			to, 
-			TextSendMessage(text='Light off at Storage Room'))
+	
 			
    
 if __name__ == "__main__":
