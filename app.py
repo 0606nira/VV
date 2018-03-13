@@ -1,6 +1,6 @@
 from flask import Flask, request, abort
 
-import antolib
+from antolib import anto.digitalGet
 
 from linebot import (
     LineBotApi, WebhookHandler,
@@ -298,20 +298,20 @@ buttons_template_message4 = TemplateSendMessage(
 
 def dataCB(channel, msg):
 	#value = int(msg)
-	#to = 'U5db26ce3aad1c4d83691ea5d6992116a'
+	to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 		if(anto.digitalGet("LED1")) == HIGH):
 			line_bot_api.push_message(
-			U5db26ce3aad1c4d83691ea5d6992116a, 
+			to, 
 			TextSendMessage(text='Light on at Bedroom'))
 		else:
 			line_bot_api.push_message(
-			U5db26ce3aad1c4d83691ea5d6992116a, 
+			to, 
 			TextSendMessage(text='Light off at Bedroom'))
 	
 			
    
 if __name__ == "__main__":
-	anto.mqtt.isConnected(connectedCB)
+	anto.mqtt.onConnected(connectedCB)
 	anto.mqtt.onData(dataCB)
 	anto.mqtt.connect()
 	app.run(debug=True)
