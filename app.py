@@ -58,21 +58,33 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
 def dataCB(channel, msg):
-	if(channel == 'LED1'):
-		value = int(msg)
-		if(value == 1):
-			line_bot_api.push_message(to, TextSendMessage(text='LED1 On'))
-		else:
-			line_bot_api.push_message(to, TextSendMessage(text='LED1 Off'))
-	elif(channel == 'LED2'):
-		value = int(msg)
-		if(value == 1):
-			line_bot_api.push_message(to, TextSendMessage(text='LED2 On'))
-		else:
-			line_bot_api.push_message(to, TextSendMessage(text='LED2 Off'))
+	try:
+		if(channel == 'LED1'):
+			value = int(msg)
+			if(value == 1):
+				message_text('On')
+			else:
+				message_text('Off')
+		elif(channel == 'LED2'):
+			value = int(msg)
+			if(value == 1):
+				message_text('On')
+			else
+			message_text('Off')
+			
+	except linebot.exceptions.LineBotApiError as e:
+		print(e.status_code)
+		print(e.error.message)
+		print(e.error.details)
 		
+@handler.add(MessageEvent, message=TextMessage)
+def message_text(text):
+    line_bot_api.push_message(
+        to,
+        TextSendMessage(text=event.message.text)
+    )
+	
    
 if __name__ == "__main__":
 
