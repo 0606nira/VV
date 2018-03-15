@@ -61,7 +61,7 @@ def callback():
 def handle_message(event):
 		line_bot_api.push_message(
 			to, 
-			TextSendMessage(text='Hi'))
+			TextSendMessage(text='Ayo'))
 			
    
 if __name__ == "__main__":
