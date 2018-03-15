@@ -71,7 +71,7 @@ def dataCB(channel, msg):
 			if(value == 1):
 				message_text('On')
 			else:
-			message_text('Off')
+				message_text('Off')
 			
 	except linebot.exceptions.LineBotApiError as e:
 		print(e.status_code)
