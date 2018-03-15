@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
-to = 'U5db26ce3aad1c4d83691ea5d6992116a'
+#to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 
 # username of anto.io account
 user = 'Nira'
@@ -60,7 +60,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 		line_bot_api.push_message(
-			to, 
+			event.to, 
 			TextSendMessage(text='Ayo'))
 			
    
