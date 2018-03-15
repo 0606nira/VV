@@ -79,7 +79,7 @@ def dataCB(channel, msg):
 		print(e.error.details)
 		
 @handler.add(MessageEvent, message=TextMessage)
-def message_text(text):
+def message_text(text, event):
     line_bot_api.push_message(
         to,
         TextSendMessage(text=event.message.text)
