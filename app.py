@@ -1,6 +1,5 @@
 import json
-import requests
-from flask import Flask
+from flask import Flask, request
 app = Flask(__name__)
 global Authorization
 Authorization = 'Bearer MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU='
@@ -17,7 +16,7 @@ def callback():
   user = decoded["events"][0]['replyToken']
   #id=[d['replyToken'] for d in user][0]
   #print(json_line)
-  print("user:",user)
+  print("user:", user)
   sendText(user,'Lovely') # ส่งข้อความ งง
   return '',200
 
