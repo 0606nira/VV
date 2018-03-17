@@ -60,6 +60,7 @@ def handle_message(event):
 				e.error.message \
 				e.error.details
 				"""
+				)
 		#print(e.status_code)
 		#print(e.error.message)
 		#print(e.error.details)
