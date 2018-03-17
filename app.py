@@ -53,17 +53,9 @@ def handle_message(event):
 				TextSendMessage(text='TaeTae Luv U'))
     
 	except linebot.exceptions.LineBotApiError as e:
-		line_bot_api.reply_message(
-				event.reply_token,
-				TextSendMessage(text='Error...' + """\
-				e.status_code \
-				e.error.message \
-				e.error.details
-				"""
-				)
-		#print(e.status_code)
-		#print(e.error.message)
-		#print(e.error.details)
+		print(e.status_code)
+		print(e.error.message)
+		print(e.error.details)
 
 if __name__ == "__main__":
 	app.run(debug=True)
