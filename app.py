@@ -1,7 +1,5 @@
 from flask import Flask, request, abort
 
-import antolib
-
 from linebot import (
     LineBotApi, WebhookHandler,
 )
@@ -17,7 +15,7 @@ from linebot.models import (
  StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
  ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
- RichMenu, RichMenuArea, RichMenuBound,
+ #RichMenu, RichMenuArea, RichMenuBound,
  )
 
 app = Flask(__name__)
