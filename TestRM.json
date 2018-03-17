@@ -1,0 +1,59 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": false,
+  "name": "HomeIE",
+  "chatBarText": "Sweet Home",
+  "areas": [
+    {
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 2500,
+        "height": 705
+      },
+      "action": {
+        "type": "message",
+        "text": "Bed Room"
+      }
+    },
+    {
+      "bounds": {
+        "x": 0,
+        "y": 705,
+        "width": 1525,
+        "height": 586
+      },
+      "action": {
+        "type": "message",
+        "text": "Living Room"
+      }
+    },
+    {
+      "bounds": {
+        "x": 0,
+        "y": 1291,
+        "width": 1525,
+        "height": 395
+      },
+      "action": {
+        "type": "message",
+        "text": "Lawn"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1525,
+        "y": 705,
+        "width": 975,
+        "height": 981
+      },
+      "action": {
+        "type": "message",
+        "text": "Storage Room"
+      }
+    }
+  ]
+}

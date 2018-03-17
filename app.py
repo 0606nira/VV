@@ -1,58 +1,39 @@
-from flask import Flask, request, abort
-
-from linebot import (
-    LineBotApi, WebhookHandler,
-)
-from linebot.exceptions import (
-    InvalidSignatureError, LineBotApiError,
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,
- SourceUser, SourceGroup, SourceRoom,
- TemplateSendMessage, ConfirmTemplate, MessageTemplateAction,
- ButtonsTemplate, URITemplateAction, PostbackTemplateAction,
- CarouselTemplate, CarouselColumn, PostbackEvent, ImageCarouselTemplate,
- StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
- ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
- UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
- RichMenu, RichMenuArea, RichMenuBound,
- )
-
+import json
+import requests
 app = Flask(__name__)
+global Authorization
+Authorization = 'Bearer MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU='
+@app.route('/')
+def index():
+  return "Hello World!"
 
-line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
-
-
-@app.route("/callback", methods=['POST'])
+# ส่วน callback สำหรับ Webhook
+@app.route('/callback', methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+  json_line = request.get_json()
+  json_line = json.dumps(json_line)
+  decoded = json.loads(json_line)
+  user = decoded["events"][0]['replyToken']
+  #id=[d['replyToken'] for d in user][0]
+  #print(json_line)
+  print("user:",user)
+  sendText(user,'Lovely') # ส่งข้อความ งง
+  return '',200
 
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
 
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
+def sendText(user, text):
+  LINE_API = 'https://api.line.me/v2/bot/message/reply'
+  headers = {
+  'Content-Type': 'application/json; charset=UTF-8',
+  'Authorization':Authorization
+  }
+  data = json.dumps({
+  "replyToken":user,
+  "messages":[{"type":"text","text":text}]})
+  #print("ข้อมูล:",data)
+  r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
+  #print(r.text)
 
-    return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-	#message = event.message.text
-	try:
-			line_bot_api.reply_message(
-				event.reply_token,
-				TextSendMessage(text='TaeTae Luv U'))
-    
-	except linebot.exceptions.LineBotApiError as e:
-		print(e.status_code)
-		print(e.error.message)
-		print(e.error.details)
-
-if __name__ == "__main__":
-	app.run(debug=True)
+if __name__ == '__main__':
+  app.run(debug=True)
