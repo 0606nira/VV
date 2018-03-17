@@ -17,32 +17,17 @@ from linebot.models import (
  StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
  ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
-)
+ RichMenu, RichMenuArea, RichMenuBound,
+ )
 
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
-to = 'U5db26ce3aad1c4d83691ea5d6992116a'
 
-# username of anto.io account
-user = 'Nira'
-
-# key of permission, generated on control panel anto.io
-key = 'WNS3El4QsXI2cZe3FbA9Nj72UO70HaN6i2RpKVDU'
-
-# your default thing.
-thing = 'Flower'
-
-anto = antolib.Anto(user, key, thing)
-
-def connectedCB():
-    anto.sub("LED1");
-    anto.sub("LED2");
 
 @app.route("/callback", methods=['POST'])
 def callback():
-	
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
 
@@ -58,37 +43,26 @@ def callback():
 
     return 'OK'
 
-def dataCB(channel, msg):
-	try:
-		if(channel == 'LED1'):
-			value = int(msg)
-			if(value == 1):
-				message_text('On')
-			else:
-				message_text('Off')
-		elif(channel == 'LED2'):
-			value = int(msg)
-			if(value == 1):
-				message_text('On')
-			else:
-				message_text('Off')
-			
-	except linebot.exceptions.LineBotApiError as e:
-		print(e.status_code)
-		print(e.error.message)
-		print(e.error.details)
-		
 @handler.add(MessageEvent, message=TextMessage)
-def message_text(text, event):
-    line_bot_api.push_message(
-        to,
-        TextSendMessage(text=event.message.text)
-    )
-	
-   
-if __name__ == "__main__":
+def handle_message(event):
+	message = event.message.text
+	try:
+		if(message = event.message.text):
+			line_bot_api.reply_message(
+				event.reply_token,
+				TextSendMessage(text='TaeTae Luv U'))
+    
+	except linebot.exceptions.LineBotApiError as e:
+		line_bot_api.reply_message(
+				event.reply_token,
+				TextSendMessage(text='Error...' + """\
+				e.status_code \
+				e.error.message \
+				e.error.details
+				"""
+		#print(e.status_code)
+		#print(e.error.message)
+		#print(e.error.details)
 
-	anto.mqtt.onConnected(connectedCB)
-	anto.mqtt.onData(dataCB)
-	anto.mqtt.connect()
+if __name__ == "__main__":
 	app.run(debug=True)
