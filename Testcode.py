@@ -1,4 +1,4 @@
-﻿from flask import Flask, request
+from flask import Flask, request
 import json
 import requests
 app = Flask(__name__)
@@ -37,4 +37,4 @@ def sendText(user, text):
 
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run()
