@@ -32,12 +32,13 @@ def sendText(user, text):
   data = json.dumps({
   "replyToken":user,
   "messages":[{"type":"text","text":text}]})
+  
   #print("ข้อมูล:",data)
   r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
   #print(r.text)
 
 def sendMes():
-	message = decoded['events'][0]['message']['text']
+	message = json.dumps['events'][0]['message']['text']
 	if(message == 'Hi'):
 		sendText(user, 'Just Sleep')
 	else:
