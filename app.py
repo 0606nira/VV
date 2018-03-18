@@ -37,7 +37,7 @@ def sendText(user, text):
   #print(r.text)
 
 def sendMes(user, texts):
-	message = ['events'][0]['replyToken']
+	message = ['events'][0]['message']['text']
 	if(message == 'Hi'):
 		sendText(user, 'Just Sleep')
 	else:
