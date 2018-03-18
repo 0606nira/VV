@@ -15,6 +15,8 @@ from linebot.models import (
  StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
  ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
+ DatetimePickerTemplateAction, 
+ ImagemapSendMessage, URIImagemapAction, MessageImagemapAction, BaseSize, ImagemapAction, ImagemapArea, 
  RichMenu, RichMenuArea, RichMenuBound,
  )
 
