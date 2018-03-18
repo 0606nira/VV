@@ -38,7 +38,7 @@ def sendText(user, text):
   #print(r.text)
 
 def sendMes():
-	message = json.dumps['events'][0]['message']['text']
+	message = json.loads['events'][0]['message']['text']
 	if(message == 'Hi'):
 		sendText(user, 'Just Sleep')
 	else:
