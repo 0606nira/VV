@@ -39,7 +39,7 @@ def sendMes(user, text):
 	message = ['events'][0]['replyToken']
 	if(message == 'Hi'):
 		sendText(user, 'Just Sleep')
-	else
+	else:
 		sendText(user, 'Go to BED')
 
 if __name__ == '__main__':
