@@ -77,7 +77,7 @@ def handle_message(event):
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Have a good day"))
+			TextSendMessage(text="Have a good day <3"))
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
