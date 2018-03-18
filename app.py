@@ -36,6 +36,5 @@ def sendText(replyToken, text):
   r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
   #print(r.text)
 
-def
 if __name__ == '__main__':
   app.run(debug=True)
