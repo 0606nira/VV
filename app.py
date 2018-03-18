@@ -14,29 +14,28 @@ def callback():
   json_line = request.get_json()
   json_line = json.dumps(json_line)
   decoded = json.loads(json_line)
-  #replytoken = decoded["events"][0]['replyToken']
   json_user = decode(content=True)
+  replyToken = json_user["events"][0]['replyToken']
   #id=[d['replyToken'] for d in user][0]
   #print(json_line)
-  print("ผู้ใช้:",user)
+  sendText(replyToken, 'Woo')
+  #print("ผู้ใช้:",user)
   return '',200
 
-def profile(
 
-
-def sendText(user, text):
+def sendText(replyToken, text):
   LINE_API = 'https://api.line.me/v2/bot/message/reply'
   headers = {
   'Content-Type': 'application/json; charset=UTF-8',
   'Authorization':Authorization
   }
   data = json.dumps({
-  "replyToken":json_user["events"][0]['replyToken'],
+  "replyToken":replyToken,
   "messages":[{"type":"text","text":text}]})
   #print("ข้อมูล:",data)
   r = requests.post(LINE_API, headers=headers, data=data) # ส่งข้อมูล
   #print(r.text)
 
-
+def
 if __name__ == '__main__':
   app.run(debug=True)
