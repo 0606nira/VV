@@ -47,7 +47,7 @@ def callback():
 def handle_message(event):
 	message = event.message.text
 
-	if(message == 'HOME'):
+	if(message == 'Home'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
@@ -55,7 +55,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
-	elif(message == 'Pet Room'): 
+	elif(message == 'Living Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message2)
@@ -95,28 +95,28 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='http://zlregata.com/wp-content/uploads/2017/12/Fresh-Images-of-Go-dark-in-style-inside-the-bedroom.jpg-Blue-Gray-Bedroom-Paint-Collection-Decor.jpg',
+				image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
 				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
 							)
 					),
 					ImageCarouselColumn(
-						image_url='https://www.ceramicarondine.it/media//catalogimages/MS6/HD_AMB_1.jpg',
+						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
 						action=MessageTemplateAction(
-								label='Pet Room',
-								text='Pet Room',								
+								label='Living Room',
+								text='Living Room',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='http://www.ebootcamp.org/l/2018/02/living-room-cabinet-design-ideas-clothing-storage-ideas-for-small-bedrooms-wall-storage-cabinets-for-bedrooms-cabinets-for-sale.jpg',
+						image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
 						action=MessageTemplateAction(
 								label='Storage Room',
 								text='Storage Room',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='http://www.catsandflorals.com/wp-content/uploads/2017/11/cool-tips-for-front-yard-landscaping-ideas-front-house-garden-design-together-with-stunning-garden-design-ideas-for-front-of-house-1024x768.jpg',
+						image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
 						action=MessageTemplateAction(
 								label='Landscape',
 								text='Landscape',								
@@ -130,7 +130,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://hamipara.com/wp-content/uploads/2017/06/Bedroom-Overhead-Light-Fixtures-Gallery-With-Vintage-Ceiling-Pictures-Antique-1024x768.jpg',
+        thumbnail_image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
         title='Light',
         text='Please select',
         actions=[            
@@ -152,28 +152,28 @@ image_carousel_template_message2 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://cdn.shopify.com/s/files/1/1992/6569/products/red-velvet-curtains_530x@2x.jpg?v=1502874704',
+				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
 				action=MessageTemplateAction(
 					label='Curtain',
 					text='Curtain',
 							)
 					),
-					ImageCarouselColumn(
-						image_url='http://autocorrect.us/wp-content/uploads/2018/01/ceiling-fan-light-kit-adapter-ceiling-fan-light-kit-replacement-intended-for-measurements-1024-x-768.jpg',
-						action=MessageTemplateAction(
-								label='Fan',
-								text='Fan',								
-							)
-					),
-			]
-		)
+			ImageCarouselColumn(
+				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+				action=MessageTemplateAction(
+					label='Fan',
+					text='Fan',								
+				)
+			),
+		]
+	)
 )
 
 # ผ้าม่าน
 buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://cdn.shopify.com/s/files/1/1992/6569/products/red-velvet-curtains_530x@2x.jpg?v=1502874704',
+        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
         title='Curtain',
         text='Please select',
         actions=[            
@@ -193,7 +193,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='http://autocorrect.us/wp-content/uploads/2018/01/ceiling-fan-light-kit-adapter-ceiling-fan-light-kit-replacement-intended-for-measurements-1024-x-768.jpg',
+        thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
         title='Fan',
         text='Please select',
         actions=[            
@@ -217,7 +217,7 @@ buttons_template_message22 = TemplateSendMessage(
 buttons_template_message3 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='http://theandroidworkshop.com/wp-content/uploads/2018/03/cloud-pendant-light-2013-jonas-wagell-design-architecture-cloud-pendant-lamp-1024x1024.jpg',
+        thumbnail_image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
         title='Light',
         text='Please select',
         actions=[            
@@ -237,7 +237,7 @@ buttons_template_message3 = TemplateSendMessage(
 buttons_template_message4 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fimg1.southernliving.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2Fimage%2F2016%2F03%2Fmain%2Fgasesp021024861.jpg%3Fitok%3DjJb-NiL8&w=800&q=85',
+        thumbnail_image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
         title='Springer',
         text='Please select',
         actions=[            
