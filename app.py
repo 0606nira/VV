@@ -69,7 +69,7 @@ def callback():
 def handle_message(event):
 	message = event.message.text
 
-	if(message == 'Go to HOME'):
+	if(message == 'HOME'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
