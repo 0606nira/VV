@@ -195,7 +195,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 buttons_template_message21 = TemplateSendMessage(
     alt_text='Buttons template',
     template=ButtonsTemplate(
-        thumbnail_image_url='https://cdn.shopify.com/s/files/1/1992/6569/products/red-velvet-curtains_530x@2x.jpg?v=1502874704',',
+        thumbnail_image_url='https://cdn.shopify.com/s/files/1/1992/6569/products/red-velvet-curtains_530x@2x.jpg?v=1502874704',
         title='Curtain',
         text='Please select',
         actions=[            
@@ -278,8 +278,6 @@ buttons_template_message4 = TemplateSendMessage(
         ]
     )
 )
-
-
    
 if __name__ == "__main__":
     app.run(debug=True)
