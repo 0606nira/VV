@@ -1,5 +1,6 @@
 ﻿from flask import Flask, request, abort
-import requests
+import time, sys
+import requests 
 import httplib, urllib
 from linebot import (
     LineBotApi, WebhookHandler,
