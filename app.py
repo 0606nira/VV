@@ -1,7 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys
 import requests 
-import httplib, urllib
+import http.client, urllib
 from linebot import (
     LineBotApi, WebhookHandler,
 )
@@ -28,17 +28,25 @@ API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
 
 def send_values(light):
     global API_KEY_WRITE
-    params = urllib.urlencode(
+    params = urllib.parse.urlencode(
              {'field1': light,
               'key': API_KEY_WRITE} )
     headers = { "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "text/plain" }
-    conn = httplib.HTTPConnection("api.thingspeak.com:80")
-	conn.request( "POST", "/update", params, headers ) # send HTTP request
-    resp = conn.getresponse() # get HTTP response
-    print 'status:', resp.status, resp.reason # read HTTP status
-    entry_id = resp.read()  # read response string
-    conn.close()            # close HTTP connection
+    conn = http.client.HTTPConnection("api.thingspeak.com:80")
+    try:
+        conn.request( "POST", "/update", params, headers ) # send HTTP request
+        resp = conn.getresponse() # get HTTP response
+        print ('status:', resp.status, resp.reason) # read HTTP status
+        entry_id = resp.read()  # read response string
+        conn.close()            # close HTTP connection
+        if entry_id.isdigit() and int(entry_id) > 0:
+            print ('Entry ID:', entry_id)
+            return True
+        else:
+            return False
+    except:
+        print ("connection failed", sys.exc_info())
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -94,6 +102,11 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Light On"))
 		send_values(1)
+	elif(message == 'Bedroom Light Off'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Light On"))
+		send_values(0)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
