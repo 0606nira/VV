@@ -86,7 +86,7 @@ def handle_message(event):
 	elif(message == 'Bedroom Light Off'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Light Off"))
+			TextSendMessage(text="Light On"))
 		send_values(0)
 	else:
 		line_bot_api.reply_message(
@@ -282,18 +282,18 @@ def send_values(light):
     except:
         print ("connection failed", sys.exc_info())
 		
-def notification():
+def notification(status):
     global API_KEY_READ
     url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
     response = urllib.request.urlopen(url)
     data = json.load(response)
-    # print (data)
-    # print (data['feeds'][0]['field2'])
-	
+    status = data['feeds'][0]['field1']
+    print (status)
+
 @handler.add(MessageEvent, message=TextMessage)
 def send_message(event):
 	message = event.message.text
-	if notification(data['feeds'][0]['field1'] == 0):
+	if notification('status' == 0):
 		line_bot_api.push_message(
 			event.source.user_id, 
 			TextSendMessage(text='Light Off'))
