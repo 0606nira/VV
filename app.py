@@ -293,7 +293,7 @@ def notification():
 @handler.add(MessageEvent, message=TextMessage)
 def send_message(event):
 	message = event.message.text
-	if notification(data['feeds'][0]['field1'] == 0)
+	if notification(data['feeds'][0]['field1'] == 0):
 		line_bot_api.push_message(
 			event.source.user_id, 
 			TextSendMessage(text='Light Off'))
