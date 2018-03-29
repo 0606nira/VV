@@ -1,5 +1,6 @@
 ﻿from flask import Flask, request, abort
 import time, sys
+import json
 import requests 
 import http.client, urllib
 from linebot import (
@@ -25,6 +26,8 @@ line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
+API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
+CHANNEL_ID = '455279'
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -278,7 +281,22 @@ def send_values(light):
             return False
     except:
         print ("connection failed", sys.exc_info())
-
-   
+		
+def notification():
+    global API_KEY_READ
+    url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+    response = urllib.request.urlopen(url)
+    data = json.load(response)
+    # print (data)
+    # print (data['feeds'][0]['field2'])
+	
+@handler.add(MessageEvent, message=TextMessage)
+def send_message(event):
+	message = event.message.text
+	if notification(data['feeds'][0]['field1'] == 0)
+		line_bot_api.push_message(
+			event.source.user_id, 
+			TextSendMessage(text='Light Off'))
+		
 if __name__ == "__main__":
     app.run(debug=True)
