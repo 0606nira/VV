@@ -289,14 +289,6 @@ def notification(status):
     data = json.load(response)
     status = data['feeds'][0]['field1']
     print (status)
-
-@handler.add(MessageEvent, message=TextMessage)
-def send_message(event):
-	message = event.message.text
-	if notification('status' == 0):
-		line_bot_api.push_message(
-			event.source.user_id, 
-			TextSendMessage(text='Light Off'))
 		
 if __name__ == "__main__":
     app.run(debug=True)
