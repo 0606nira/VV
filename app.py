@@ -29,6 +29,8 @@ API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
 API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
 CHANNEL_ID = '455279'
 
+timeis = time.localtime() # กำหนดให้เป็นเวลาเครื่อง
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -96,11 +98,11 @@ def handle_message(event):
 	if notification('status' == 1):
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light On' +time.strftime('%A %d %B %Y, %H:%M:%S')))
+			TextSendMessage(text='Light On at ' +time.strftime('%A %d %B %Y, %H:%M:%S', timeis)))
 	else:
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light Off' +time.strftime('%A %d %B %Y, %H:%M:%S')))
+			TextSendMessage(text='Light Off at ' +time.strftime('%A %d %B %Y, %H:%M:%S', timeis)))
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
