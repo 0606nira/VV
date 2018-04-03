@@ -84,12 +84,12 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light On"))
-		send.send_values(1)
+		send.send_values1(1)
 	elif(message == 'Bedroom Light Off'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
-		send.send_values(0)
+		send.send_values1(0)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
