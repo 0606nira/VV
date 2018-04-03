@@ -3,7 +3,7 @@ import time, sys
 import json
 import send
 import requests 
-import http.client, urllib
+#import http.client, urllib
 from linebot import (
     LineBotApi, WebhookHandler,
 )
@@ -26,9 +26,7 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
-API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
-API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
-CHANNEL_ID = '455279'
+
 
 timeis = time.localtime()
 time = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
