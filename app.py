@@ -96,11 +96,11 @@ def handle_message(event):
 	if notification('status' == 1):
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light On'+'%A %d %B %Y, %H:%M:%S'))
+			TextSendMessage(text='Light On' +time.strftime('%A %d %B %Y, %H:%M:%S')))
 	else:
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light Off''%A %d %B %Y, %H:%M:%S'))
+			TextSendMessage(text='Light Off' +time.strftime('%A %d %B %Y, %H:%M:%S')))
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
