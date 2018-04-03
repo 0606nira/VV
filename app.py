@@ -30,6 +30,7 @@ API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
 CHANNEL_ID = '455279'
 
 timeis = time.localtime() # กำหนดให้เป็นเวลาเครื่อง
+time = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -98,11 +99,11 @@ def handle_message(event):
 	if notification('status' == 1):
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light On at ' +time.strftime('%A %d %B %Y, %H:%M:%S', timeis)))
+			TextSendMessage(text='Light On at ' +time))
 	else:
 		line_bot_api.push_message(
 			event.source.user_id, 
-			TextSendMessage(text='Light Off at ' +time.strftime('%A %d %B %Y, %H:%M:%S', timeis)))
+			TextSendMessage(text='Light Off at ' +time))
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
