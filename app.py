@@ -29,7 +29,7 @@ API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
 API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
 CHANNEL_ID = '455279'
 
-timeis = time.localtime() # กำหนดให้เป็นเวลาเครื่อง
+timeis = time.ctime(time.time())
 time = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 @app.route("/callback", methods=['POST'])
