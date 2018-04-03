@@ -1,6 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys
 import json
+import send
 import requests 
 import http.client, urllib
 from linebot import (
@@ -85,25 +86,18 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light On"))
-		send_values(1)
+		send.send_values(1)
 	elif(message == 'Bedroom Light Off'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Light On"))
-		send_values(0)
+			TextSendMessage(text="Light Off"))
+		send.send_values(0)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Have a good day"))
 			
-	if notification('status' == 1):
-		line_bot_api.push_message(
-			event.source.user_id, 
-			TextSendMessage(text='Light On at ' +time))
-	else:
-		line_bot_api.push_message(
-			event.source.user_id, 
-			TextSendMessage(text='Light Off at ' +time))
+	
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -272,35 +266,6 @@ buttons_template_message4 = TemplateSendMessage(
     )
 )
 
-def send_values(light):
-    global API_KEY_WRITE
-    params = urllib.parse.urlencode(
-             {'field1': light,
-              'key': API_KEY_WRITE} )
-    headers = { "Content-Type": "application/x-www-form-urlencoded",
-                "Accept": "text/plain" }
-    conn = http.client.HTTPConnection("api.thingspeak.com:80")
-    try:
-        conn.request( "POST", "/update", params, headers ) # send HTTP request
-        resp = conn.getresponse() # get HTTP response
-        print ('status:', resp.status, resp.reason) # read HTTP status
-        entry_id = resp.read()  # read response string
-        conn.close()            # close HTTP connection
-        if entry_id.isdigit() and int(entry_id) > 0:
-            print ('Entry ID:', entry_id)
-            return True
-        else:
-            return False
-    except:
-        print ("connection failed", sys.exc_info())
-		
-def notification(status):
-    global API_KEY_READ
-    url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
-    response = urllib.request.urlopen(url)
-    data = json.load(response)
-    status = data['feeds'][0]['field1']
-    print (status)
 		
 if __name__ == "__main__":
     app.run(debug=True)
