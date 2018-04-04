@@ -58,30 +58,11 @@ def handle_message(event):
 			event.reply_token,
 			image_carousel_template_message1)
 		noti.notification()
+		
 	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
-	elif(message == 'Living Room'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			image_carousel_template_message2)
-	elif(message == 'Storage Room'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message3)
-	elif(message == 'Landscape'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message4)
-	elif(message == 'Curtain'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message21)
-	elif(message == 'Fan'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message22)
 	elif(message == 'Bedroom Light On'):
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -92,6 +73,30 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
 		send.send_values1(0)
+	while True:
+		if(notification() == '1'):
+			line_bot_api.push_message(
+				event.source.user_id or event.source.group_id or event.source.room_id, 
+				TextSendMessage(text='Light On'))
+		time.sleep(2)
+		
+	elif(message == 'Living Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message2)
+	elif(message == 'Curtain'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message21)
+	elif(message == 'Fan'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message22)
+			
+	elif(message == 'Storage Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -102,6 +107,20 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
 		send.send_values2(0)
+		
+	elif(message == 'Landscape'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message4)
+			
+	elif(message == 'Weather'):
+		line_bot_api.push_message(
+			event.source.user_id or event.source.group_id or event.source.room_id, 
+			TextSendMessage(text='Light On'))
+	
+
+
+
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
