@@ -121,7 +121,7 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
-	while True:
+	#while True:
 		if(noti.notification() == '1'):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.push_message(
@@ -143,8 +143,8 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Light Off when" +timeat))
-		time.sleep(2)
-		continue
+		time.sleep(5)
+		#continue
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
