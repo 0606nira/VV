@@ -139,8 +139,8 @@ def handle_message(event):
 					TextSendMessage(text='Light On room'))
 			else:
 				line_bot_api.reply_message(
-                event.reply_token,
-                TextMessage(text="Error"))
+					event.reply_token,
+					TextMessage(text="Error"))
 		time.sleep(2)
 		continue
 
