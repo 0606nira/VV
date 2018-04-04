@@ -2,7 +2,7 @@
 import time, sys
 import json
 import send
-import notification as n,
+import notification,
 import requests 
 #import http.client, urllib
 from linebot import (
@@ -44,7 +44,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
-		n.notification()
+		notification.notification()
     except InvalidSignatureError:
         abort(400)
 
