@@ -105,17 +105,42 @@ def handle_message(event):
 		line_bot_api.push_message(
 			event.source.user_id or event.source.group_id or event.source.room_id, 
 			TextSendMessage(text='Light On'))
+	elif(message == 'Bye'):
+        if isinstance(event.source, SourceGroup):
+            line_bot_api.reply_message(
+                event.reply_token, TextMessage(text='Leaving group'))
+            line_bot_api.leave_group(event.source.group_id)
+        elif isinstance(event.source, SourceRoom):
+            line_bot_api.reply_message(
+                event.reply_token, TextMessage(text='Leaving group'))
+            line_bot_api.leave_room(event.source.room_id)
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="Can't Leave"))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-
-def light_message(event):			
+				
 	while True:
 		if(noti.notification() == '1'):
-			line_bot_api.push_message(
-				event.source.user_id or event.source.group_id or event.source.room_id, 
-				TextSendMessage(text='Light On'))
+			if isinstance(event.source, SourceUser):
+				line_bot_api.push_message(
+					event.source.user_id or event.source.group_id or event.source.room_id, 
+					TextSendMessage(text='Light On user'))
+			elif isinstance(event.source, SourceGroup):
+				line_bot_api.push_message(
+					event.source.group_id, 
+					TextSendMessage(text='Light On group'))
+			elif isinstance(event.source, SourceRoom):
+				line_bot_api.push_message(
+					event.source.room_id, 
+					TextSendMessage(text='Light On room'))
+			else:
+				line_bot_api.reply_message(
+                event.reply_token,
+                TextMessage(text="Error"))
 		time.sleep(2)
 
 image_carousel_template_message1 = TemplateSendMessage(
