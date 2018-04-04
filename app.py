@@ -2,6 +2,7 @@
 import time, sys
 import json
 import send
+import noti
 import requests 
 import http.client, urllib
 from linebot import (
@@ -56,6 +57,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
+		noti.notification()
 	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
