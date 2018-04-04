@@ -74,7 +74,7 @@ def handle_message(event):
 			TextSendMessage(text="Light Off"))
 		send.send_values1(0)
 	while True:
-		if(notification() == '1'):
+		if(noti.notification() == '1'):
 			line_bot_api.push_message(
 				event.source.user_id or event.source.group_id or event.source.room_id, 
 				TextSendMessage(text='Light On'))
