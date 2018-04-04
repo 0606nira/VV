@@ -44,7 +44,6 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
-		noti.notification()
     except InvalidSignatureError:
         abort(400)
 
@@ -58,6 +57,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
+		noti.notification()
 	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
