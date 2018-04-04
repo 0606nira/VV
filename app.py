@@ -27,8 +27,6 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
-
-
 timeis = time.localtime()
 time = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
@@ -112,7 +110,7 @@ def handle_message(event):
 			line_bot_api.leave_group(event.source.group_id)
 		elif isinstance(event.source, SourceRoom):
 			line_bot_api.reply_message(
-				event.reply_token, TextMessage(text='Leaving group'))
+				event.reply_token, TextMessage(text='Leaving room'))
 			line_bot_api.leave_room(event.source.room_id)
 		else:
 			line_bot_api.reply_message(
@@ -123,30 +121,30 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 				
-	while True:
-		if(noti.notification() == '1'):
-			if isinstance(event.source, SourceUser):
-				line_bot_api.push_message(
-					event.source.user_id, 
-					TextSendMessage(text='Light On user'))
-			elif isinstance(event.source, SourceGroup):
-				line_bot_api.push_message(
-					event.source.group_id, 
-					TextSendMessage(text='Light On group'))
-			elif isinstance(event.source, SourceRoom):
-				line_bot_api.push_message(
-					event.source.room_id, 
-					TextSendMessage(text='Light On room'))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token,
-					TextMessage(text="Error"))
+while True:
+	if(noti.notification() == '1'):
+		if isinstance(event.source, SourceUser):
+			line_bot_api.push_message(
+				event.source.user_id, 
+				TextSendMessage(text='Light On user'))
+		elif isinstance(event.source, SourceGroup):
+			line_bot_api.push_message(
+				event.source.group_id, 
+				TextSendMessage(text='Light On group'))
+		elif isinstance(event.source, SourceRoom):
+			line_bot_api.push_message(
+				event.source.room_id, 
+				TextSendMessage(text='Light On room'))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token,
-				TextMessage(text="Light Off"))
-		time.sleep(2)
-		continue
+				TextMessage(text="Error"))
+	else:
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextMessage(text="Light Off"))
+	time.sleep(2)
+	continue
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
