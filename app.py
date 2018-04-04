@@ -1,7 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys
 import json
-import send
+import send, notification
 import requests 
 #import http.client, urllib
 from linebot import (
@@ -90,10 +90,20 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
 		send.send_values1(0)
+	elif(message == 'Storageroom Light On'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Light On"))
+		send.send_values2(1)
+	elif(message == 'Storageroom Light Off'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="Light Off"))
+		send.send_values2(0)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextSendMessage(text="Have a good day"))
+			TextSendMessage(text="I don't know %s" %event.message.text))
 			
 	
 
@@ -263,7 +273,7 @@ buttons_template_message4 = TemplateSendMessage(
         ]
     )
 )
-
-		
+			
+			
 if __name__ == "__main__":
     app.run(debug=True)
