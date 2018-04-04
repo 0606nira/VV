@@ -2,9 +2,8 @@
 import time, sys
 import json
 import send
-import noti
 import requests 
-#import http.client, urllib
+import http.client, urllib
 from linebot import (
     LineBotApi, WebhookHandler,
 )
@@ -57,7 +56,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
-
 	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
