@@ -28,7 +28,7 @@ line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 timeis = time.localtime()
-time = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
+timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 @app.route("/callback", methods=['POST'])
 def callback():
