@@ -120,8 +120,9 @@ def notification(event):
             print('on')
         else:
             print ('error')
-        print (status)
-        print (sta)
+			
+        #print (status)
+        #print (sta)
         time.sleep(5)			
 	
 
