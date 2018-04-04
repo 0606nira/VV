@@ -109,7 +109,8 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-			
+
+def light_message(event):			
 	while True:
 		if(noti.notification() == '1'):
 			line_bot_api.push_message(
