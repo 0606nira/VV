@@ -1,7 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys
 import json
-import send, notification
+import send, notification as n,
 import requests 
 #import http.client, urllib
 from linebot import (
@@ -43,6 +43,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+		n.notification()
     except InvalidSignatureError:
         abort(400)
 
@@ -105,25 +106,7 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
-def notification(event):
-    while True:
-        global API_KEY_READ
-        url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
-        response = urllib.request.urlopen(url)
-        data = json.load(response)
-        status = data['feeds'][0]['field1']
-        sta = data['feeds'][1]['field1']
-        if (status == 1):
-            line_bot_api.push_message(
-			event.source.user_id or event.source.group_id or event.source.room_id,
-			TextSendMessage(text='Light On'))
-            print('on')
-        else:
-            print ('error')
-			
-        #print (status)
-        #print (sta)
-        time.sleep(5)			
+	if (
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
