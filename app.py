@@ -56,9 +56,8 @@ def handle_message(event):
 	if(message == 'Home'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			image_carousel_template_message1)
-		
-	if(message == 'Bed Room'): 
+			image_carousel_template_message1)	
+	elif(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
@@ -71,8 +70,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
-		send.send_values1(0)
-		
+		send.send_values1(0)	
 	elif(message == 'Living Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -84,8 +82,7 @@ def handle_message(event):
 	elif(message == 'Fan'): 
 		line_bot_api.reply_message(
 			event.reply_token,
-			buttons_template_message22)
-			
+			buttons_template_message22)		
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -99,19 +96,15 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
-		send.send_values2(0)
-		
+		send.send_values2(0)		
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
 			event.reply_token,
-			buttons_template_message4)
-			
+			buttons_template_message4)		
 	elif(message == 'Weather'):
 		line_bot_api.push_message(
 			event.source.user_id or event.source.group_id or event.source.room_id, 
 			TextSendMessage(text='Light On'))
-	
-
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
