@@ -127,7 +127,7 @@ def handle_message(event):
 		if(noti.notification() == '1'):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.push_message(
-					event.source.user_id or event.source.group_id or event.source.room_id, 
+					event.source.user_id, 
 					TextSendMessage(text='Light On user'))
 			elif isinstance(event.source, SourceGroup):
 				line_bot_api.push_message(
@@ -142,6 +142,7 @@ def handle_message(event):
                 event.reply_token,
                 TextMessage(text="Error"))
 		time.sleep(2)
+		continue
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
