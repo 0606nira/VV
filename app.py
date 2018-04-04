@@ -70,7 +70,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
-		send.send_values1(0)	
+		send.send_values1(0)
 	elif(message == 'Living Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -113,7 +113,7 @@ def handle_message(event):
 	while True:
 		if(noti.notification() == '1'):
 			line_bot_api.push_message(
-				event.source.user_id or event.source.group_id or event.source.room_id, 
+				event.source.user_id and event.source.group_id and event.source.room_id, 
 				TextSendMessage(text='Light On'))
 		time.sleep(2)
 
