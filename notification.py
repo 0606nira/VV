@@ -5,6 +5,7 @@ import http.client, urllib
 
 	
 def notification():
+	while True:
         global API_KEY_READ
         url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
         response = urllib.request.urlopen(url)
@@ -15,7 +16,7 @@ def notification():
 			line_bot_api.push_message(
 				event.source.user_id or event.source.group_id or event.source.room_id, 
 				TextSendMessage(text='Light On'))
-		
+		time.sleep(5)
 		#print (status)
 		#print (sta)
 		

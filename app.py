@@ -1,7 +1,8 @@
 ﻿from flask import Flask, request, abort
 import time, sys
 import json
-import send, notification as n,
+import send
+import notification as n,
 import requests 
 #import http.client, urllib
 from linebot import (
