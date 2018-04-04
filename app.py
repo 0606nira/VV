@@ -104,9 +104,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-			
-	if (
-	
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
