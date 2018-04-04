@@ -141,6 +141,10 @@ def handle_message(event):
 				line_bot_api.reply_message(
 					event.reply_token,
 					TextMessage(text="Error"))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token,
+				TextMessage(text="Light Off"))
 		time.sleep(2)
 		continue
 
