@@ -106,18 +106,18 @@ def handle_message(event):
 			event.source.user_id or event.source.group_id or event.source.room_id, 
 			TextSendMessage(text='Light On'))
 	elif(message == 'Bye'):
-        if isinstance(event.source, SourceGroup):
-            line_bot_api.reply_message(
-                event.reply_token, TextMessage(text='Leaving group'))
-            line_bot_api.leave_group(event.source.group_id)
-        elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(
-                event.reply_token, TextMessage(text='Leaving group'))
-            line_bot_api.leave_room(event.source.room_id)
-        else:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextMessage(text="Can't Leave"))
+		if isinstance(event.source, SourceGroup):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text='Leaving group'))
+			line_bot_api.leave_group(event.source.group_id)
+		elif isinstance(event.source, SourceRoom):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text='Leaving group'))
+			line_bot_api.leave_room(event.source.room_id)
+		else:
+			line_bot_api.reply_message(
+				event.reply_token,
+				TextMessage(text="Can't Leave"))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
