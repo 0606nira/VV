@@ -57,9 +57,8 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)
-		noti.notification()
 		
-	elif(message == 'Bed Room'): 
+	if(message == 'Bed Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
@@ -73,12 +72,6 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="Light Off"))
 		send.send_values1(0)
-	while True:
-		if(noti.notification() == '1'):
-			line_bot_api.push_message(
-				event.source.user_id or event.source.group_id or event.source.room_id, 
-				TextSendMessage(text='Light On'))
-		time.sleep(2)
 		
 	elif(message == 'Living Room'): 
 		line_bot_api.reply_message(
@@ -119,12 +112,17 @@ def handle_message(event):
 			TextSendMessage(text='Light On'))
 	
 
-
-
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
+			
+	while True:
+		if(noti.notification() == '1'):
+			line_bot_api.push_message(
+				event.source.user_id or event.source.group_id or event.source.room_id, 
+				TextSendMessage(text='Light On'))
+		time.sleep(2)
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
