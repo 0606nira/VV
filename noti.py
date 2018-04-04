@@ -3,6 +3,9 @@ import json
 import requests 
 import http.client, urllib
 
+API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
+API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
+CHANNEL_ID = '455279'
 	
 def notification():
 	while True:
