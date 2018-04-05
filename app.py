@@ -125,7 +125,7 @@ def handle_message(event):
 			TextSendMessage(text="I don't know %s" %event.message.text))
 
 	while True:
-		if(noti.notification() == 2):
+		if(notification() == 2):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.push_message(
 					event.source.user_id, 
@@ -138,7 +138,7 @@ def handle_message(event):
 				line_bot_api.push_message(
 					event.source.room_id, 
 					TextSendMessage(text='Light On room when ' +timeat))
-		if(noti.notification() == 1):
+		if(notification() == 1):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.push_message(
 					event.source.user_id, 
@@ -153,7 +153,25 @@ def handle_message(event):
 					TextSendMessage(text='Light Off room when ' +timeat))
 		continue
 	
-
+def notification():
+	global dummy
+	while True:
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
+		response = urllib.request.urlopen(url)
+		data = json.load(response)
+		status = data['feeds'][0]['field1']
+		entry = data['feeds'][0]['entry_id']
+		if (status != dummy):
+			dummy = status
+			var = 1
+			vadum = var+int(dummy)
+			print ('Change')
+			print (vadum)
+			print (type(vadum))
+			return vadum
+		continue
+		#print (status)
+		#print (entry)
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
