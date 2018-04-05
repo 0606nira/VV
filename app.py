@@ -127,36 +127,38 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-
-while True:
-	if(noti.notification() == 2):
-		if isinstance(event.source, SourceUser):
-			line_bot_api.push_message(
-				event.source.user_id, 
-				TextSendMessage(text='Light On user when ' +timeat))
-		elif isinstance(event.source, SourceGroup):
-			line_bot_api.push_message(
-				event.source.group_id, 
-				TextSendMessage(text='Light On group when ' +timeat))
-		elif isinstance(event.source, SourceRoom):
-			line_bot_api.push_message(
-				event.source.room_id, 
-				TextSendMessage(text='Light On room when ' +timeat))
-	if(noti.notification() == 1):
-		if isinstance(event.source, SourceUser):
-			line_bot_api.push_message(
-				event.source.user_id, 
-				TextSendMessage(text='Light Off user when ' +timeat))
-		elif isinstance(event.source, SourceGroup):
-			line_bot_api.push_message(
-				event.source.group_id, 
-				TextSendMessage(text='Light Off group when ' +timeat))
-		elif isinstance(event.source, SourceRoom):
-			line_bot_api.push_message(
-				event.source.room_id, 
-				TextSendMessage(text='Light Off room when ' +timeat))
-	time.sleep(5)
-	continue
+			
+@handler.add(MessageEvent)
+def handle_noti(event):
+	while True:
+		if(noti.notification() == 2):
+			if isinstance(event.source, SourceUser):
+				line_bot_api.push_message(
+					event.source.user_id, 
+					TextSendMessage(text='Light On user when ' +timeat))
+			elif isinstance(event.source, SourceGroup):
+				line_bot_api.push_message(
+					event.source.group_id, 
+					TextSendMessage(text='Light On group when ' +timeat))
+			elif isinstance(event.source, SourceRoom):
+				line_bot_api.push_message(
+					event.source.room_id, 
+					TextSendMessage(text='Light On room when ' +timeat))
+		if(noti.notification() == 1):
+			if isinstance(event.source, SourceUser):
+				line_bot_api.push_message(
+					event.source.user_id, 
+					TextSendMessage(text='Light Off user when ' +timeat))
+			elif isinstance(event.source, SourceGroup):
+				line_bot_api.push_message(
+					event.source.group_id, 
+					TextSendMessage(text='Light Off group when ' +timeat))
+			elif isinstance(event.source, SourceRoom):
+				line_bot_api.push_message(
+					event.source.room_id, 
+					TextSendMessage(text='Light Off room when ' +timeat))
+		time.sleep(5)
+		continue
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
