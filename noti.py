@@ -22,5 +22,6 @@ def notification():
 			print (vadum)
 			print (type(vadum))
 			return vadum
+		continue
 		#print (status)
 		#print (entry)
