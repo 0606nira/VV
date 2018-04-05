@@ -19,7 +19,7 @@ from linebot.models import (
  CarouselTemplate, CarouselColumn, PostbackEvent, ImageCarouselTemplate,
  StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
  ImageMessage, VideoMessage, AudioMessage, ImageCarouselColumn,
- UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
+ UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, DatetimePickerTemplateAction,
  )
 
 app = Flask(__name__)
@@ -329,28 +329,28 @@ buttons_template_message4 = TemplateSendMessage(
 )
 
 confirm_template_message = TemplateSendMessage(
-    alt_text='Confirm template',
-    template=ConfirmTemplate(
-        text='What do you want to set up?',
-        actions=[
-            PostbackTemplateAction(
-                label='Date and Time',
-                text='I want to set up Date and Time',
-                data='datetime_postback'
-            ),
-            MessageTemplateAction(
-                label='Nothing',
-                text='Cancel set up'
-            )
-        ]
-    )
+	alt_text='Confirm template',
+	template=ConfirmTemplate(
+		text='What do you want to set up?',
+		actions=[
+			DatetimePickerTemplateAction(
+				label='DateTime'
+				data='datetime_postback',
+				mode='datetime')
+			),
+			MessageTemplateAction(
+				label='Nothing',
+				text='Cancel set up'
+			)
+		]
+	)
 )
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-    if event.postback.data == 'datetime_postback':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
+	if event.postback.data == 'datetime_postback':
+		line_bot_api.reply_message(
+			event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
 			
 if __name__ == "__main__":
     app.run(debug=True)
