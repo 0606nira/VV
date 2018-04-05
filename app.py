@@ -63,14 +63,14 @@ def handle_message(event):
 			event.reply_token,
 			buttons_template_message1)
 	elif(message == 'Bedroom Light On'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="Light On"))
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#TextSendMessage(text="Light On"))
 		send.send_values1(1)
 	elif(message == 'Bedroom Light Off'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="Light Off"))
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#TextSendMessage(text="Light Off"))
 		send.send_values1(0)
 	elif(message == 'Living Room'): 
 		line_bot_api.reply_message(
