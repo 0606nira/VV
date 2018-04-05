@@ -47,7 +47,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=TextMessage, LocationMessage)
 def handle_message(event):
 	message = event.message.text
 
@@ -116,39 +116,7 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
-	else:
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="I don't know %s" %event.message.text))
-			
-	#while True:
-		if(noti.notification() == '1'):
-			if isinstance(event.source, SourceUser):
-				line_bot_api.push_message(
-					event.source.user_id, 
-					TextSendMessage(text='Light On user when' +timeat))
-			elif isinstance(event.source, SourceGroup):
-				line_bot_api.push_message(
-					event.source.group_id, 
-					TextSendMessage(text='Light On group when' +timeat))
-			elif isinstance(event.source, SourceRoom):
-				line_bot_api.push_message(
-					event.source.room_id, 
-					TextSendMessage(text='Light On room when' +timeat))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token,
-					TextMessage(text="Error"))
-		else:
-			line_bot_api.reply_message(
-				event.reply_token,
-				TextMessage(text="Light Off when" +timeat))
-		time.sleep(5)
-		#continue
-
-@handler.add(MessageEvent, message=LocationMessage)
-def handle_location_message(event):
-	if(message == 'Location'):
+	elif(message == 'Location'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationSendMessage(
@@ -156,7 +124,12 @@ def handle_location_message(event):
 				latitude=event.message.latitude, longitude=event.message.longitude
 			)
 		)
-				
+	else:
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="I don't know %s" %event.message.text))
+			
+	
 
 
 image_carousel_template_message1 = TemplateSendMessage(
