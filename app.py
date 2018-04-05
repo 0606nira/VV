@@ -350,7 +350,7 @@ confirm_template_message = TemplateSendMessage(
 def handle_postback(event):
 	if event.postback.data == 'time_postback':
 		line_bot_api.reply_message(
-			event.reply_token, TextSendMessage(text=event.postback.params['time']))
+			event.reply_token, TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
 			
 if __name__ == "__main__":
     app.run(debug=True)
