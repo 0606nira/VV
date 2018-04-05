@@ -22,6 +22,5 @@ def notification():
 			print (vadum)
 			print (type(vadum))
 			return vadum
-		time.sleep(2)
 		#print (status)
 		#print (entry)
