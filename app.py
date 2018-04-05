@@ -334,9 +334,9 @@ confirm_template_message = TemplateSendMessage(
 		text='What do you want to set up?',
 		actions=[
 			DatetimePickerTemplateAction(
-				label='DateTime',
-				data='datetime_postback',
-				mode='datetime'
+				label='Time',
+				data='time_postback',
+				mode='time'
 			),
 			MessageTemplateAction(
 				label='Nothing',
@@ -348,7 +348,7 @@ confirm_template_message = TemplateSendMessage(
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-	if event.postback.data == 'datetime_postback':
+	if event.postback.data == 'time_postback':
 		line_bot_api.reply_message(
 			event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
 			
