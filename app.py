@@ -116,11 +116,18 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
-	elif(message == 'Location'):
+	else:
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text="I don't know %s" %event.message.text))
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+	if (message == 'Location'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationSendMessage(
-				title='my location', address='Bangkok',
+				title=event.message.title, address=event.message.address,
 				latitude=event.message.latitude, longitude=event.message.longitude
 			)
 		)
@@ -128,7 +135,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-			
 	
 
 
