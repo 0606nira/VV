@@ -15,10 +15,12 @@ def notification():
 		status = data['feeds'][0]['field1']
 		entry = data['feeds'][0]['entry_id']
 		if (status != dummy):
-			dummy = status
-			var = 1
-			return var
+			vadum = var+int(dummy)
 			print ('Change')
+			print (vadum)
+			print (type(vadum))
+			return vadum
 		time.sleep(2)
 		#print (status)
-		#print (entry)	
+		#print (entry)
+		continue
