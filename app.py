@@ -151,6 +151,7 @@ def handle_message(event):
 				line_bot_api.push_message(
 					event.source.room_id, 
 					TextSendMessage(text='Light Off room when ' +timeat))
+		time.sleep(5)
 		continue
 	
 def notification():
@@ -169,6 +170,7 @@ def notification():
 			print (vadum)
 			print (type(vadum))
 			return vadum
+		time.sleep(5)
 		continue
 		#print (status)
 		#print (entry)
