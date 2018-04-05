@@ -47,7 +47,7 @@ def callback():
 
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage, LocationMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	message = event.message.text
 
@@ -120,7 +120,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationSendMessage(
-				title='My Location', address='Bangkok',
+				title=event.message.title, address=event.message.address,
 				latitude=event.message.latitude, longitude=event.message.longitude
 			)
 		)
