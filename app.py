@@ -120,7 +120,7 @@ def handle_message(event):
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
 	elif(message == 'Set Up'):
-		line_bot_api.reply)message(
+		line_bot_api.reply_message(
 			event.reply_token,
 			confirm_template_message)
 	else:
