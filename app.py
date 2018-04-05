@@ -138,10 +138,6 @@ def handle_message(event):
 				line_bot_api.push_message(
 					event.source.room_id, 
 					TextSendMessage(text='Light On room when ' +timeat))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token,
-					TextMessage(text="Error"))
 		if(noti.notification() == 1):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.push_message(
@@ -155,14 +151,6 @@ def handle_message(event):
 				line_bot_api.push_message(
 					event.source.room_id, 
 					TextSendMessage(text='Light Off room when ' +timeat))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token,
-					TextMessage(text="Error"))
-		else:
-			line_bot_api.reply_message(
-				event.reply_token,
-				TextMessage(text="Error"))
 		continue
 	
 

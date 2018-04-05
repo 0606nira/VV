@@ -3,6 +3,9 @@ import json
 import requests 
 import http.client, urllib
 
+dummy = '0'
+var = 0
+	
 def notification():
 	global dummy
 	while True:
