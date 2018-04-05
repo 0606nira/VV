@@ -334,9 +334,9 @@ confirm_template_message = TemplateSendMessage(
 		text='What do you want to set up?',
 		actions=[
 			DatetimePickerTemplateAction(
-				label='DateTime'
+				label='DateTime',
 				data='datetime_postback',
-				mode='datetime')
+				mode='datetime'
 			),
 			MessageTemplateAction(
 				label='Nothing',
