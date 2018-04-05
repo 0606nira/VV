@@ -121,20 +121,29 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 
-@handler.add(MessageEvent, message=LocationMessage)
-def handle_location_message(event):
-	if (message == 'Location'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			LocationSendMessage(
-				title=event.message.title, address=event.message.address,
-				latitude=event.message.latitude, longitude=event.message.longitude
-			)
-		)
-	else:
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="I don't know %s" %event.message.text))
+	while True:
+		if(noti.notification() == 1):
+			if isinstance(event.source, SourceUser):
+				line_bot_api.push_message(
+					event.source.user_id, 
+					TextSendMessage(text='Light On user when ' +timeat))
+			elif isinstance(event.source, SourceGroup):
+				line_bot_api.push_message(
+					event.source.group_id, 
+					TextSendMessage(text='Light On group when ' +timeat))
+			elif isinstance(event.source, SourceRoom):
+				line_bot_api.push_message(
+					event.source.room_id, 
+					TextSendMessage(text='Light On room when ' +timeat))
+			else:
+				line_bot_api.reply_message(
+					event.reply_token,
+					TextMessage(text="Error"))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token,
+				TextMessage(text="Light Off when " +timeat))
+		time.sleep(2)
 	
 
 
