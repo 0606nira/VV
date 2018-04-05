@@ -144,7 +144,6 @@ def handle_message(event):
 				event.reply_token,
 				TextMessage(text="Light Off when " +timeat))
 		time.sleep(2)
-		continue
 	
 
 

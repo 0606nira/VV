@@ -4,6 +4,7 @@ import requests
 import http.client, urllib
 
 dummy = '0'
+var = 0
 	
 def notification():
 	global dummy
@@ -15,6 +16,8 @@ def notification():
 		entry = data['feeds'][0]['entry_id']
 		if (status != dummy):
 			dummy = status
+			var = 1
+			return var
 			print ('Change')
 		time.sleep(2)
 		#print (status)
