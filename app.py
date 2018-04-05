@@ -119,6 +119,10 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
+	elif(message == 'Set Up'):
+		line_bot_api.reply)message(
+			event.reply_token,
+			confirm_template_message)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -320,8 +324,31 @@ buttons_template_message4 = TemplateSendMessage(
             )
         ]
     )
-)	
+)
 
+confirm_template_message = TemplateSendMessage(
+    alt_text='Confirm template',
+    template=ConfirmTemplate(
+        text='What do you want to set up?',
+        actions=[
+            PostbackTemplateAction(
+                label='Date and Time',
+                text='I want to set up Date and Time',
+                data='datetime_postback'
+            ),
+            MessageTemplateAction(
+                label='Nothing',
+                text='Cancel set up'
+            )
+        ]
+    )
+)
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if event.postback.data == 'datetime_postback':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
 			
 if __name__ == "__main__":
     app.run(debug=True)
