@@ -31,7 +31,7 @@ timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 dummy = '0'
-var = 0
+#var = 0
 
 @app.route("/callback", methods=['POST'])
 def callback():
