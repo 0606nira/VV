@@ -30,6 +30,9 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
+dummy = '0'
+var = 0
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
