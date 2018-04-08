@@ -16,11 +16,11 @@ def send_values1(light):
     try:
         conn.request( "POST", "/update", params, headers ) # send HTTP request
         resp = conn.getresponse() # get HTTP response
-        print ('status:', resp.status, resp.reason) # read HTTP status
+        #print ('status:', resp.status, resp.reason) # read HTTP status
         entry_id = resp.read()  # read response string
         conn.close()            # close HTTP connection
         if entry_id.isdigit() and int(entry_id) > 0:
-            print ('Entry ID:', entry_id)
+            #print ('Entry ID:', entry_id)
             return True
         else:
             return False
@@ -38,11 +38,11 @@ def send_values2(light):
     try:
         conn.request( "POST", "/update", params, headers ) # send HTTP request
         resp = conn.getresponse() # get HTTP response
-        print ('status:', resp.status, resp.reason) # read HTTP status
+        #print ('status:', resp.status, resp.reason) # read HTTP status
         entry_id = resp.read()  # read response string
         conn.close()            # close HTTP connection
         if entry_id.isdigit() and int(entry_id) > 0:
-            print ('Entry ID:', entry_id)
+            #print ('Entry ID:', entry_id)
             return True
         else:
             return False

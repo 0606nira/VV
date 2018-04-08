@@ -130,20 +130,6 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 
-def noti_message():			
-	while True:
-		if(noti.notification() == 'On'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light On when ' +timeat))
-		if(noti.notification() == 'Off'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Off when ' +timeat))
-		time.sleep(10)
-		
-noti_message()
-	
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -394,17 +380,17 @@ def handle_postback(event):
 			multicasts.remove(event.source.user_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='%s' %event.source.user_id))	
+				TextSendMessage(text='your id is %s' %event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
 			multicasts.remove(event.source.group_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text=event.source.group_id))
+				TextSendMessage(text='your group id is %s' %event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
 			multicasts.remove(event.source.room_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text=event.source.room_id))
+				TextSendMessage(text='your room id is %s' %event.source.room_id))
 		
 if __name__ == "__main__":
     app.run(debug=True)
