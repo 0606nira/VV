@@ -136,13 +136,13 @@ def handle_message(event):
 			
 	while True:
 		if(noti.notification() == 2):
-				line_bot_api.multicast(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light On when ' +timeat))
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light On when ' +timeat))
 		if(noti.notification() == 1):
-				line_bot_api.multicast(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light Off when ' +timeat))
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Off when ' +timeat))
 		continue
 	
 
