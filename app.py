@@ -135,28 +135,28 @@ def handle_noti(event):
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.multicast(
-					event.source.user_id, 
+					multicasts, 
 					TextSendMessage(text='Light On user when ' +timeat))
 			elif isinstance(event.source, SourceGroup):
 				line_bot_api.multicast(
-					event.source.group_id, 
+					multicasts, 
 					TextSendMessage(text='Light On group when ' +timeat))
 			elif isinstance(event.source, SourceRoom):
 				line_bot_api.multicast(
-					event.source.room_id, 
+					multicasts, 
 					TextSendMessage(text='Light On room when ' +timeat))
 		if(noti.notification() == 1):
 			if isinstance(event.source, SourceUser):
 				line_bot_api.multicast(
-					event.source.user_id, 
+					multicasts, 
 					TextSendMessage(text='Light Off user when ' +timeat))
 			elif isinstance(event.source, SourceGroup):
 				line_bot_api.multicast(
-					event.source.group_id, 
+					multicasts, 
 					TextSendMessage(text='Light Off group when ' +timeat))
 			elif isinstance(event.source, SourceRoom):
 				line_bot_api.multicast(
-					event.source.room_id, 
+					multicasts, 
 					TextSendMessage(text='Light Off room when ' +timeat))
 		time.sleep(5)
 		continue
@@ -395,17 +395,33 @@ def handle_postback(event):
 			multicasts.append(event.source.user_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text=event.source.user_id))	
+				TextSendMessage(text='your id is %s' %event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
+			multicasts.append(event.source.group_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text=event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
+			multicasts.append(event.source.room_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text=event.source.room_id))
 	elif(postback == 'remove_noti'):
-		multicasts.remove('profile.user_id')
+		if isinstance(event.source, SourceUser):
+			multicasts.remove(event.source.user_id)
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='%s' %event.source.user_id))	
+		elif isinstance(event.source, SourceGroup):
+			multicasts.remove(event.source.group_id)
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text=event.source.group_id))
+		elif isinstance(event.source, SourceRoom):
+			multicasts.remove(event.source.room_id)
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text=event.source.room_id))
 		
 if __name__ == "__main__":
     app.run(debug=True)
