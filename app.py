@@ -66,10 +66,11 @@ def notification():
 			print ('Change')
 			print (vadum)
 			print (type(vadum))
-			return vadum
+			#return vadum
 		continue
-		#print (status)
-		#print (entry)
+		print (status)
+		print (entry)
+notification()
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
