@@ -30,8 +30,8 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
-#dummy = '0'
-#var = 0
+dummy = '0'
+var = 0
 
 multicasts = []
 
@@ -51,6 +51,26 @@ def callback():
         abort(400)
 
     return 'OK'
+	
+def notification():
+	global dummy
+	while True:
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
+		response = urllib.request.urlopen(url)
+		data = json.load(response)
+		status = data['feeds'][0]['field1']
+		entry = data['feeds'][0]['entry_id']
+		if (status != dummy):
+			dummy = status
+			var = 1
+			vadum = var+int(dummy)
+			print ('Change')
+			print (vadum)
+			print (type(vadum))
+			return vadum
+		continue
+		#print (status)
+		#print (entry)
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -135,11 +155,11 @@ def handle_message(event):
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
 	while True:
-		if(noti.notification() == 2):
+		if(notification() == 2):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light On when ' +timeat))
-		if(noti.notification() == 1):
+		if(notification() == 1):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
