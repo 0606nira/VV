@@ -140,6 +140,7 @@ def handle_message(event):
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
 		time.sleep(10)
+		continue
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
