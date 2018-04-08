@@ -130,7 +130,7 @@ def handle_message(event):
 			
 @handler.add(MessageEvent)
 def handle_noti(event):
-muticasts = ['begin', 'second']
+	muticasts = ['begin', 'second']
 	while True:
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
@@ -381,8 +381,7 @@ buttons_template_message6 = TemplateSendMessage(
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-postback = event.postback.data
-
+	postback = event.postback.data
 	if(postback == 'time_postback'):
 		line_bot_api.reply_message(
 			event.reply_token, 
