@@ -1,5 +1,6 @@
 import time, sys
 import json
+import send
 import requests 
 import http.client, urllib
 	
@@ -15,12 +16,12 @@ def notification():
         dummy = 0
         if(status != sta):
             if(status == '1'):
-                send_values1(1)
+                send.send_values1(1)
                 dummy = 'On'
                 #print (dummy)
                 return dummy
             elif(status == '0'):
-                send_values1(0)
+                send.send_values1(0)
                 dummy = 'Off'
                 #print (dummy)
                 #print (status)
