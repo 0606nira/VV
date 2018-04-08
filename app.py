@@ -66,9 +66,9 @@ def notification():
 			print ('Change')
 			print (vadum)
 			print (type(vadum))
-			return vadum
 			print (status)
 			print (entry)
+			return vadum
 		continue
 #notification()
 
