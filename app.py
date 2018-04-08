@@ -130,7 +130,7 @@ def handle_message(event):
 			
 @handler.add(MessageEvent)
 def handle_noti(event):
-muticasts = []
+muticasts = ['begin']
 	while True:
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
