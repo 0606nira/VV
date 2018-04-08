@@ -120,10 +120,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
-	elif(message == 'check list'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextMessage(text='%s' %multicasts))
 
 
 image_carousel_template_message1 = TemplateSendMessage(
@@ -334,6 +330,9 @@ buttons_template_message6 = TemplateSendMessage(
 				label='Remove Notify',
 				data='remove_noti',
 				text='Remove success'
+			),MessageTemplateAction(
+				label='Check list',
+				text='%s' %multicasts
 			),
 			MessageTemplateAction(
 				label='Nothing',
