@@ -9,7 +9,7 @@ var = 0
 def notification():
 	global dummy
 	while True:
-		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		response = urllib.request.urlopen(url)
 		data = json.load(response)
 		status = data['feeds'][0]['field1']

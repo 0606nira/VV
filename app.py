@@ -67,8 +67,8 @@ def notification():
 			print (vadum)
 			print (type(vadum))
 			#return vadum
-		print (status)
-		print (entry)
+		#print (status)
+		#print (entry)
 		continue
 #notification()
 
