@@ -33,7 +33,7 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 #dummy = '0'
 #var = 0
 
-multicasts = ['begin', 'second']
+multicasts = []
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -134,7 +134,7 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 
-@handler.add(MessageEvent)
+@handler.add(MessageEvent, message=TextMessage)
 def noti_message(event):			
 	while True:
 		if(noti.notification() == 2):
