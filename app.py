@@ -48,7 +48,7 @@ def callback():
 		abort(400)
 	return 'OK'
 
-#def notification():
+def notification():
 	while True:
 		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
 		response = urllib.request.urlopen(url)
@@ -165,7 +165,7 @@ def noti_message():
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
 		continue	
-noti_message()
+#noti_message()
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
