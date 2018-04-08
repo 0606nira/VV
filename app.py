@@ -30,9 +30,6 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
-dummy = '0'
-var = 0
-
 multicasts = []
 
 @app.route("/callback", methods=['POST'])
@@ -52,23 +49,22 @@ def callback():
 	return 'OK'
 
 def notification():
-	global dummy
 	while True:
-		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
 		response = urllib.request.urlopen(url)
 		data = json.load(response)
-		status = data['feeds'][0]['field1']
-		entry = data['feeds'][0]['entry_id']
-		if (status != dummy):
-			dummy = status
-			var = 1
-			vadum = var+int(dummy)
-			print ('Change')
-			print (vadum)
-			print (type(vadum))
-			print (status)
-			print (entry)
-			return vadum
+		sta = data['feeds'][0]['field1']
+		#entry_sta = data['feeds'][0]['entry_id']
+		status = data['feeds'][1]['field1']
+		#entry_status = data['feeds'][1]['entry_id']
+		dummy = 0
+		if (status != sta):	
+			send.send_values1(int(sta))
+			if (status = '1'):
+				dummy = 'On'
+			elif (status = '0'):
+				dummy = 'Off'
+			return dummy
 		continue
 #notification()
 
@@ -157,16 +153,16 @@ def handle_message(event):
 			
 def noti_message():
 	while True:
-		if(notification() == 2):
+		if(notification() == 'On'):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light On when ' +timeat))
-		if(notification() == 1):
+		if(notification() == 'Off'):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
 		continue	
-#noti_message()
+noti_message()
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
