@@ -33,6 +33,8 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 dummy = '0'
 var = 0
 
+muticasts = ['begin', 'second']
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -130,7 +132,6 @@ def handle_message(event):
 			
 @handler.add(MessageEvent)
 def handle_noti(event):
-	muticasts = ['begin', 'second']
 	while True:
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
@@ -344,7 +345,7 @@ buttons_template_message5 = TemplateSendMessage(
 			PostbackTemplateAction(
 				label='Notification',
 				data='noti_postback',
-				text='What would you like to do next?'
+				text='Set up notification'
 			),
 			MessageTemplateAction(
 				label='Nothing',
