@@ -54,7 +54,7 @@ def callback():
 def notification():
 	global dummy
 	while True:
-		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		response = urllib.request.urlopen(url)
 		data = json.load(response)
 		status = data['feeds'][0]['field1']
@@ -70,7 +70,7 @@ def notification():
 		print (status)
 		print (entry)
 		continue
-notification()
+#notification()
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -167,7 +167,7 @@ def noti_message():
 				TextSendMessage(text='Light Off when ' +timeat))
 		continue
 		
-#noti_message()
+noti_message()
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
