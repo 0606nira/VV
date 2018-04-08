@@ -125,6 +125,10 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
+	elif(message == 'check list'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextMessage(text=multicasts))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
