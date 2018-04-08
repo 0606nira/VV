@@ -2,7 +2,6 @@
 import time, sys
 import json
 import send
-import noti
 import requests 
 import http.client, urllib
 from linebot import (
@@ -364,33 +363,33 @@ def handle_postback(event):
 			multicasts.append(event.source.user_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your id is %s' %event.source.user_id))	
+				TextSendMessage(text='your id is %s add' %event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
 			multicasts.append(event.source.group_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your group id is %s' %event.source.group_id))
+				TextSendMessage(text='your group id is %s add' %event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
 			multicasts.append(event.source.room_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your room id is %s' %event.source.room_id))
+				TextSendMessage(text='your room id is %s add' %event.source.room_id))
 	elif(postback == 'remove_noti'):
 		if isinstance(event.source, SourceUser):
 			multicasts.remove(event.source.user_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your id is %s' %event.source.user_id))	
+				TextSendMessage(text='your id is %s re' %event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
 			multicasts.remove(event.source.group_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your group id is %s' %event.source.group_id))
+				TextSendMessage(text='your group id is %s re' %event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
 			multicasts.remove(event.source.room_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your room id is %s' %event.source.room_id))
+				TextSendMessage(text='your room id is %s re' %event.source.room_id))
 		
 if __name__ == "__main__":
     app.run(debug=True)
