@@ -166,7 +166,7 @@ def noti_message():
 				TextSendMessage(text='Light Off when ' +timeat))
 		continue
 		
-noti_message()
+#noti_message()
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
