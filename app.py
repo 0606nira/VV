@@ -33,7 +33,7 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 dummy = '0'
 var = 0
 
-muticasts = ['begin', 'second']
+multicasts = ['begin', 'second']
 
 @app.route("/callback", methods=['POST'])
 def callback():
