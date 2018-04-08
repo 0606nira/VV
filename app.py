@@ -40,7 +40,6 @@ def callback():
     # get request body as text
 	body = request.get_data(as_text=True)
 	app.logger.info("Request body: " + body)
-	noti_message()
 	
     # handle webhook body
 	try:
@@ -142,7 +141,8 @@ def noti_message():
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
 		time.sleep(10)
-		continue
+		
+noti_message()
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
