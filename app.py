@@ -392,11 +392,18 @@ def handle_postback(event):
 			buttons_template_message6)
 	elif(postback == 'add_noti'):
 		if isinstance(event.source, SourceUser):
-			multicasts.append('%s' %event.source.user_id)
+			multicasts.append(event.source.user_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text=event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text=event.source.group_id))
+		elif isinstance(event.source, SourceRoom):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text=event.source.room_id))
 	elif(postback == 'remove_noti'):
 		multicasts.remove('profile.user_id')
 		
