@@ -128,41 +128,21 @@ def handle_message(event):
 	elif(message == 'check list'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			TextMessage(text=multicasts))
+			TextMessage(text='%s' %multicasts))
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
-@handler.add(MessageEvent)
-def handle_noti(event):
 	while True:
 		if(noti.notification() == 2):
-			if isinstance(event.source, SourceUser):
 				line_bot_api.multicast(
 					multicasts, 
-					TextSendMessage(text='Light On user when ' +timeat))
-			elif isinstance(event.source, SourceGroup):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light On group when ' +timeat))
-			elif isinstance(event.source, SourceRoom):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light On room when ' +timeat))
+					TextSendMessage(text='Light On when ' +timeat))
 		if(noti.notification() == 1):
-			if isinstance(event.source, SourceUser):
 				line_bot_api.multicast(
 					multicasts, 
-					TextSendMessage(text='Light Off user when ' +timeat))
-			elif isinstance(event.source, SourceGroup):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Off group when ' +timeat))
-			elif isinstance(event.source, SourceRoom):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Off room when ' +timeat))
+					TextSendMessage(text='Light Off when ' +timeat))
 		time.sleep(5)
 		continue
 	
