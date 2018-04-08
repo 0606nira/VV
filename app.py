@@ -124,10 +124,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextMessage(text='%s' %multicasts))
-	else:
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="I don't know %s" %event.message.text))
 
 
 image_carousel_template_message1 = TemplateSendMessage(
@@ -332,12 +328,12 @@ buttons_template_message6 = TemplateSendMessage(
 			PostbackTemplateAction(
 				label='Add Notify',
 				data='add_noti',
-				text='success'
+				text='Add success'
 			),
 			PostbackTemplateAction(
 				label='Remove Notify',
 				data='remove_noti',
-				text='success'
+				text='Remove success'
 			),
 			MessageTemplateAction(
 				label='Nothing',
