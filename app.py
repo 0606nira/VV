@@ -122,7 +122,7 @@ def handle_message(event):
 	elif(message == 'Set Up'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			confirm_template_message)
+			buttons_template_message5)
 	else:
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -130,31 +130,32 @@ def handle_message(event):
 			
 @handler.add(MessageEvent)
 def handle_noti(event):
+muticasts = []
 	while True:
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.user_id, 
 					TextSendMessage(text='Light On user when ' +timeat))
 			elif isinstance(event.source, SourceGroup):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.group_id, 
 					TextSendMessage(text='Light On group when ' +timeat))
 			elif isinstance(event.source, SourceRoom):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.room_id, 
 					TextSendMessage(text='Light On room when ' +timeat))
 		if(noti.notification() == 1):
 			if isinstance(event.source, SourceUser):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.user_id, 
 					TextSendMessage(text='Light Off user when ' +timeat))
 			elif isinstance(event.source, SourceGroup):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.group_id, 
 					TextSendMessage(text='Light Off group when ' +timeat))
 			elif isinstance(event.source, SourceRoom):
-				line_bot_api.push_message(
+				line_bot_api.multicast(
 					event.source.room_id, 
 					TextSendMessage(text='Light Off room when ' +timeat))
 		time.sleep(5)
@@ -328,15 +329,47 @@ buttons_template_message4 = TemplateSendMessage(
     )
 )
 
-confirm_template_message = TemplateSendMessage(
-	alt_text='Confirm template',
-	template=ConfirmTemplate(
+#ตั้งค่า
+buttons_template_message5 = TemplateSendMessage(
+	alt_text='Buttons template',
+	template=ButtonsTemplate(
+		thumbnail_image_url='',
 		text='What do you want to set up?',
 		actions=[
 			DatetimePickerTemplateAction(
 				label='Time',
 				data='time_postback',
 				mode='time'
+			),
+			PostbackTemplateAction(
+				label='Notification',
+				data='noti_postback',
+				text='What would you like to do next?'
+			),
+			MessageTemplateAction(
+				label='Nothing',
+				text='Cancel set up'
+			)
+		]
+	)
+)
+
+#ตั้งค่าแจ้งเตือน
+buttons_template_message6 = TemplateSendMessage(
+	alt_text='Buttons template',
+	template=ButtonsTemplate(
+		thumbnail_image_url='',
+		text='Please select',
+		actions=[
+			PostbackTemplateAction(
+				label='Add Notify',
+				data='add_noti',
+				text='success'
+			),
+			PostbackTemplateAction(
+				label='Remove Notify',
+				data='remove_noti',
+				text='success'
 			),
 			MessageTemplateAction(
 				label='Nothing',
@@ -348,9 +381,25 @@ confirm_template_message = TemplateSendMessage(
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
-	if event.postback.data == 'time_postback':
+postback = event.postback.data
+
+	if(postback == 'time_postback'):
 		line_bot_api.reply_message(
-			event.reply_token, TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
-			
+			event.reply_token, 
+			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
+	elif(postback == 'noti_postback'):
+		line_bot_api.reply_message(
+			event.reply_token, 
+			buttons_template_message6)
+	elif(postback == 'add_noti'):
+		if isinstance(event.source, SourceUser):
+			multicasts.append('%s' %event.source.user_id)
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text=event.source.user_id))	
+		elif isinstance(event.source, SourceGroup):
+	elif(postback == 'remove_noti'):
+		multicasts.remove('profile.user_id')
+		
 if __name__ == "__main__":
     app.run(debug=True)
