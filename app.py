@@ -35,6 +35,8 @@ var = 0
 
 multicasts = []
 
+noti_message()
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -43,16 +45,15 @@ def callback():
     # get request body as text
 	body = request.get_data(as_text=True)
 	app.logger.info("Request body: " + body)
-	noti_message()
-
+	
     # handle webhook body
 	try:
 		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
 	return 'OK'
-	
-def notification():
+
+def notification(timeout=None):
 	global dummy
 	while True:
 		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
