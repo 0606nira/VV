@@ -40,6 +40,7 @@ def callback():
     # get request body as text
 	body = request.get_data(as_text=True)
 	app.logger.info("Request body: " + body)
+	noti_message()
 	
     # handle webhook body
 	try:
@@ -129,7 +130,8 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
-			
+
+def noti_message():			
 	while True:
 		if(noti.notification() == 'On'):
 			line_bot_api.push_message(
