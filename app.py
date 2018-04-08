@@ -401,12 +401,12 @@ def handle_postback(event):
 			multicasts.append(event.source.group_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text=event.source.group_id))
+				TextSendMessage(text='your group id is %s' %event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
 			multicasts.append(event.source.room_id)
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text=event.source.room_id))
+				TextSendMessage(text='your room id is %s' %event.source.room_id))
 	elif(postback == 'remove_noti'):
 		if isinstance(event.source, SourceUser):
 			multicasts.remove(event.source.user_id)
