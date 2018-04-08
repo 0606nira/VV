@@ -48,29 +48,6 @@ def callback():
 		abort(400)
 	return 'OK'
 
-def notification():
-	while True:
-		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
-		response = urllib.request.urlopen(url)
-		data = json.load(response)
-		sta = data['feeds'][0]['field1']
-		#entry_sta = data['feeds'][0]['entry_id']
-		status = data['feeds'][1]['field1']
-		#entry_status = data['feeds'][1]['entry_id']
-		dummy = 0
-		if (status != sta):	
-			send.send_values1(int(sta))
-			if(status == '1'):
-				dummy = 'On'
-				print (dummy)
-			elif(status == '0'):
-				dummy = 'Off'
-				print (dummy)
-			print (status)
-			return dummy
-		continue
-#notification()
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
 	message = event.message.text
@@ -153,19 +130,16 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
-			
-def noti_message():
 	while True:
-		if(notification() == 'On'):
+		if(noti.notification() == 'On'):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light On when ' +timeat))
-		if(notification() == 'Off'):
+		if(noti.notification() == 'Off'):
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Off when ' +timeat))
-		continue	
-#noti_message()
+		time.sleep(10)
 	
 
 image_carousel_template_message1 = TemplateSendMessage(
