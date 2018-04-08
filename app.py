@@ -60,10 +60,13 @@ def notification():
 		dummy = 0
 		if (status != sta):	
 			send.send_values1(int(sta))
-			if (status = '1'):
+			if(status == '1'):
 				dummy = 'On'
-			elif (status = '0'):
+				print (dummy)
+			elif(status == '0'):
 				dummy = 'Off'
+				print (dummy)
+			print (status)
 			return dummy
 		continue
 #notification()
