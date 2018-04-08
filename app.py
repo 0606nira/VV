@@ -130,7 +130,7 @@ def handle_message(event):
 			
 @handler.add(MessageEvent)
 def handle_noti(event):
-muticasts = ['begin']
+muticasts = ['begin', 'second']
 	while True:
 		if(noti.notification() == 2):
 			if isinstance(event.source, SourceUser):
@@ -333,7 +333,7 @@ buttons_template_message4 = TemplateSendMessage(
 buttons_template_message5 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='',
+		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--bAhU43hA--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124002/production/designs/1975176_1.jpg',
 		text='What do you want to set up?',
 		actions=[
 			DatetimePickerTemplateAction(
@@ -358,7 +358,7 @@ buttons_template_message5 = TemplateSendMessage(
 buttons_template_message6 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='',
+		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--BRE04nGW--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124241/production/designs/1975184_1.jpg',
 		text='Please select',
 		actions=[
 			PostbackTemplateAction(
