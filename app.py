@@ -48,7 +48,7 @@ def callback():
 		abort(400)
 	return 'OK'
 
-def notification():
+#def notification():
 	while True:
 		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
 		response = urllib.request.urlopen(url)
