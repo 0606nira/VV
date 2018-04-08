@@ -47,6 +47,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+		noti_message()
     except InvalidSignatureError:
         abort(400)
 
@@ -154,6 +155,8 @@ def handle_message(event):
 			event.reply_token,
 			TextSendMessage(text="I don't know %s" %event.message.text))
 			
+			
+def noti_message():
 	while True:
 		if(notification() == 2):
 			line_bot_api.push_message(
