@@ -2,6 +2,7 @@
 import time, sys
 import json
 import send
+import noti
 import requests 
 import http.client, urllib
 from linebot import (
@@ -330,7 +331,8 @@ buttons_template_message6 = TemplateSendMessage(
 				label='Remove Notify',
 				data='remove_noti',
 				text='Remove success'
-			),MessageTemplateAction(
+			),
+			MessageTemplateAction(
 				label='Check list',
 				text='%s' %multicasts
 			),
@@ -342,6 +344,18 @@ buttons_template_message6 = TemplateSendMessage(
 	)
 )
 
+def noti_message():
+	while True:
+		if(noti.notification() == 'On'):
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light On when ' +timeat))
+		elif(noti.notification() == 'Off'):
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Off when ' +timeat))
+		time.sleep(10)
+		
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
@@ -355,36 +369,66 @@ def handle_postback(event):
 			buttons_template_message6)
 	elif(postback == 'add_noti'):
 		if isinstance(event.source, SourceUser):
-			multicasts.append(event.source.user_id)
-			line_bot_api.reply_message(
+			if (event.source.user_id in multicasts):
+				line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your id is %s add' %event.source.user_id))	
+				TextSendMessage(text='you already on notify')
+			else:
+				multicasts.append(event.source.user_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your id is %s add' %event.source.user_id))	
 		elif isinstance(event.source, SourceGroup):
-			multicasts.append(event.source.group_id)
-			line_bot_api.reply_message(
+			if (event.source.group_id in multicasts):
+				line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your group id is %s add' %event.source.group_id))
+				TextSendMessage(text='you already on notify')
+			else:
+				multicasts.append(event.source.group_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your group id is %s add' %event.source.group_id))
 		elif isinstance(event.source, SourceRoom):
-			multicasts.append(event.source.room_id)
-			line_bot_api.reply_message(
+			if (event.source.room_id in multicasts):
+				line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='your room id is %s add' %event.source.room_id))
+				TextSendMessage(text='you already on notify')
+			else:
+				multicasts.append(event.source.room_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your room id is %s add' %event.source.room_id))
 	elif(postback == 'remove_noti'):
 		if isinstance(event.source, SourceUser):
-			multicasts.remove(event.source.user_id)
-			line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='your id is %s re' %event.source.user_id))	
+			if (event.source.user_id in multicasts):
+				multicasts.remove(event.source.user_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your id is %s re' %event.source.user_id))
+			else:
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text="your notify didn't set")
 		elif isinstance(event.source, SourceGroup):
-			multicasts.remove(event.source.group_id)
-			line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='your group id is %s re' %event.source.group_id))
+			if (event.source.group_id in multicasts):
+				multicasts.remove(event.source.group_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your group id is %s re' %event.source.group_id))
+			else:
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text="your notify didn't set")
 		elif isinstance(event.source, SourceRoom):
-			multicasts.remove(event.source.room_id)
-			line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='your room id is %s re' %event.source.room_id))
+			if (event.source.room_id in multicasts):
+				multicasts.remove(event.source.room_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your room id is %s re' %event.source.room_id))
+			else:
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text="your notify didn't set")
 		
 if __name__ == "__main__":
     app.run(debug=True)
