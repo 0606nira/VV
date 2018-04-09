@@ -362,25 +362,22 @@ def handle_postback(event):
 	if(postback == 'time_postback'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
-			
+			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))			
 	elif(postback == 'noti_postback'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			buttons_template_message6)
-			
+			buttons_template_message6)		
 	elif(postback == 'add_noti'):
 		if isinstance(event.source, SourceUser):
 			if(event.source.user_id in multicasts):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='you already on notify')
-			else:
-					multicasts.append(event.source.user_id)
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text='your id is %s add' %event.source.user_id))
-					
+			elif(event.source.user_id not in multicasts):
+				multicasts.append(event.source.user_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your id is %s add' %event.source.user_id))
 		elif isinstance(event.source, SourceGroup):
 			if(event.source.group_id in multicasts):
 				line_bot_api.reply_message(
@@ -390,8 +387,7 @@ def handle_postback(event):
 				multicasts.append(event.source.group_id)
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text='your group id is %s add' %event.source.group_id))
-					
+					TextSendMessage(text='your group id is %s add' %event.source.group_id))					
 		elif isinstance(event.source, SourceRoom):
 			if(event.source.room_id in multicasts):
 				line_bot_api.reply_message(
