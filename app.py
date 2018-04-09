@@ -103,7 +103,7 @@ def handle_message(event):
 	elif(message == 'Weather'):
 		line_bot_api.push_message(
 			event.source.user_id or event.source.group_id or event.source.room_id, 
-			TextSendMessage(text='Light On'))
+			TextSendMessage(text='The weather is...'))
 	elif(message == 'Bye'):
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
@@ -369,10 +369,10 @@ def handle_postback(event):
 			buttons_template_message6)
 	elif(postback == 'add_noti'):
 		if isinstance(event.source, SourceUser):
-			if (event.source.user_id in multicasts):
+			if(event.source.user_id in multicasts):
 				line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='you already on notify')
+					event.reply_token, 
+					TextSendMessage(text='you already on notify')
 			else:
 				multicasts.append(event.source.user_id)
 				line_bot_api.reply_message(
@@ -381,8 +381,8 @@ def handle_postback(event):
 		elif isinstance(event.source, SourceGroup):
 			if (event.source.group_id in multicasts):
 				line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='you already on notify')
+					event.reply_token, 
+					TextSendMessage(text='you already on notify')
 			else:
 				multicasts.append(event.source.group_id)
 				line_bot_api.reply_message(
@@ -391,8 +391,8 @@ def handle_postback(event):
 		elif isinstance(event.source, SourceRoom):
 			if (event.source.room_id in multicasts):
 				line_bot_api.reply_message(
-				event.reply_token, 
-				TextSendMessage(text='you already on notify')
+					event.reply_token, 
+					TextSendMessage(text='you already on notify')
 			else:
 				multicasts.append(event.source.room_id)
 				line_bot_api.reply_message(
