@@ -382,7 +382,7 @@ def handle_postback(event):
 			if(event.source.group_id in multicasts):
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text='you already on notify')
+					TextSendMessage(text='you already on notify'))
 			else:
 				multicasts.append(event.source.group_id)
 				line_bot_api.reply_message(
@@ -392,7 +392,7 @@ def handle_postback(event):
 			if(event.source.room_id in multicasts):
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text='you already on notify')
+					TextSendMessage(text='you already on notify'))
 			else:
 				multicasts.append(event.source.room_id)
 				line_bot_api.reply_message(
@@ -408,7 +408,7 @@ def handle_postback(event):
 			else:
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text="your notify didn't set")
+					TextSendMessage(text="your notify didn't set"))
 		elif isinstance(event.source, SourceGroup):
 			if(event.source.group_id in multicasts):
 				multicasts.remove(event.source.group_id)
@@ -418,7 +418,7 @@ def handle_postback(event):
 			else:
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text="your notify didn't set")
+					TextSendMessage(text="your notify didn't set"))
 		elif isinstance(event.source, SourceRoom):
 			if(event.source.room_id in multicasts):
 				multicasts.remove(event.source.room_id)
@@ -428,7 +428,7 @@ def handle_postback(event):
 			else:
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text="your notify didn't set")
+					TextSendMessage(text="your notify didn't set"))
 		
 if __name__ == "__main__":
     app.run(debug=True)
