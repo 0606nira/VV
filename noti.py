@@ -8,7 +8,7 @@ import http.client, urllib
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
-dummy = 313
+dummy = 315
 
 def notification():
         global dummy
