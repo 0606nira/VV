@@ -372,13 +372,12 @@ def handle_postback(event):
 			if(event.source.user_id in multicasts):
 				line_bot_api.reply_message(
 					event.reply_token, 
-					TextSendMessage(text='you already on notify')
+					TextSendMessage(text='you already on notify'))
 			else:
-				if(event.source.user_id not in multicasts):
-					multicasts.append(event.source.user_id)
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text='your id is %s add' %event.source.user_id))
+				multicasts.append(event.source.user_id)
+				line_bot_api.reply_message(
+					event.reply_token, 
+					TextSendMessage(text='your id is %s add' %event.source.user_id))
 		elif isinstance(event.source, SourceGroup):
 			if(event.source.group_id in multicasts):
 				line_bot_api.reply_message(
