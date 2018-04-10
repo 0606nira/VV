@@ -438,7 +438,7 @@ def n():
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Stroageroom On when ' +timeat))
 
-        await asyncio.sleep(5)
+        yield from asyncio.sleep(5)
 		
 loop = asyncio.get_event_loop()
 tasks = [
