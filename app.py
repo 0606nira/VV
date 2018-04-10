@@ -442,7 +442,7 @@ def n():
 		
 loop = asyncio.get_event_loop()
 tasks = [
-	asyncio.async(n())
+	asyncio.async(n()), 
 	asyncio.async(def callback())
 ]
 
