@@ -443,7 +443,6 @@ def n():
 		
 loop = asyncio.get_event_loop()
 tasks = [
-	asyncio.ensure_future(n()), 
 	asyncio.ensure_future(callback())
 ]
 
