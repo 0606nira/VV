@@ -48,6 +48,7 @@ async def callback():
 		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
+	await n()
 	return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -442,11 +443,11 @@ def n():
 		
 loop = asyncio.get_event_loop()
 tasks = [
-	asyncio.async(n()), 
-	asyncio.async(callback())
+	asyncio.ensure_future(n()), 
+	asyncio.ensure_future(callback())
 ]
 
-loop.run_until_complete(asyncio.gather(*tasks))
+loop.run_until_complete(tasks)
 		
 if __name__ == "__main__":
     app.run(debug=True)
