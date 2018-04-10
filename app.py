@@ -24,7 +24,7 @@ from linebot.models import (
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, DatetimePickerTemplateAction,
  )
 
-app = Quart(__name__)
+app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
@@ -35,7 +35,7 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 multicasts = []
 
 @app.route("/callback", methods=['POST'])
-async def callback():
+def callback():
     # get X-Line-Signature header value
 	signature = request.headers['X-Line-Signature']
 
@@ -48,8 +48,6 @@ async def callback():
 		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
-		
-	await 
 	return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
