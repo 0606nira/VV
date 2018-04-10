@@ -1,5 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys
+import asyncio
+from quart import Quart
 import json
 import send
 import noti
@@ -22,7 +24,7 @@ from linebot.models import (
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, DatetimePickerTemplateAction,
  )
 
-app = Flask(__name__)
+app = Quart(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
@@ -33,7 +35,7 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 multicasts = []
 
 @app.route("/callback", methods=['POST'])
-def callback():
+async def callback():
     # get X-Line-Signature header value
 	signature = request.headers['X-Line-Signature']
 
@@ -46,6 +48,8 @@ def callback():
 		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
+		
+	await 
 	return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -87,14 +91,8 @@ def handle_message(event):
 			event.reply_token,
 			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="Light On"))
 		send.send_values2(1)
 	elif(message == 'Storageroom Light Off'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text="Light Off"))
 		send.send_values2(0)		
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
@@ -343,18 +341,6 @@ buttons_template_message6 = TemplateSendMessage(
 		]
 	)
 )
-
-def noti_message():
-	while True:
-		if(noti.notification() == 'On'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light On when ' +timeat))
-		elif(noti.notification() == 'Off'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Off when ' +timeat))
-		time.sleep(10)
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):

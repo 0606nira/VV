@@ -15,4 +15,4 @@ six==1.10.0
 urllib3==1.22
 Werkzeug==0.12.2
 line-bot-sdk
-antolib
+quart==0.4.1

@@ -8,7 +8,7 @@ CHANNEL_ID = '455279'
 def send_values1(light):
     global API_KEY_WRITE
     params = urllib.parse.urlencode(
-             {'field1': light,
+             {'field1': light
               'key': API_KEY_WRITE} )
     headers = { "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "text/plain" }
