@@ -24,7 +24,7 @@ from linebot.models import (
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, DatetimePickerTemplateAction,
  )
 
-app = Flask(__name__)
+app = Quart(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
@@ -35,7 +35,7 @@ timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรู�
 multicasts = []
 
 @app.route("/callback", methods=['POST'])
-def callback():
+async def callback():
     # get X-Line-Signature header value
 	signature = request.headers['X-Line-Signature']
 
@@ -413,6 +413,37 @@ def handle_postback(event):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
+
+@asyncio.coroutine     
+def n():
+    while True:
+        if (noti.notification() == ('0', 1)): #(1 1), (1, 1),
+            print ('Light Off ' +timeat)
+            line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Bedroom Off when ' +timeat))
+        elif (noti.notification() == ('1', 1)):
+            print ('Light On ' +timeat)
+            line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Bedroom On when ' +timeat))
+        elif (noti.notification() == ('0', 2)):
+            print ('Light Off ' +timeat)
+            line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
+        elif (noti.notification() == ('1', 2)):
+            print ('Light On ' +timeat)
+            line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Stroageroom On when ' +timeat))
+
+        yield from asyncio.sleep(0.005)
+		
+loop = asyncio.get_event_loop()
+tasks = [
+	asyncio.async(n())
+]
 		
 if __name__ == "__main__":
     app.run(debug=True)
