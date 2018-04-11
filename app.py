@@ -414,7 +414,7 @@ def handle_postback(event):
 					TextSendMessage(text="your notify didn't set"))
 
 
-if (noit.notification() == ('0', 1)): #(1 1), (1, 1),
+if (noti.notification() == ('0', 1)): #(1 1), (1, 1),
 	print ('Light Off ' +timeat)
 	line_bot_api.multicast(
 		multicasts, 
