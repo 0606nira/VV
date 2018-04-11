@@ -329,7 +329,7 @@ def handle_message(event):
 				title='my location', 
 				address=event.message.address, 
 				latitude=event.message.latitude, 
-				longitude=event.message.longitude)
+				longitude=event.message.longitude))
 	elif(message == 'Bye'):
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
