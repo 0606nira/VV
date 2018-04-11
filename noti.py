@@ -5,7 +5,7 @@ import requests
 import http.client, urllib
 
 
-timeis = time.localtime()
+timeis = datetime.datetime.now()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 dummy = 0
