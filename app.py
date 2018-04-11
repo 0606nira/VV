@@ -252,13 +252,6 @@ buttons_template_message6 = TemplateSendMessage(
 	)
 )
 
-location_message = LocationSendMessage(
-    title='my location',
-    address=event.message.address,
-    latitude=event.message.latitude,
-    longitude=event.message.longitude
-)
-
 @app.route("/callback", methods=['POST'])
 def callback():
 	# get X-Line-Signature header value
@@ -332,7 +325,11 @@ def handle_message(event):
 	elif(message == 'Locatione'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			location_message)
+			LocationSendMessage(
+				title='my location', 
+				address=event.message.address, 
+				latitude=event.message.latitude, 
+				longitude=event.message.longitude)
 	elif(message == 'Bye'):
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
