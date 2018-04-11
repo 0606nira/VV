@@ -93,7 +93,7 @@ def send_values4(curtain):
     except:
         print ("connection failed", sys.exc_info())
 		
-def send_values4(springer):
+def send_values5(springer):
     global API_KEY_WRITE
     params = urllib.parse.urlencode(
              {'field5': springer, 
