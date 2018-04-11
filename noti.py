@@ -1,12 +1,9 @@
-import time, sys
+import time, sys, datetime
 import json
 import send
 import requests 
 import http.client, urllib
 
-
-timeis = datetime.datetime.now()
-timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 
 dummy = 0
 
