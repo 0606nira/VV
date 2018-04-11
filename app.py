@@ -24,18 +24,17 @@ from linebot.models import (
  UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent, DatetimePickerTemplateAction,
  )
 
-app = Quart(__name__)
+app = Flask(__name__)
 
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
-
 multicasts = []
 
 @app.route("/callback", methods=['POST'])
-async def callback():
+def callback():
     # get X-Line-Signature header value
 	signature = request.headers['X-Line-Signature']
 
@@ -48,7 +47,6 @@ async def callback():
 		handler.handle(body, signature)
 	except InvalidSignatureError:
 		abort(400)
-	await n()
 	return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -347,7 +345,7 @@ def handle_postback(event):
 	if(postback == 'time_postback'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))			
+			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']: timeset))
 	elif(postback == 'noti_postback'):
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -415,38 +413,29 @@ def handle_postback(event):
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
 
-@asyncio.coroutine     
 def n():
     while True:
-        if (noti.notification() == ('0', 1)): #(1 1), (1, 1),
+        if (notification() == ('0', 1)): #(1 1), (1, 1),
             print ('Light Off ' +timeat)
             line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Bedroom Off when ' +timeat))
-        elif (noti.notification() == ('1', 1)):
+        elif (notification() == ('1', 1)):
             print ('Light On ' +timeat)
             line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Bedroom On when ' +timeat))
-        elif (noti.notification() == ('0', 2)):
+        elif (notification() == ('0', 2)):
             print ('Light Off ' +timeat)
             line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-        elif (noti.notification() == ('1', 2)):
+        elif (notification() == ('1', 2)):
             print ('Light On ' +timeat)
             line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Stroageroom On when ' +timeat))
-
-        yield from asyncio.sleep(5)
-		
-loop = asyncio.get_event_loop()
-tasks = [
-	asyncio.ensure_future(callback())
-]
-
-loop.run_until_complete(tasks)
-		
+		time.sleep(5)
+				
 if __name__ == "__main__":
     app.run(debug=True)
