@@ -49,75 +49,6 @@ def callback():
 		abort(400)
 	return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-	message = event.message.text
-
-	if(message == 'Home'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			image_carousel_template_message1)	
-	elif(message == 'Bed Room'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message1)
-	elif(message == 'Bedroom Light On'):
-		#line_bot_api.reply_message(
-			#event.reply_token,
-			#TextSendMessage(text="Light On"))
-		send.send_values1(1)
-	elif(message == 'Bedroom Light Off'):
-		#line_bot_api.reply_message(
-			#event.reply_token,
-			#TextSendMessage(text="Light Off"))
-		send.send_values1(0)
-	elif(message == 'Living Room'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			image_carousel_template_message2)
-	elif(message == 'Curtain'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message21)
-	elif(message == 'Fan'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message22)		
-	elif(message == 'Storage Room'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message3)
-	elif(message == 'Storageroom Light On'):
-		send.send_values2(1)
-	elif(message == 'Storageroom Light Off'):
-		send.send_values2(0)		
-	elif(message == 'Landscape'): 
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message4)		
-	elif(message == 'Weather'):
-		line_bot_api.push_message(
-			event.source.user_id or event.source.group_id or event.source.room_id, 
-			TextSendMessage(text='The weather is...'))
-	elif(message == 'Bye'):
-		if isinstance(event.source, SourceGroup):
-			line_bot_api.reply_message(
-				event.reply_token, TextMessage(text='Leaving group'))
-			line_bot_api.leave_group(event.source.group_id)
-		elif isinstance(event.source, SourceRoom):
-			line_bot_api.reply_message(
-				event.reply_token, TextMessage(text='Leaving room'))
-			line_bot_api.leave_room(event.source.room_id)
-		else:
-			line_bot_api.reply_message(
-				event.reply_token,
-				TextMessage(text="Can't Leave"))
-	elif(message == 'Set Up'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message5)
-
-
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -338,6 +269,75 @@ buttons_template_message6 = TemplateSendMessage(
 		]
 	)
 )
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+	message = event.message.text
+
+	if(message == 'Home'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message1)	
+	elif(message == 'Bed Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message1)
+	elif(message == 'Bedroom Light On'):
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#TextSendMessage(text="Light On"))
+		send.send_values1(1)
+	elif(message == 'Bedroom Light Off'):
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#TextSendMessage(text="Light Off"))
+		send.send_values1(0)
+	elif(message == 'Living Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message2)
+	elif(message == 'Curtain'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message21)
+	elif(message == 'Fan'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message22)		
+	elif(message == 'Storage Room'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message3)
+	elif(message == 'Storageroom Light On'):
+		send.send_values2(1)
+	elif(message == 'Storageroom Light Off'):
+		send.send_values2(0)		
+	elif(message == 'Landscape'): 
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message4)		
+	elif(message == 'Weather'):
+		line_bot_api.push_message(
+			event.source.user_id or event.source.group_id or event.source.room_id, 
+			TextSendMessage(text='The weather is...'))
+	elif(message == 'Bye'):
+		if isinstance(event.source, SourceGroup):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text='Leaving group'))
+			line_bot_api.leave_group(event.source.group_id)
+		elif isinstance(event.source, SourceRoom):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text='Leaving room'))
+			line_bot_api.leave_room(event.source.room_id)
+		else:
+			line_bot_api.reply_message(
+				event.reply_token,
+				TextMessage(text="Can't Leave"))
+	elif(message == 'Set Up'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message5)
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -413,30 +413,28 @@ def handle_postback(event):
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
 
-def n():
-	while True:
-		if (notification() == ('0', 1)): #(1 1), (1, 1),
-			print ('Light Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom Off when ' +timeat))
-		elif (notification() == ('1', 1)):
-			print ('Light On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom On when ' +timeat))
-		elif (notification() == ('0', 2)):
-			print ('Light Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-		elif(notification() == ('1', 2)):
-			print ('Light On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom On when ' +timeat))
-		time.sleep(5)
-		
+
+if (notification() == ('0', 1)): #(1 1), (1, 1),
+	print ('Light Off ' +timeat)
+	line_bot_api.multicast(
+		multicasts, 
+		TextSendMessage(text='Light Bedroom Off when ' +timeat))
+elif (notification() == ('1', 1)):
+	print ('Light On ' +timeat)
+	line_bot_api.push_message(
+		'U5db26ce3aad1c4d83691ea5d6992116a', 
+		TextSendMessage(text='Light Bedroom On when ' +timeat))
+elif (notification() == ('0', 2)):
+	print ('Light Off ' +timeat)
+	line_bot_api.push_message(
+		'U5db26ce3aad1c4d83691ea5d6992116a', 
+		TextSendMessage(text='Light Stroageroom Off when ' +timeat))
+elif(notification() == ('1', 2)):
+	print ('Light On ' +timeat)
+	line_bot_api.push_message(
+		'U5db26ce3aad1c4d83691ea5d6992116a', 
+		TextSendMessage(text='Light Stroageroom On when ' +timeat))
+time.sleep(5)
 
 if __name__ == "__main__":
     app.run(debug=True)
