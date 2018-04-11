@@ -431,7 +431,7 @@ def n():
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
         elif(notification() == ('1', 2)):
-            print ('Light On ' +timeat)
+			print ('Light On ' +timeat)
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Light Stroageroom On when ' +timeat))
