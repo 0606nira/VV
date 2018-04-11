@@ -416,8 +416,8 @@ def handle_postback(event):
 
 if (noti.notification() == ('0', 1)): #(1 1), (1, 1),
 	print ('Light Off ' +timeat)
-	line_bot_api.multicast(
-		multicasts, 
+	line_bot_api.push_message(
+		'U5db26ce3aad1c4d83691ea5d6992116a', 
 		TextSendMessage(text='Light Bedroom Off when ' +timeat))
 elif (noti.notification() == ('1', 1)):
 	print ('Light On ' +timeat)
@@ -434,6 +434,7 @@ elif(noti.notification() == ('1', 2)):
 	line_bot_api.push_message(
 		'U5db26ce3aad1c4d83691ea5d6992116a', 
 		TextSendMessage(text='Light Stroageroom On when ' +timeat))
+#time.sleep(5)
 
 if __name__ == "__main__":
     app.run(debug=True)
