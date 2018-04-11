@@ -327,9 +327,9 @@ def handle_message(event):
 			event.reply_token, 
 			LocationSendMessage(
 				title='my location', 
-				address=event.message.address, 
-				latitude=event.message.latitude, 
-				longitude=event.message.longitude))
+				address='Tokyo', 
+				latitude=35.65910807942215, 
+				longitude=139.70372892916203))
 	elif(message == 'Bye'):
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
