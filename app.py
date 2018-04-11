@@ -348,11 +348,11 @@ while True:
 	@handler.add(PostbackEvent)
 	def handle_postback(event):
 		postback = event.postback.data
-		timewake = event.postback.params['time']
 		if(postback == 'time_postback'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Time to wake up is %s', %timewake))
+				TextSendMessage(text='Time to wake up is %s', %event.postback.params['time']))
+			print (event.postback.params['time'])
 		elif(postback == 'noti_postback'):
 			line_bot_api.reply_message(
 				event.reply_token, 
