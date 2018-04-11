@@ -351,7 +351,7 @@ while True:
 		if(postback == 'time_postback'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Time to wake up is %s', %event.postback.params['time']))
+				TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
 			print (event.postback.params['time'])
 		elif(postback == 'noti_postback'):
 			line_bot_api.reply_message(
