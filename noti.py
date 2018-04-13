@@ -28,22 +28,22 @@ def notification():
 			print ('dummy1: ', dummy)
 			light = 1
 			return last_status_light1, light #คืนค่ากลับ บอกสถานะไฟและห้องที่มีการเปลี่ยนแปลง
-		if(last_status_light2 != None):
+		elif(last_status_light2 != None):
 			dummy = entry_status
 			print ('dummy2: ', dummy)
 			light = 2
 			return last_status_light2, light
-		if(last_status_fan != None):
+		elif(last_status_fan != None):
 			dummy = entry_status
 			print ('dummy3: ', dummy)
 			fan = 3
 			return last_status_fan, fan
-		if(last_status_curtain != None):
+		elif(last_status_curtain != None):
 			dummy = entry_status
 			print ('dummy4: ', dummy)
 			curtain = 4
 			return last_status_curtain, curtain
-		if(last_status_springer != None):
+		elif(last_status_springer != None):
 			dummy = entry_status
 			print ('dummy5: ', dummy)
 			springer = 5
