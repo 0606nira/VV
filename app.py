@@ -498,7 +498,7 @@ def notification():
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Springer On when ' +timeat))
 
-
+notification()
 	
 if __name__ == "__main__":
     app.run(debug=True)
