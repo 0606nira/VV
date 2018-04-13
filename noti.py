@@ -21,23 +21,23 @@ def notification():
 	last_status_curtain = data['feeds'][0]['field4']
 	last_status_springer = data['feeds'][0]['field5']
 	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-		if(last_status_light1 is not None): 
+		if(last_status_light1 != None): 
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			light = 1
 			return last_status_light1, light #คืนค่ากลับ บอกสถานะไฟและห้องที่มีการเปลี่ยนแปลง
-		if(last_status_light2 is not None):
+		if(last_status_light2 != None):
 			dummy = entry_status
 			light = 2
 			return last_status_light2, light
-		if(last_status_fan is not None):
+		if(last_status_fan != None):
 			dummy = entry_status
 			fan = 3
 			return last_status_fan, fan
-		if(last_status_curtain is not None):
+		if(last_status_curtain != None):
 			dummy = entry_status
 			curtain = 4
 			return last_status_curtain, curtain
-		if(last_status_springer is not None):
+		if(last_status_springer != None):
 			dummy = entry_status
 			springer = 5
 			return last_status_springer, springer
