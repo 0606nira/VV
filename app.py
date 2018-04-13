@@ -426,6 +426,7 @@ def handle_postback(event):
 
 
 def n():
+		print ('in loop')
 		if (noti.notification() == ('0', 1)):
 			print ('Light Off ' +timeat)
 			line_bot_api.push_message(
