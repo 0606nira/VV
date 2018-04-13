@@ -27,13 +27,11 @@ def notification():
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
 			light = 1
-			print (notification())
 			return last_status_light1, light #คืนค่ากลับ บอกสถานะไฟและห้องที่มีการเปลี่ยนแปลง
 		elif(last_status_light2 != None):
 			dummy = entry_status
 			print ('dummy2: ', dummy)
 			light = 2
-			print (notification())
 			return last_status_light2, light
 		elif(last_status_fan != None):
 			dummy = entry_status

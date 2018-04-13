@@ -31,6 +31,7 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 multicasts = []
+dummy = 0
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -425,60 +426,79 @@ def handle_postback(event):
 					TextSendMessage(text="your notify didn't set"))
 
 
-def n():
-		print ('in loop')
-		if(noti.notification() == ('0', 1)):
-			print ('Light Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom Off when ' +timeat))
-		elif(noti.notification() == ('1', 1)):
-			print ('Light On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom On when ' +timeat))
-		elif(noti.notification() == ('0')):
-			print ('Light Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-		elif(noti.notification() == ('1', 2)):
-			print ('Light On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom On when ' +timeat))
-		elif(noti.notification() == ('0', 3)):
-			print ('Fan Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Fan Off when ' +timeat))
-		elif(noti.notification() == ('1', 3)):
-			print ('Fan On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Fan On when ' +timeat))
-		elif(noti.notification() == ('0', 4)):
-			print ('Curtain Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Curtain Off when ' +timeat))
-		elif(noti.notification() == ('1', 4)):
-			print ('Curtain On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Curtain On when ' +timeat))
-		elif(noti.notification() == ('0', 5)):
-			print ('Springer Off ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Springer Off when ' +timeat))
-		elif(noti.notification() == ('1', 5)):
-			print ('Springer On ' +timeat)
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Springer On when ' +timeat))
+def notification():
+	global dummy #ตั้งเป็นตัวแปรหลอก
+	print ('dummy: ', dummy)
+	#last_detect = datetime.datetime.now()
+	#url GET อ่านข้อมูล
+	url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+	entry_status = data['feeds'][0]['entry_id']
+	print ('entry_status: ', entry_status)
+	last_status_light1 = data['feeds'][0]['field1'] #สถานะไฟล่าสุดในห้องนอน
+	last_status_light2 = data['feeds'][0]['field2'] #สถานะไฟล่าสุดในห้องเก็บของ
+	last_status_fan = data['feeds'][0]['field3']
+	last_status_curtain = data['feeds'][0]['field4']
+	last_status_springer = data['feeds'][0]['field5']
+	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
+		if(last_status_light1 != None): 
+			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
+			print ('dummy1: ', dummy)
+			if(last_status_light1 == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Bedroom Off when ' +timeat))
+			else:
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Bedroom On when ' +timeat))
+		elif(last_status_light2 != None):
+			dummy = entry_status
+			print ('dummy2: ', dummy)
+			if(last_status_light2 == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Stroageroom Off when ' +timeat))
+			else:
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Stroageroom On when ' +timeat))
+		elif(last_status_fan != None):
+			dummy = entry_status
+			print ('dummy3: ', dummy)
+			if(last_status_fan == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Fan Off when ' +timeat))
+			else:
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Fan On when ' +timeat))
+		elif(last_status_curtain != None):
+			dummy = entry_status
+			print ('dummy4: ', dummy)
+			if(last_status_curtain == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Curtain Off when ' +timeat))
+			else:
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Curtain On when ' +timeat))
+		elif(last_status_springer != None):
+			dummy = entry_status
+			print ('dummy5: ', dummy)
+			if(last_status_springer == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Springer Off when ' +timeat))
+			else:
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Springer On when ' +timeat))
 
-n()
+
 	
 if __name__ == "__main__":
     app.run(debug=True)
