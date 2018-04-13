@@ -425,59 +425,59 @@ def handle_postback(event):
 					TextSendMessage(text="your notify didn't set"))
 
 def n():
-while True:
-	if (noti.notification() == ('0', 1)):
-		print ('Light Off ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Light Bedroom Off when ' +timeat))
-	elif (noti.notification() == ('1', 1)):
-		print ('Light On ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Light Bedroom On when ' +timeat))
-	elif (noti.notification() == ('0', 2)):
-		print ('Light Off ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-	elif (noti.notification() == ('1', 2)):
-		print ('Light On ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Light Stroageroom On when ' +timeat))
-	elif (noti.notification() == ('0', 3)):
-		print ('Fan Off ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Fan Off when ' +timeat))
-	elif (noti.notification() == ('1', 3)):
-		print ('Fan On ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Fan On when ' +timeat))
-	elif (noti.notification() == ('0', 4)):
-		print ('Curtain Off ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Curtain Off when ' +timeat))
-	elif (noti.notification() == ('1', 4)):
-		print ('Curtain On ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Curtain On when ' +timeat))
-	elif (noti.notification() == ('0', 5)):
-		print ('Springer Off ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Springer Off when ' +timeat))
-	elif (noti.notification() == ('1', 5)):
-		print ('Springer On ' +timeat)
-		line_bot_api.push_message(
-			'U5db26ce3aad1c4d83691ea5d6992116a', 
-			TextSendMessage(text='Springer On when ' +timeat))
+	while True:
+		if (noti.notification() == ('0', 1)):
+			print ('Light Off ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Bedroom Off when ' +timeat))
+		elif (noti.notification() == ('1', 1)):
+			print ('Light On ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Bedroom On when ' +timeat))
+		elif (noti.notification() == ('0', 2)):
+			print ('Light Off ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Stroageroom Off when ' +timeat))
+		elif (noti.notification() == ('1', 2)):
+			print ('Light On ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Light Stroageroom On when ' +timeat))
+		elif (noti.notification() == ('0', 3)):
+			print ('Fan Off ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Fan Off when ' +timeat))
+		elif (noti.notification() == ('1', 3)):
+			print ('Fan On ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Fan On when ' +timeat))
+		elif (noti.notification() == ('0', 4)):
+			print ('Curtain Off ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Curtain Off when ' +timeat))
+		elif (noti.notification() == ('1', 4)):
+			print ('Curtain On ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Curtain On when ' +timeat))
+		elif (noti.notification() == ('0', 5)):
+			print ('Springer Off ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Springer Off when ' +timeat))
+		elif (noti.notification() == ('1', 5)):
+			print ('Springer On ' +timeat)
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='Springer On when ' +timeat))
 
-	time.sleep(5)
+		time.sleep(5)
 	
 if __name__ == "__main__":
     app.run(debug=True)
