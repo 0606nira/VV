@@ -3,7 +3,6 @@ import time, sys, datetime
 import json
 import asyncio
 import send
-import noti
 import requests 
 import http.client, urllib
 from linebot import (
@@ -32,6 +31,7 @@ timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 multicasts = []
 dummy = 0
+flag = False
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -297,33 +297,33 @@ def handle_message(event):
 			event.reply_token,
 			buttons_template_message21)
 	elif(message == 'Curtain On'):
-		send.send_values4(1)
+		send.send_values(7)
 	elif(message == 'Curtain Off'):
-		send.send_values4(0)
+		send.send_values(6)
 	elif(message == 'Fan'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
 	elif(message == 'Fan On'):
-		send.send_values3(1)
+		send.send_values(5)
 	elif(message == 'Fan Off'):
-		send.send_values3(0)
+		send.send_values(4)
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
-		send.send_values2(1)
+		send.send_values(3)
 	elif(message == 'Storageroom Light Off'):
-		send.send_values2(0)		
+		send.send_values(2)		
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message4)
 	elif(message == 'Springer On'):
-		send.send_values5(1)
+		send.send_values(9)
 	elif(message == 'Springer Off'):
-		send.send_values5(0)			
+		send.send_values(8)			
 	elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -436,64 +436,48 @@ def notification():
 	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
 	entry_status = data['feeds'][0]['entry_id']
 	print ('entry_status: ', entry_status)
-	last_status_light1 = data['feeds'][0]['field1'] #สถานะไฟล่าสุดในห้องนอน
-	last_status_light2 = data['feeds'][0]['field2'] #สถานะไฟล่าสุดในห้องเก็บของ
-	last_status_fan = data['feeds'][0]['field3']
-	last_status_curtain = data['feeds'][0]['field4']
-	last_status_springer = data['feeds'][0]['field5']
+	last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
 	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-		if(last_status_light1 != None): 
+		if(last_status != None): 
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			if(last_status_light1 == '0'):
+			if(last_status == '0'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Light Bedroom Off when ' +timeat))
-			else:
+			elif(last_status == '1'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Light Bedroom On when ' +timeat))
-		elif(last_status_light2 != None):
-			dummy = entry_status
-			print ('dummy2: ', dummy)
-			if(last_status_light2 == '0'):
+			elif(last_status == '2'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-			else:
+			elif(last_status == '3'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Light Stroageroom On when ' +timeat))
-		elif(last_status_fan != None):
-			dummy = entry_status
-			print ('dummy3: ', dummy)
-			if(last_status_fan == '0'):
+			elif(last_status == '4'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Fan Off when ' +timeat))
-			else:
+			elif(last_status == '5'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Fan On when ' +timeat))
-		elif(last_status_curtain != None):
-			dummy = entry_status
-			print ('dummy4: ', dummy)
-			if(last_status_curtain == '0'):
+			elif(last_status == '6'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Curtain Off when ' +timeat))
-			else:
+			elif(last_status == '7'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Curtain On when ' +timeat))
-		elif(last_status_springer != None):
-			dummy = entry_status
-			print ('dummy5: ', dummy)
-			if(last_status_springer == '0'):
+			elif(last_status == '8'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Springer Off when ' +timeat))
-			else:
+			elif(last_status == '9'):
 				line_bot_api.push_message(
 					'U5db26ce3aad1c4d83691ea5d6992116a', 
 					TextSendMessage(text='Springer On when ' +timeat))
