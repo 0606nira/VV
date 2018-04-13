@@ -26,26 +26,29 @@ def notification():
 	last_status_curtain = data['feeds'][1]['field4']
 	last_status_springer = data['feeds'][1]['field5']
 	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-		if(last_status_light1 != be_status_light1) and (last_status_light1 != ""): #
-			dummy = entry_status #
-			light = 1
-			return last_status_light1, light #คืนค่ากลับ บอกสถานะไฟและห้องที่มีการเปลี่ยนแปลง
-		elif(last_status_light2 != be_status_light2) and (last_status_light2 != ""):
-			dummy = entry_status
-			light = 2
-			return last_status_light2, light
-		elif(last_status_fan != be_status_fan) and (last_status_fan != ""):
-			dummy = entry_status
-			fan = 3
-			return last_status_fan, fan
-		elif(last_status_curtain != be_status_curtain) and (last_status_curtain != ""):
-			dummy = entry_status
-			curtain = 4
-			return last_status_curtain, curtain
-		elif(last_status_springer != be_status_springer) and (last_status_springer != ""):
-			dummy = entry_status
-			springer = 5
-			return last_status_springer, springer
-	else:
-		pass
+		if(last_status_light1 != be_status_light1):
+			if(last_status_light1 is not None):
+				dummy = entry_status #
+				light = 1
+				return last_status_light1, light #คืนค่ากลับ บอกสถานะไฟและห้องที่มีการเปลี่ยนแปลง
+		elif(last_status_light2 != be_status_light2):
+			if(last_status_light2 is not None):
+				dummy = entry_status
+				light = 2
+				return last_status_light2, light
+		elif(last_status_fan != be_status_fan):
+			if(last_status_fan is not None):
+				dummy = entry_status
+				fan = 3
+				return last_status_fan, fan
+		elif(last_status_curtain != be_status_curtain):
+			if(last_status_curtain is not None):
+				dummy = entry_status
+				curtain = 4
+				return last_status_curtain, curtain
+		elif(last_status_springer != be_status_springer):
+			if(last_status_springer is not None):
+				dummy = entry_status
+				springer = 5
+				return last_status_springer, springer
 		

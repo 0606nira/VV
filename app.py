@@ -1,6 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys, datetime
 import json
+import asyncio
 import send
 import noti
 import requests 
@@ -423,7 +424,8 @@ def handle_postback(event):
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
 
-	if (noti.notification() == ('0', 1)): #(1 1), (1, 1),
+def n():
+	if (noti.notification() == ('0', 1)):
 		print ('Light Off ' +timeat)
 		line_bot_api.push_message(
 			'U5db26ce3aad1c4d83691ea5d6992116a', 
@@ -473,6 +475,7 @@ def handle_postback(event):
 		line_bot_api.push_message(
 			'U5db26ce3aad1c4d83691ea5d6992116a', 
 			TextSendMessage(text='Springer On when ' +timeat))
-
+	
+	
 if __name__ == "__main__":
     app.run(debug=True)
