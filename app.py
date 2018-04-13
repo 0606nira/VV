@@ -426,7 +426,6 @@ def handle_postback(event):
 
 
 def n():
-	while True:
 		if (noti.notification() == ('0', 1)):
 			print ('Light Off ' +timeat)
 			line_bot_api.push_message(
@@ -477,7 +476,8 @@ def n():
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='Springer On when ' +timeat))
-	time.sleep(5)
+
+n()
 	
 if __name__ == "__main__":
     app.run(debug=True)
