@@ -1,11 +1,11 @@
 import http.client, urllib
 import time, sys
 
-API_KEY_WRITE = 'WWRZDTPBUN0O18FM'
-API_KEY_READ = 'ZDDJL90IXYJOIQ3S'
+API_KEY_WRITE = 'WWRZDTPBUN0O18FM' #API สำหรับ ส่งค่า
+API_KEY_READ = 'ZDDJL90IXYJOIQ3S' #API สำหรับ อ่านค่า
 CHANNEL_ID = '455279'
 
-def send_values1(light):
+def send_values1(light):#ส่งค่าไฟห้องนอน 1คือเปิด 0คือปิด
     global API_KEY_WRITE
     params = urllib.parse.urlencode(
              {'field1': light, 
@@ -27,7 +27,7 @@ def send_values1(light):
     except:
         print ("connection failed", sys.exc_info())
 		
-def send_values2(light):
+def send_values2(light): #ส่งค่าไฟห้องเก็บของ 1คือเปิด 0คือปิด
     global API_KEY_WRITE
     params = urllib.parse.urlencode(
              {'field2': light,

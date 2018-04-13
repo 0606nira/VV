@@ -242,7 +242,7 @@ buttons_template_message6 = TemplateSendMessage(
 				text='Remove success'
 			),
 			MessageTemplateAction(
-				label='Check list',
+				label='Check list', #ไว้เช็ค ID ต่างๆที่เก็บไว้ใน list multicasts
 				text='%s' %multicasts
 			),
 			MessageTemplateAction(
@@ -256,7 +256,7 @@ buttons_template_message6 = TemplateSendMessage(
 @app.route("/callback", methods=['POST'])
 def callback():
 	# get X-Line-Signature header value
-	signature = request.headers['X-Line-Signature']
+	signature = request.headers['X-Line-Signature'] 
 
 	# get request body as text
 	body = request.get_data(as_text=True)
@@ -271,23 +271,23 @@ def callback():
 		print(e.error.details)
 	return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
 	message = event.message.text
 
-	if(message == 'Home'):
+	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message1)	
-	elif(message == 'Bed Room'): 
+	elif(message == 'Bed Room'): #แสดงเมนูของห้องนอน
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
 	elif(message == 'Bedroom Light On'):
-		send.send_values1(1)
+		send.send_values1(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
 	elif(message == 'Bedroom Light Off'):
-		send.send_values1(0)
-	elif(message == 'Living Room'): 
+		send.send_values1(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
+	elif(message == 'Living Room'): #แสดงเมนูห้องนั่งเล่น มี 2 อุปกรณ์ คือม่านกับพัดลม
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message2)
@@ -323,7 +323,7 @@ def handle_message(event):
 		send.send_values5(1)
 	elif(message == 'Springer Off'):
 		send.send_values5(0)			
-	elif(message == 'Locatione'):
+	elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
 		line_bot_api.reply_message(
 			event.reply_token, 
 			LocationSendMessage(
@@ -331,7 +331,7 @@ def handle_message(event):
 				address='Mahidol University', 
 				latitude=13.794578, 
 				longitude=100.323417))
-	elif(message == 'Bye'):
+	elif(message == 'Bye'): #เตะ bot ออกจากกลุุ่มหรือห้องแชท
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
 				event.reply_token, TextMessage(text='Leaving group'))
@@ -344,7 +344,7 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
-	elif(message == 'Set Up'):
+	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
@@ -352,23 +352,23 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
-	if(postback == 'time_postback'):
+	if(postback == 'time_postback'): #รับค่าเวลาที่เลือกได้มา ยังไม่ได้กำหนดว่าจะเอาไปทำอะไร
 		line_bot_api.reply_message(
 			event.reply_token, 
 			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
 		print (event.postback.params['time'])
-	elif(postback == 'noti_postback'):
+	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
 			buttons_template_message6)		
-	elif(postback == 'add_noti'):
-		if isinstance(event.source, SourceUser):
-			if(event.source.user_id in multicasts):
+	elif(postback == 'add_noti'): #เมื่อต้องการรับค่าแจ้งเตือน
+		if isinstance(event.source, SourceUser): #ถ้าเป็นห้องแชทแบบ 1 ต่อ 1
+			if(event.source.user_id in multicasts): #ถ้ามี ID นั้นใน list อยู่แล้ว
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='you already on notify'))
 			else:
-				multicasts.append(event.source.user_id)
+				multicasts.append(event.source.user_id)#เพิ่ม ID ลงใน list
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='your id is %s add' %event.source.user_id))
@@ -392,10 +392,10 @@ def handle_postback(event):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='your room id is %s add' %event.source.room_id))
-	elif(postback == 'remove_noti'):
+	elif(postback == 'remove_noti'): #ถ้าไม่ต้องการรับการแจ้งเตือนแล้ว
 		if isinstance(event.source, SourceUser):
-			if(event.source.user_id in multicasts):
-				multicasts.remove(event.source.user_id)
+			if(event.source.user_id in multicasts): #ถ้ามี ID นั้นใน list อยู่แล้ว
+				multicasts.remove(event.source.user_id)#ลบ ID นั้นออกจาก list
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='your id is %s re' %event.source.user_id))
@@ -425,6 +425,7 @@ def handle_postback(event):
 					TextSendMessage(text="your notify didn't set"))
 
 def n():
+while True:
 	if (noti.notification() == ('0', 1)):
 		print ('Light Off ' +timeat)
 		line_bot_api.push_message(
@@ -475,7 +476,8 @@ def n():
 		line_bot_api.push_message(
 			'U5db26ce3aad1c4d83691ea5d6992116a', 
 			TextSendMessage(text='Springer On when ' +timeat))
-	
+
+	time.sleep(5)
 	
 if __name__ == "__main__":
     app.run(debug=True)
