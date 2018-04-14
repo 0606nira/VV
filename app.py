@@ -3,6 +3,7 @@ import time, sys, datetime
 import json
 import asyncio
 import send
+import mode
 import requests 
 import http.client, urllib
 from linebot import (
@@ -212,6 +213,10 @@ buttons_template_message5 = TemplateSendMessage(
 				data='time_postback',
 				mode='time'
 			),
+			MessageTemplateAction(
+				label='MODE',
+				text='Set up MODE'
+			),
 			PostbackTemplateAction(
 				label='Notification',
 				data='noti_postback',
@@ -254,6 +259,25 @@ buttons_template_message6 = TemplateSendMessage(
 	)
 )
 
+#ตั้งค่า MODE
+buttons_template_message7 = TemplateSendMessage(
+	alt_text='Buttons template',
+	template=ButtonsTemplate(
+		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--BRE04nGW--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124241/production/designs/1975184_1.jpg',
+		text='Please select',
+		actions=[
+			MessageTemplateAction(
+				label='Turn On Automation'
+				text='Turn On Automation'
+			),
+			MessageTemplateAction(
+				label='Turn Off Automation',
+				text='Turn Off Automation'
+			)
+		]
+	)
+)
+
 @app.route("/callback", methods=['POST'])
 def callback():
 	# get X-Line-Signature header value
@@ -275,7 +299,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
 	message = event.message.text
-
+	global flag
 	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -286,8 +310,10 @@ def handle_message(event):
 			buttons_template_message1)
 	elif(message == 'Bedroom Light On'):
 		send.send_values1(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
+		notification()
 	elif(message == 'Bedroom Light Off'):
 		send.send_values1(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
+		notification()
 	elif(message == 'Living Room'): #แสดงเมนูห้องนั่งเล่น มี 2 อุปกรณ์ คือม่านกับพัดลม
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -298,32 +324,40 @@ def handle_message(event):
 			buttons_template_message21)
 	elif(message == 'Curtain On'):
 		send.send_values(7)
+		notification()
 	elif(message == 'Curtain Off'):
 		send.send_values(6)
+		notification()
 	elif(message == 'Fan'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
 	elif(message == 'Fan On'):
 		send.send_values(5)
+		notification()
 	elif(message == 'Fan Off'):
 		send.send_values(4)
+		notification()
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
 		send.send_values(3)
+		notification()
 	elif(message == 'Storageroom Light Off'):
-		send.send_values(2)		
+		send.send_values(2)
+		notification()		
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message4)
 	elif(message == 'Springer On'):
 		send.send_values(9)
+		notification()
 	elif(message == 'Springer Off'):
-		send.send_values(8)			
+		send.send_values(8)	
+		notification()		
 	elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -349,7 +383,15 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
-			
+	elif(message == 'Set up MODE'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message7)
+	elif(message == 'Turn On Automation'):
+		mode.mode(1)
+	elif(message == 'Turn Off Automation'):
+		mode.mode(0)
+		
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
@@ -425,64 +467,67 @@ def handle_postback(event):
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
 
-
+	
 def notification():
-	global dummy #ตั้งเป็นตัวแปรหลอก
-	print ('dummy: ', dummy)
-	#last_detect = datetime.datetime.now()
-	#url GET อ่านข้อมูล
-	url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
-	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-	entry_status = data['feeds'][0]['entry_id']
-	print ('entry_status: ', entry_status)
-	last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
-	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-		if(last_status != None): 
-			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
-			print ('dummy1: ', dummy)
-			if(last_status == '0'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light Bedroom Off when ' +timeat))
-			elif(last_status == '1'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light Bedroom On when ' +timeat))
-			elif(last_status == '2'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light Stroageroom Off when ' +timeat))
-			elif(last_status == '3'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Light Stroageroom On when ' +timeat))
-			elif(last_status == '4'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Fan Off when ' +timeat))
-			elif(last_status == '5'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Fan On when ' +timeat))
-			elif(last_status == '6'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Curtain Off when ' +timeat))
-			elif(last_status == '7'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Curtain On when ' +timeat))
-			elif(last_status == '8'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Springer Off when ' +timeat))
-			elif(last_status == '9'):
-				line_bot_api.push_message(
-					'U5db26ce3aad1c4d83691ea5d6992116a', 
-					TextSendMessage(text='Springer On when ' +timeat))
-
-notification()
+	global flag
+	while not flag:
+		global dummy #ตั้งเป็นตัวแปรหลอก
+		print ('dummy: ', dummy)
+		#last_detect = datetime.datetime.now()
+		#url GET อ่านข้อมูล
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+		response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+		data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+		entry_status = data['feeds'][0]['entry_id']
+		print ('entry_status: ', entry_status)
+		last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
+		if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
+			if(last_status != None):
+				
+				dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
+				print ('dummy1: ', dummy)
+				if(last_status == '0'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				elif(last_status == '1'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Light Bedroom On at ' +timeat))
+				elif(last_status == '2'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				elif(last_status == '3'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				elif(last_status == '4'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Fan Off at ' +timeat))
+				elif(last_status == '5'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Fan On at ' +timeat))
+				elif(last_status == '6'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Curtain Off at ' +timeat))
+				elif(last_status == '7'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Curtain On at ' +timeat))
+				elif(last_status == '8'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Springer Off at ' +timeat))
+				elif(last_status == '9'):
+					line_bot_api.push_message(
+						'U5db26ce3aad1c4d83691ea5d6992116a', 
+						TextSendMessage(text='Springer On at ' +timeat))
+		else:
+			flag = True
 	
 if __name__ == "__main__":
     app.run(debug=True)
