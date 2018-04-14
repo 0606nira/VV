@@ -393,11 +393,11 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
+	timemode = event.postback.params['time']#00:00
 	if(postback == 'time_postback'): #รับค่าเวลาที่เลือกได้มา ยังไม่ได้กำหนดว่าจะเอาไปทำอะไร
 		line_bot_api.reply_message(
 			event.reply_token, 
 			TextSendMessage(text='Turn on Automation MODE until %s' %event.postback.params['time']))
-		global timemode = event.postback.params['time']
 		print (timemode)
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
