@@ -469,8 +469,6 @@ def handle_postback(event):
 
 	
 def notification():
-	global flag
-	while not flag:
 		global dummy #ตั้งเป็นตัวแปรหลอก
 		print ('dummy: ', dummy)
 		#last_detect = datetime.datetime.now()
@@ -526,8 +524,6 @@ def notification():
 					line_bot_api.push_message(
 						'U5db26ce3aad1c4d83691ea5d6992116a', 
 						TextSendMessage(text='Springer On at ' +timeat))
-		else:
-			flag = True
 	
 if __name__ == "__main__":
     app.run(debug=True)
