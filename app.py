@@ -208,11 +208,6 @@ buttons_template_message5 = TemplateSendMessage(
 		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--bAhU43hA--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124002/production/designs/1975176_1.jpg',
 		text='What do you want to set up?',
 		actions=[
-			DatetimePickerTemplateAction(
-				label='Time',
-				data='time_postback',
-				mode='time'
-			),
 			MessageTemplateAction(
 				label='MODE',
 				text='Set up MODE'
@@ -266,9 +261,10 @@ buttons_template_message7 = TemplateSendMessage(
 		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--BRE04nGW--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124241/production/designs/1975184_1.jpg',
 		text='Please select',
 		actions=[
-			MessageTemplateAction(
+			DatetimePickerTemplateAction(
 				label='Turn On Automation',
-				text='Turn On Automation'
+				data='time_postback',
+				mode='time'
 			),
 			MessageTemplateAction(
 				label='Turn Off Automation',
@@ -389,8 +385,10 @@ def handle_message(event):
 			buttons_template_message7)
 	elif(message == 'Turn On Automation'):
 		mode.mode(1)
+		flag = True
 	elif(message == 'Turn Off Automation'):
 		mode.mode(0)
+		flag = False
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -398,8 +396,9 @@ def handle_postback(event):
 	if(postback == 'time_postback'): #รับค่าเวลาที่เลือกได้มา ยังไม่ได้กำหนดว่าจะเอาไปทำอะไร
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text='Time to wake up is %s' %event.postback.params['time']))
-		print (event.postback.params['time'])
+			TextSendMessage(text='Turn on Automation MODE until %s' %event.postback.params['time']))
+		global timemode = event.postback.params['time']
+		print (timemode)
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -467,7 +466,6 @@ def handle_postback(event):
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
 
-	
 def notification():
 		global dummy #ตั้งเป็นตัวแปรหลอก
 		print ('dummy: ', dummy)
@@ -524,6 +522,17 @@ def notification():
 					line_bot_api.push_message(
 						'U5db26ce3aad1c4d83691ea5d6992116a', 
 						TextSendMessage(text='Springer On at ' +timeat))
+						
+def automation():
+	global flag
+	while flag:
+		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+		response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+		data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+		entry_status = data['feeds'][0]['entry_id']
+		print ('entry_status: ', entry_status)
+		last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
+		
 	
 if __name__ == "__main__":
     app.run(debug=True)
