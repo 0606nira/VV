@@ -267,7 +267,7 @@ buttons_template_message7 = TemplateSendMessage(
 		text='Please select',
 		actions=[
 			MessageTemplateAction(
-				label='Turn On Automation'
+				label='Turn On Automation',
 				text='Turn On Automation'
 			),
 			MessageTemplateAction(
