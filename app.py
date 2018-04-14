@@ -31,6 +31,7 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 multicasts = []
+timesetup = {}
 dummy = 0
 flag = False
 
@@ -399,6 +400,8 @@ def handle_postback(event):
 			event.reply_token, 
 			TextSendMessage(text='Turn on Automation MODE until %s' %event.postback.params['time']))
 		print (timemode)
+		timesetup.setdefault('timemode', timemode)
+		print (timesetup)
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
