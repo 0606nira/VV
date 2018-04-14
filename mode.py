@@ -5,9 +5,9 @@ API_KEY_WRITE = 'E34W34GC4JCO4K3R'
 
 def mode(mode):
 	global API_KEY_WRITE
-    params = urllib.parse.urlencode(
-             {'field1': mode, 
-			 'key': API_KEY_WRITE} )
+	params = urllib.parse.urlencode(
+		{'field1': mode, 
+		'key': API_KEY_WRITE} )
     headers = { "Content-Type": "application/x-www-form-urlencoded",
                 "Accept": "text/plain" }
     conn = http.client.HTTPConnection("api.thingspeak.com:80")
