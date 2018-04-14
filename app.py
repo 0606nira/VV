@@ -309,10 +309,10 @@ def handle_message(event):
 			event.reply_token,
 			buttons_template_message1)
 	elif(message == 'Bedroom Light On'):
-		send.send_values1(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
+		send.send_values(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
 		notification()
 	elif(message == 'Bedroom Light Off'):
-		send.send_values1(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
+		send.send_values(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
 		notification()
 	elif(message == 'Living Room'): #แสดงเมนูห้องนั่งเล่น มี 2 อุปกรณ์ คือม่านกับพัดลม
 		line_bot_api.reply_message(
