@@ -30,6 +30,8 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
+time_pick = time.strftime('%H:%M', timeis)
+now = datetime.datetime.now()
 multicasts = []
 timesetup = {}
 dummy = 0
@@ -387,9 +389,11 @@ def handle_message(event):
 	elif(message == 'Turn On Automation'):
 		mode.mode(1)
 		flag = True
+		automation()
 	elif(message == 'Turn Off Automation'):
 		mode.mode(0)
 		flag = False
+		automation()
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -401,7 +405,7 @@ def handle_postback(event):
 			TextSendMessage(text='Turn on Automation MODE until %s' %event.postback.params['time']))
 		print (timemode)
 		timesetup.setdefault('timemode', timemode)
-		print (timesetup)
+		print (timesetup) #{'timemode': '14:57'}
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -529,12 +533,21 @@ def notification():
 def automation():
 	global flag
 	while flag:
-		url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
-		response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-		data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-		entry_status = data['feeds'][0]['entry_id']
-		print ('entry_status: ', entry_status)
-		last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
+		if(time_pick == timesetup['timemode']):
+			print('this time')
+			line_bot_api.push_message(
+				'U5db26ce3aad1c4d83691ea5d6992116a', 
+				TextSendMessage(text='timeset ok ' +timeat))
+				flag = False
+		else:
+			print ('not yet')
+		time.sleep(60)
+		
+		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
+		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+		#data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+		#entry_status = data['feeds'][0]['entry_id']
+		#last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
 		
 	
 if __name__ == "__main__":
