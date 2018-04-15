@@ -538,7 +538,7 @@ def automation():
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='timeset ok ' +timeat))
-				flag = False
+			flag = False
 		else:
 			print ('not yet')
 		time.sleep(60)
