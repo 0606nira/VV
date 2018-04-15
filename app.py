@@ -532,8 +532,11 @@ def notification():
 						
 def automation():
 	global flag
+	print (time_pick)
+	print (timesetup['timemode'])
 	while flag:
 		if(time_pick == timesetup['timemode']):
+			
 			print('this time')
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
