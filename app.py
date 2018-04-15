@@ -531,6 +531,7 @@ def notification():
 def automation():
 	global flag
 	while flag:
+		timeis = time.localtime()
 		time_pick = time.strftime('%H:%M', timeis)
 		print ('in loop auto')
 		print (time_pick)
