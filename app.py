@@ -30,7 +30,6 @@ handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
-time_pick = time.strftime('%H:%M', timeis)
 now = datetime.datetime.now()
 multicasts = []
 timesetup = {}
@@ -532,6 +531,7 @@ def notification():
 def automation():
 	global flag
 	while flag:
+		time_pick = time.strftime('%H:%M', timeis)
 		print ('in loop auto')
 		print (time_pick)
 		print (timesetup['timemode'])
