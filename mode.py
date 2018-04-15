@@ -21,7 +21,7 @@ def mode(Mode):
 		conn.close()            # close HTTP connection
 		if entry_id.isdigit() and int(entry_id) > 0:
 			print ('Entry ID:', entry_id)
-			print ('mode is: ', fielse1)
+			print ('mode is: ', field1)
 			return True
 		else:
 			return False

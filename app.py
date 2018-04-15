@@ -7,7 +7,7 @@ import mode
 import requests 
 import http.client, urllib
 from linebot import (
-    LineBotApi, WebhookHandler,
+    LineBotApi, WebhookHandler, exceptions,
 )
 from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError,
@@ -544,7 +544,6 @@ def automation():
 			flag = False
 		else:
 			print ('not yet')
-		time.sleep(20)
 		
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
