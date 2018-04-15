@@ -4,10 +4,10 @@ import http.client, urllib
 
 API_KEY_WRITE = 'E34W34GC4JCO4K3R'
 
-def mode(mode):
+def mode(Mode):
 	global API_KEY_WRITE
 	params = urllib.parse.urlencode(
-		{'field1': mode, 
+		{'field1': Mode, 
 		'key': API_KEY_WRITE} )
 	headers = { "Content-Type": "application/x-www-form-urlencoded",
 		"Accept": "text/plain" }
