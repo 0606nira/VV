@@ -537,7 +537,6 @@ def automation():
 		print (time_pick)
 		print (timesetup['timemode'])
 		if(time_pick == timesetup['timemode']):
-			
 			print('this time')
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
@@ -546,7 +545,7 @@ def automation():
 		else:
 			print ('not yet')
 		time.sleep(5)
-		
+		continue
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
 		#data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
