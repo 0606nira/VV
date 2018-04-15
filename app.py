@@ -544,7 +544,7 @@ def automation():
 			flag = False
 		else:
 			print ('not yet')
-		time.sleep(60)
+		time.sleep(30)
 		
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
