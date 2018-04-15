@@ -386,9 +386,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message7)
-	elif(message == 'Turn On Automation'):
-		mode.mode(1)
-		flag = True	
 	elif(message == 'Turn Off Automation'):
 		mode.mode(0)
 		flag = False
@@ -401,6 +398,8 @@ def handle_postback(event):
 		line_bot_api.reply_message(
 			event.reply_token, 
 			TextSendMessage(text='Turn on Automation MODE until %s' %event.postback.params['time']))
+		mode.mode(1)
+		flag = True	
 		print (timemode)
 		timesetup.setdefault('timemode', timemode)
 		print (timesetup) #{'timemode': '14:57'}
@@ -531,9 +530,10 @@ def notification():
 						
 def automation():
 	global flag
-	print (time_pick)
-	print (timesetup['timemode'])
 	while flag:
+		print ('in loop auto')
+		print (time_pick)
+		print (timesetup['timemode'])
 		if(time_pick == timesetup['timemode']):
 			
 			print('this time')
