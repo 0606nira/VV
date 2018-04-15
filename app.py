@@ -394,6 +394,7 @@ def handle_message(event):
 def handle_postback(event):
 	postback = event.postback.data
 	timemode = event.postback.params['time']#00:00
+	global flag
 	if(postback == 'time_postback'): #รับค่าเวลาที่เลือกได้มา ยังไม่ได้กำหนดว่าจะเอาไปทำอะไร
 		line_bot_api.reply_message(
 			event.reply_token, 
