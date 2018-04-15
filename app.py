@@ -388,12 +388,10 @@ def handle_message(event):
 			buttons_template_message7)
 	elif(message == 'Turn On Automation'):
 		mode.mode(1)
-		flag = True
-		automation()
+		flag = True	
 	elif(message == 'Turn Off Automation'):
 		mode.mode(0)
 		flag = False
-		automation()
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -406,6 +404,7 @@ def handle_postback(event):
 		print (timemode)
 		timesetup.setdefault('timemode', timemode)
 		print (timesetup) #{'timemode': '14:57'}
+		automation()
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
