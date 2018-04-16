@@ -27,6 +27,8 @@ def mode(Mode):
 			return False
 	except:
 		print ("connection failed", sys.exc_info())
+		
+
 
 			#mode auto = 1
 			#mode manual = 0

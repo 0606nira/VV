@@ -16,3 +16,4 @@ urllib3==1.22
 Werkzeug==0.12.2
 line-bot-sdk
 quart==0.4.1
+APScheduler==3.0.0

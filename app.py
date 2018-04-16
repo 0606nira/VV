@@ -1,5 +1,6 @@
 ﻿from flask import Flask, request, abort
-import time, sys, datetime
+from apscheduler.schedulers.background import BackgroundScheduler
+import time, sys, datetime, os
 import json
 import asyncio
 import send
@@ -28,11 +29,15 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH5t+GbxcJRIXEsiioQe7xhs0mluGITwfR55jRSRsd3R+JTBz6Z1O3Q+Ei0OIYS2QT0Mg86n6UZowtp0nO7HWmJBQJoCc4nSyMgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
+sched = BackgroundScheduler()
+
 timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 now = datetime.datetime.now()
+
 multicasts = []
 timesetup = {}
+
 dummy = 0
 flag = False
 
@@ -403,7 +408,6 @@ def handle_postback(event):
 		print (timemode)
 		timesetup.setdefault('timemode', timemode)
 		print (timesetup) #{'timemode': '14:57'}
-		automation()
 	elif(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -527,25 +531,26 @@ def notification():
 					line_bot_api.push_message(
 						'U5db26ce3aad1c4d83691ea5d6992116a', 
 						TextSendMessage(text='Springer On at ' +timeat))
-						
+					
+
 def automation():
-	global flag
-	while flag:
+	while True:
 		timeis = time.localtime()
 		time_pick = time.strftime('%H:%M', timeis)
 		print ('in loop auto')
-		print (time_pick)
+		print ('now: ' +time_pick)
 		print (timesetup['timemode'])
-		if(time_pick == timesetup['timemode']):
+		if(time_pick == '22:50'):
 			print('this time')
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='timeset ok ' +timeat))
-			flag = False
+			#flag = False	
 		else:
 			print ('not yet')
-		time.sleep(5)
-		continue
+		time.sleep(10)	
+
+automation()		
 		
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
