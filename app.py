@@ -531,24 +531,23 @@ def notification():
 					
 
 def automation():
-	#global flag
+	global flag
 	while True:
 		timeis = time.localtime()
 		time_pick = time.strftime('%H:%M', timeis)
 		print ('in loop auto')
 		print ('now: ' +time_pick)
-		#print (timesetup['timemode'])
+		print (timesetup['timemode'])
 		if(time_pick == '23:00'):
 			print('this time')
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
 				TextSendMessage(text='timeset ok ' +timeat))
-			#flag = False	
+			flag = False	
 		else:
 			print ('not yet')
 		time.sleep(30)	
-	
-automation()		
+		
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
 		#data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
