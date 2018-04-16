@@ -536,8 +536,8 @@ def automation():
 		time_pick = time.strftime('%H:%M', timeis)
 		print ('in loop auto')
 		print ('now: ' +time_pick)
-		print (timesetup['timemode'])
-		if(time_pick == '22:50'):
+		#print (timesetup['timemode'])
+		if(time_pick == '22:53'):
 			print('this time')
 			line_bot_api.push_message(
 				'U5db26ce3aad1c4d83691ea5d6992116a', 
