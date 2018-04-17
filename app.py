@@ -541,5 +541,5 @@ t1 = threading.Thread(target=notification)
 	
 if __name__ == "__main__":
     app.run(debug=True)
-	t1.setDaemon(True)
+	#t1.setDaemon(True)
 	t1.start()
