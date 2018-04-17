@@ -1,7 +1,7 @@
 ﻿from flask import Flask, request, abort
 import time, sys, datetime, os
+import threading
 import json
-import asyncio
 import send
 import mode
 import requests 
@@ -529,24 +529,8 @@ def notification():
 						'U5db26ce3aad1c4d83691ea5d6992116a', 
 						TextSendMessage(text='Springer On at ' +timeat))
 					
+t1 = threading.Thread(target=notification)
 
-def automation():
-	global flag
-	while True:
-		timeis = time.localtime()
-		time_pick = time.strftime('%H:%M', timeis)
-		print ('in loop auto')
-		print ('now: ' +time_pick)
-		print (timesetup['timemode'])
-		if(time_pick == '23:00'):
-			print('this time')
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='timeset ok ' +timeat))
-			flag = False	
-		else:
-			print ('not yet')
-		time.sleep(30)	
 		
 		#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 		#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
@@ -557,3 +541,5 @@ def automation():
 	
 if __name__ == "__main__":
     app.run(debug=True)
+	t1.setDaemon(True)
+	t1.start()
