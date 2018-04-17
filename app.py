@@ -489,49 +489,49 @@ while True:
 	last_pir = data['feeds'][0]['field4']
 	last_lux = data['feeds'][0]['field5']
 	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-	if(last_status != None):
-		dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
-		print ('dummy1: ', dummy)
-		if(last_status == '0'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom Off at ' +timeat))
-		elif(last_status == '1'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Bedroom On at ' +timeat))
-		elif(last_status == '2'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-		elif(last_status == '3'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Light Stroageroom On at ' +timeat))
-		elif(last_status == '4'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Fan Off at ' +timeat +'Temp.: ' +last_temp))
-		elif(last_status == '5'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Fan On at ' +timeat))
-		elif(last_status == '6'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Curtain Off at ' +timeat))
-		elif(last_status == '7'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Curtain On at ' +timeat))
-		elif(last_status == '8'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Springer Off at ' +timeat))
-		elif(last_status == '9'):
-			line_bot_api.push_message(
-				'U5db26ce3aad1c4d83691ea5d6992116a', 
-				TextSendMessage(text='Springer On at ' +timeat))
+		if(last_status != None):
+			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
+			print ('dummy1: ', dummy)
+			if(last_status == '0'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Bedroom Off at ' +timeat))
+			elif(last_status == '1'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Bedroom On at ' +timeat))
+			elif(last_status == '2'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+			elif(last_status == '3'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Light Stroageroom On at ' +timeat))
+			elif(last_status == '4'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Fan Off at ' +timeat +'Temp.: ' +last_temp))
+			elif(last_status == '5'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Fan On at ' +timeat))
+			elif(last_status == '6'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Curtain Off at ' +timeat))
+			elif(last_status == '7'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Curtain On at ' +timeat))
+			elif(last_status == '8'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Springer Off at ' +timeat))
+			elif(last_status == '9'):
+				line_bot_api.push_message(
+					'U5db26ce3aad1c4d83691ea5d6992116a', 
+					TextSendMessage(text='Springer On at ' +timeat))
 	time.sleep(10)
 						
 
