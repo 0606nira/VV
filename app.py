@@ -505,7 +505,7 @@ def notification():
 			elif(last_status == '4'):
 				line_bot_api.multicast(
 					multicasts, 
-					TextSendMessage(text="Fan Off at '{0}'\nTemp. is '{1}'".format(time, temp)))
+					TextSendMessage(text="Fan Off at '{0}'\nTemp. is '{1}'".format(timeat, last_temp)))
 			elif(last_status == '5'):
 				line_bot_api.multicast(
 					multicasts, 
