@@ -248,7 +248,7 @@ buttons_template_message6 = TemplateSendMessage(
 			),
 			MessageTemplateAction(
 				label='Check list', #ไว้เช็ค ID ต่างๆที่เก็บไว้ใน list multicasts
-				text='%s' %multicasts
+				text='Check list'
 			),
 			MessageTemplateAction(
 				label='Nothing',
@@ -393,6 +393,9 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token, TextMessage(text='Turn On Automation'))
 		mode.mode(1)
+	elif(message == 'Check list'):
+		line_bot_api.reply_message(
+			event.reply_token, TextMessage(text='%s' %multicasts))
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -502,7 +505,8 @@ def notification():
 			elif(last_status == '4'):
 				line_bot_api.multicast(
 					multicasts, 
-					TextSendMessage(text='Fan Off at ' +timeat +'Temp.: ' +last_temp))
+					TextSendMessage(text='Fan Off at %s.\
+						Temp. is %s ' %(time at, last_temp)))
 			elif(last_status == '5'):
 				line_bot_api.multicast(
 					multicasts, 
