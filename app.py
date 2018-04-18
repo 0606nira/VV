@@ -197,9 +197,9 @@ buttons_template_message4 = TemplateSendMessage(
 				label='Off',
 				text='Springer Off'
 			),
-			URITemplateAction( #ยังไม่รู้ว่าพฤติกรรมบันทึกข้อมูลเป็นแบบไหน ยังตั้งค่าไม่ได้ อาจจะไม่เอา
+			MessageTemplateAction(
 				label='Check Humidity',
-				uri='https://www.youtube.com/watch?v=7OX7dIRReSA&list=PL_Cqw69_m_yzbMVGvQA8QWrL_HdVXJQX7&index=15'
+				text='Check Humidity'
 			)
 		]
 	)
@@ -400,6 +400,8 @@ def handle_message(event):
 			event.reply_token, TextMessage(text='%s' %multicasts))
 	elif(message == 'Check Temp'):
 		detail_temp()
+	elif(message == 'Check Temp'):
+		detail_humi()	
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -470,6 +472,18 @@ def handle_postback(event):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text="your notify didn't set"))
+					
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+	message = event.message.text
+	if(message == 'Locatione'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationSendMessage(
+				title=event.message.title, address=event.message.address,
+				latitude=event.message.latitude, longitude=event.message.longitude
+			)
+		)
 
 def notification():
 	global dummy #ตั้งเป็นตัวแปรหลอก
@@ -539,7 +553,22 @@ def detail_temp():
 	#last_lux = data['feeds'][0]['field5']
 	line_bot_api.multicast(
 		multicasts, 
-		TextSendMessage(text='Temp. is %s' +last_temp))
+		TextSendMessage(text='Temp. is ' +last_temp))
+
+def detail_humi():
+	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
+	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+	entry_status = data['entry_id']
+	print ('entry_status: ', entry_status)
+	#last_temp = data['field2']
+	last_humi = data['field3']
+	#last_pir = data['feeds'][0]['field4']
+	#last_lux = data['feeds'][0]['field5']
+	line_bot_api.multicast(
+		multicasts, 
+		TextSendMessage(text='Humidity is ' +last_humi))
+
 	
 			
 			#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
