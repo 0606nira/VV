@@ -153,9 +153,9 @@ buttons_template_message22 = TemplateSendMessage(
 				label='Off',
 				text='Fan Off'
 			),
-			URITemplateAction( #ยังไม่รู้ว่าพฤติกรรมบันทึกข้อมูลเป็นแบบไหน ยังตั้งค่าไม่ได้ อาจจะไม่เอา
+			MessageTemplateAction(
 				label='Check Temp',
-				uri='https://www.youtube.com/watch?v=kTlv5_Bs8aw'
+				text='Check Temp'
 			)
 		]
 	)
@@ -333,9 +333,11 @@ def handle_message(event):
 	elif(message == 'Fan On'):
 		send.send_values(5)
 		notification()
+		detail_temp()
 	elif(message == 'Fan Off'):
 		send.send_values(4)
 		notification()
+		detail_temp()
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -396,6 +398,8 @@ def handle_message(event):
 	elif(message == 'Check list'):
 		line_bot_api.reply_message(
 			event.reply_token, TextMessage(text='%s' %multicasts))
+	elif(message == 'Check Temp'):
+		detail_temp()
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -478,10 +482,6 @@ def notification():
 	entry_status = data['feeds'][1]['entry_id']
 	print ('entry_status: ', entry_status)
 	last_status = data['feeds'][1]['field1'] #อ่านสถานะของอุปกรณ์
-	last_temp = data['feeds'][0]['field2']
-	last_humi = data['feeds'][0]['field3']
-	last_pir = data['feeds'][0]['field4']
-	last_lux = data['feeds'][0]['field5']
 	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
@@ -505,7 +505,7 @@ def notification():
 			elif(last_status == '4'):
 				line_bot_api.multicast(
 					multicasts, 
-					TextSendMessage(text="Fan Off at '{0}'\nTemp. is '{1}'".format(timeat, last_temp)))
+					TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
 			elif(last_status == '5'):
 				line_bot_api.multicast(
 					multicasts, 
@@ -527,6 +527,20 @@ def notification():
 					multicasts, 
 					TextSendMessage(text='Springer On at ' +timeat))
 						
+def detail_temp():
+	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
+	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
+	entry_status = data['entry_id']
+	print ('entry_status: ', entry_status)
+	last_temp = data['field2']
+	#last_humi = data['feeds'][0]['field3']
+	#last_pir = data['feeds'][0]['field4']
+	#last_lux = data['feeds'][0]['field5']
+	line_bot_api.multicast(
+		multicasts, 
+		TextSendMessage(text='Temp. is %s' +last_temp))
+	
 			
 			#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
 			#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
