@@ -561,7 +561,24 @@ def detail_humi():
 		multicasts, 
 		TextSendMessage(text='Humidity is ' +last_humi))
 
+	#@handler.add(MessageEvent, message=LocationMessage)
+#def handle_location_message(event):
+    #line_bot_api.reply_message(
+       # event.reply_token,
+       # LocationSendMessage(
+            #title=event.message.title, address=event.message.address,
+           # latitude=event.message.latitude, longitude=event.message.longitude
+        #)
+   # )
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_sticker_message(event):
+	line_bot_api.reply_message(
+		event.reply_token,
+		StickerSendMessage(
+			package_id=event.message.package_id,
+			sticker_id=event.message.sticker_id
+		)
+    )
 	
-
 if __name__ == "__main__":
 	app.run(debug=True)
