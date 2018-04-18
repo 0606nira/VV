@@ -394,14 +394,6 @@ def handle_message(event):
 		detail_temp()
 	elif(message == 'Check Temp'):
 		detail_humi()
-	elif(message == 'Location'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			LocationSendMessage(
-				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
-				latitude=13.796024, longitude=100.325066
-			)
-		)
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
