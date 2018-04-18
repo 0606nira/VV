@@ -358,14 +358,6 @@ def handle_message(event):
 	elif(message == 'Springer Off'):
 		send.send_values(8)	
 		notification()		
-	elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
-		line_bot_api.reply_message(
-			event.reply_token, 
-			LocationSendMessage(
-				title='my location', 
-				address='Mahidol University', 
-				latitude=13.794578, 
-				longitude=100.323417))
 	elif(message == 'Bye'): #เตะ bot ออกจากกลุุ่มหรือห้องแชท
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
@@ -475,13 +467,15 @@ def handle_postback(event):
 					
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
-	line_bot_api.reply_message(
-		event.reply_token,
-		LocationSendMessage(
-			title=event.message.title, address=event.message.address,
-			latitude=event.message.latitude, longitude=event.message.longitude
+	message = event.message.text
+	if(message == 'Location'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationSendMessage(
+				title=event.message.title, address=event.message.address,
+				latitude=event.message.latitude, longitude=event.message.longitude
+			)
 		)
-	)
 
 def notification():
 	global dummy #ตั้งเป็นตัวแปรหลอก
@@ -568,12 +562,14 @@ def detail_humi():
 		TextSendMessage(text='Humidity is ' +last_humi))
 
 	
-			
-			#url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=1'
-			#response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-			#data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-			#entry_status = data['feeds'][0]['entry_id']
-			#last_status = data['feeds'][0]['field1'] #อ่านสถานะของอุปกรณ์
+		#elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
+		#line_bot_api.reply_message(
+			#event.reply_token, 
+			#LocationSendMessage(
+				#title='my location', 
+				#address='Mahidol University', 
+				#latitude=13.794578, 
+				#longitude=100.323417))
 			
 		
 if __name__ == "__main__":
