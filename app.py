@@ -472,8 +472,8 @@ def handle_location_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationSendMessage(
-				title=event.message.title, address=event.message.address,
-				latitude=event.message.latitude, longitude=event.message.longitude
+				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+				latitude=13.796024, longitude=100.325066
 			)
 		)
 
@@ -562,15 +562,6 @@ def detail_humi():
 		TextSendMessage(text='Humidity is ' +last_humi))
 
 	
-		#elif(message == 'Locatione'): #แสดงตำแหน่งมหิดล แต่ยังไม่ขึ้นอะไรเลย
-		#line_bot_api.reply_message(
-			#event.reply_token, 
-			#LocationSendMessage(
-				#title='my location', 
-				#address='Mahidol University', 
-				#latitude=13.794578, 
-				#longitude=100.323417))
-			
-		
+
 if __name__ == "__main__":
 	app.run(debug=True)
