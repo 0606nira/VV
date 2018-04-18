@@ -393,7 +393,15 @@ def handle_message(event):
 	elif(message == 'Check Temp'):
 		detail_temp()
 	elif(message == 'Check Temp'):
-		detail_humi()	
+		detail_humi()
+	elif(message == 'Location'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationSendMessage(
+				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+				latitude=13.796024, longitude=100.325066
+			)
+		)
 		
 @handler.add(PostbackEvent)
 def handle_postback(event):
@@ -471,7 +479,7 @@ def handle_location_message(event):
 	if(message == 'Location'):
 		line_bot_api.reply_message(
 			event.reply_token,
-			LocationSendMessage(
+			LocationMessage(
 				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
 				latitude=13.796024, longitude=100.325066
 			)
@@ -570,15 +578,14 @@ def detail_humi():
            # latitude=event.message.latitude, longitude=event.message.longitude
         #)
    # )
-@handler.add(MessageEvent, message=StickerMessage)
-def handle_sticker_message(event):
-	line_bot_api.reply_message(
-		event.reply_token,
-		StickerSendMessage(
-			package_id=event.message.package_id,
-			sticker_id=event.message.sticker_id
-		)
-    )
+#@handler.add(MessageEvent, message=StickerMessage)
+#def handle_sticker_message(event):
+	#line_bot_api.reply_message(
+		#event.reply_token,
+		#StickerSendMessage(
+		#	package_id=event.message.package_id,
+		#	sticker_id=event.message.sticker_id
+	# )
 	
 if __name__ == "__main__":
 	app.run(debug=True)
