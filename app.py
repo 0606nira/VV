@@ -297,6 +297,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
+	global multicasts
 	message = event.message.text
 	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
