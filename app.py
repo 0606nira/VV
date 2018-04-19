@@ -497,43 +497,43 @@ def notification():
 			print ('dummy1: ', dummy)
 			for i in range(0, len(multicasts)):
 				if(last_status == '0'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Light Bedroom Off at ' +timeat))
 				elif(last_status == '1'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Light Bedroom On at ' +timeat))
 				elif(last_status == '2'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
 				elif(last_status == '3'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Light Stroageroom On at ' +timeat))
 				elif(last_status == '4'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
 				elif(last_status == '5'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Fan On at ' +timeat))
 				elif(last_status == '6'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Curtain Off at ' +timeat))
 				elif(last_status == '7'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Curtain On at ' +timeat))
 				elif(last_status == '8'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Springer Off at ' +timeat))
 				elif(last_status == '9'):
-					line_bot_api.multicast(
+					line_bot_api.push_message(
 						multicasts[i], 
 						TextSendMessage(text='Springer On at ' +timeat))
 						
