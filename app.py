@@ -497,47 +497,47 @@ def notification():
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			if(last_status == '0'):
-				for i in multicasts:
+			for i in multicasts:
+				if(last_status == '0'):
+						line_bot_api.push_message(
+							multicasts(i), 
+							TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				elif(last_status == '1'):
 					line_bot_api.push_message(
-						multicasts[i], 
-						TextSendMessage(text='Light Bedroom Off at ' +timeat))
-			elif(last_status == '1'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Light Bedroom On at ' +timeat))
-			elif(last_status == '2'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-			elif(last_status == '3'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Light Stroageroom On at ' +timeat))
-			elif(last_status == '4'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
-			elif(last_status == '5'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Fan On at ' +timeat))
-			elif(last_status == '6'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Curtain Off at ' +timeat))
-			elif(last_status == '7'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Curtain On at ' +timeat))
-			elif(last_status == '8'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Springer Off at ' +timeat))
-			elif(last_status == '9'):
-				line_bot_api.push_message(
-					multicasts[i], 
-					TextSendMessage(text='Springer On at ' +timeat))
+						multicasts(i), 
+						TextSendMessage(text='Light Bedroom On at ' +timeat))
+				elif(last_status == '2'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				elif(last_status == '3'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				elif(last_status == '4'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
+				elif(last_status == '5'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Fan On at ' +timeat))
+				elif(last_status == '6'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Curtain Off at ' +timeat))
+				elif(last_status == '7'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Curtain On at ' +timeat))
+				elif(last_status == '8'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Springer Off at ' +timeat))
+				elif(last_status == '9'):
+					line_bot_api.push_message(
+						multicasts(i), 
+						TextSendMessage(text='Springer On at ' +timeat))
 						
 def detail_temp():
 	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
