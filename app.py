@@ -415,6 +415,7 @@ def handle_postback(event):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='your id is %s add' %event.source.user_id))
+				print (multicasts)
 		elif isinstance(event.source, SourceGroup):
 			if(event.source.group_id in multicasts):
 				line_bot_api.reply_message(
@@ -435,6 +436,7 @@ def handle_postback(event):
 				line_bot_api.reply_message(
 					event.reply_token, 
 					TextSendMessage(text='your room id is %s add' %event.source.room_id))
+				print (multicasts)
 	elif(postback == 'remove_noti'): #ถ้าไม่ต้องการรับการแจ้งเตือนแล้ว
 		if isinstance(event.source, SourceUser):
 			if(event.source.user_id in multicasts): #ถ้ามี ID นั้นใน list อยู่แล้ว
