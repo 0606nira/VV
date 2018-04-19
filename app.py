@@ -398,6 +398,7 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
+	global multicasts
 	if(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -478,6 +479,7 @@ def handle_location_message(event):
 		)
 
 def notification():
+	global multicasts
 	global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
@@ -543,8 +545,8 @@ def detail_temp():
 	#last_humi = data['feeds'][0]['field3']
 	#last_pir = data['feeds'][0]['field4']
 	#last_lux = data['feeds'][0]['field5']
-	line_bot_api.multicast(
-		multicasts, 
+	line_bot_api.reply_message(
+		event.reply_token, 
 		TextSendMessage(text='Temp. is ' +last_temp))
 
 def detail_humi():
@@ -557,8 +559,8 @@ def detail_humi():
 	last_humi = data['field3']
 	#last_pir = data['feeds'][0]['field4']
 	#last_lux = data['feeds'][0]['field5']
-	line_bot_api.multicast(
-		multicasts, 
+	line_bot_api.reply_message(
+		event.reply_token, 
 		TextSendMessage(text='Humidity is ' +last_humi))
 
 	#@handler.add(MessageEvent, message=LocationMessage)
