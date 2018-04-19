@@ -497,11 +497,11 @@ def notification():
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			for i in range(0, len(multicasts)):
 				if(last_status == '0'):
-					line_bot_api.push_message(
-						multicasts[i], 
-						TextSendMessage(text='Light Bedroom Off at ' +timeat))
+					for i in range(0, len(multicasts)):
+						line_bot_api.push_message(
+							multicasts[i], 
+							TextSendMessage(text='Light Bedroom Off at ' +timeat))
 				elif(last_status == '1'):
 					line_bot_api.push_message(
 						multicasts[i], 
