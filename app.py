@@ -298,7 +298,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
 	message = event.message.text
-	global multicasts
+	#global multicasts
 	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -399,7 +399,7 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_postback(event):
 	postback = event.postback.data
-	global multicasts
+	#global multicasts
 	if(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -482,8 +482,8 @@ def handle_location_message(event):
 		)
 
 def notification():
-	global multicasts
-	global dummy #ตั้งเป็นตัวแปรหลอก
+	#global multicasts
+	#global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
 	#url GET อ่านข้อมูล
