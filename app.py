@@ -297,8 +297,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
-	global multicasts
 	message = event.message.text
+	global multicasts
 	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -480,7 +480,7 @@ def handle_location_message(event):
 		)
 
 def notification():
-	global multicasts
+	global multicasts_user
 	global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
@@ -495,46 +495,47 @@ def notification():
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			if(last_status == '0'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Bedroom Off at ' +timeat))
-			elif(last_status == '1'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Bedroom On at ' +timeat))
-			elif(last_status == '2'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-			elif(last_status == '3'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Light Stroageroom On at ' +timeat))
-			elif(last_status == '4'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
-			elif(last_status == '5'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Fan On at ' +timeat))
-			elif(last_status == '6'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Curtain Off at ' +timeat))
-			elif(last_status == '7'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Curtain On at ' +timeat))
-			elif(last_status == '8'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Springer Off at ' +timeat))
-			elif(last_status == '9'):
-				line_bot_api.multicast(
-					multicasts, 
-					TextSendMessage(text='Springer On at ' +timeat))
+			for i in range(0, len(multicasts)):
+				if(last_status == '0'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				elif(last_status == '1'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Light Bedroom On at ' +timeat))
+				elif(last_status == '2'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				elif(last_status == '3'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				elif(last_status == '4'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
+				elif(last_status == '5'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Fan On at ' +timeat))
+				elif(last_status == '6'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Curtain Off at ' +timeat))
+				elif(last_status == '7'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Curtain On at ' +timeat))
+				elif(last_status == '8'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Springer Off at ' +timeat))
+				elif(last_status == '9'):
+					line_bot_api.multicast(
+						multicasts[i], 
+						TextSendMessage(text='Springer On at ' +timeat))
 						
 def detail_temp():
 	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
