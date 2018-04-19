@@ -480,7 +480,7 @@ def handle_location_message(event):
 		)
 
 def notification():
-	global multicasts_user
+	global multicasts
 	global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
