@@ -482,8 +482,8 @@ def handle_location_message(event):
 		)
 
 def notification():
-	#global multicasts
-	#global dummy #ตั้งเป็นตัวแปรหลอก
+	global multicasts
+	global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
 	#url GET อ่านข้อมูล
