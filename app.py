@@ -215,11 +215,6 @@ buttons_template_message5 = TemplateSendMessage(
 				label='MODE',
 				text='Set up MODE'
 			),
-			PostbackTemplateAction(
-				label='Notification',
-				data='noti_postback',
-				text='Set up notification'
-			),
 			MessageTemplateAction(
 				label='Nothing',
 				text='Cancel set up'
