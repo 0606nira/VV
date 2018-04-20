@@ -279,10 +279,24 @@ def handle_message(event):
 			buttons_template_message1)
 	elif(message == 'Bedroom Light On'):
 		send.send_values(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
-		notification()
+		if(notification() == '1'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Light Bedroom On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Light Bedroom can't on"))
 	elif(message == 'Bedroom Light Off'):
 		send.send_values(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
-		notification()
+		if (notification() == '0'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Light Bedroom Off at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Light Bedroom can't off"))
 	elif(message == 'Living Room'): #แสดงเมนูห้องนั่งเล่น มี 2 อุปกรณ์ คือม่านกับพัดลม
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -303,11 +317,25 @@ def handle_message(event):
 			buttons_template_message22)
 	elif(message == 'Fan On'):
 		send.send_values(5)
-		notification()
+		if(notification() == '5'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Fan On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Fan can't on"))
 		detail_temp()
 	elif(message == 'Fan Off'):
 		send.send_values(4)
-		notification()
+		if(notification() == '4'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Fan Off at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Fan can't off"))
 		detail_temp()
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
@@ -315,20 +343,48 @@ def handle_message(event):
 			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
 		send.send_values(3)
-		notification()
+		if(notification() == '3'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Light Stroageroom On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Light Stroageroom can't on"))
 	elif(message == 'Storageroom Light Off'):
 		send.send_values(2)
-		notification()		
+		if(notification() == '2'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Light Stroageroom can't off"))
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message4)
 	elif(message == 'Springer On'):
 		send.send_values(9)
-		notification()
+		if(notification() == '9'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Springer On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Springer can't on"))
 	elif(message == 'Springer Off'):
 		send.send_values(8)	
-		notification()		
+		if(notification() == '8'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Springer Off at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Springer can't off"))		
 	elif(message == 'Bye'): #เตะ bot ออกจากกลุุ่มหรือห้องแชท
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
@@ -393,133 +449,8 @@ def notification():
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			if isinstance(event.source, SourceUser):
-				id = event.source.user_id
-				if(last_status == '0'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom Off at ' +timeat))
-				elif(last_status == '1'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom On at ' +timeat))
-				elif(last_status == '2'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-				elif(last_status == '3'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom On at ' +timeat))
-				elif(last_status == '4'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
-				elif(last_status == '5'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Fan On at ' +timeat))
-				elif(last_status == '6'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain Off at ' +timeat))
-				elif(last_status == '7'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain On at ' +timeat))
-				elif(last_status == '8'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer Off at ' +timeat))
-				elif(last_status == '9'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer On at ' +timeat))
-			if isinstance(event.source, SourceGroup):
-				id = event.source.group_id
-				if(last_status == '0'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom Off at ' +timeat))
-				elif(last_status == '1'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom On at ' +timeat))
-				elif(last_status == '2'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-				elif(last_status == '3'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom On at ' +timeat))
-				elif(last_status == '4'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
-				elif(last_status == '5'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Fan On at ' +timeat))
-				elif(last_status == '6'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain Off at ' +timeat))
-				elif(last_status == '7'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain On at ' +timeat))
-				elif(last_status == '8'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer Off at ' +timeat))
-				elif(last_status == '9'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer On at ' +timeat))
-			if isinstance(event.source, SourceRoom):
-				id = event.source.room_id
-				if(last_status == '0'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom Off at ' +timeat))
-				elif(last_status == '1'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Bedroom On at ' +timeat))
-				elif(last_status == '2'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
-				elif(last_status == '3'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Light Stroageroom On at ' +timeat))
-				elif(last_status == '4'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
-				elif(last_status == '5'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Fan On at ' +timeat))
-				elif(last_status == '6'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain Off at ' +timeat))
-				elif(last_status == '7'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Curtain On at ' +timeat))
-				elif(last_status == '8'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer Off at ' +timeat))
-				elif(last_status == '9'):
-					line_bot_api.push_message(
-						id, 
-						TextSendMessage(text='Springer On at ' +timeat))
-						
+			return last_status
+				
 def detail_temp():
 	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
 	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
