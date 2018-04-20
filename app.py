@@ -33,7 +33,6 @@ timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
 now = datetime.datetime.now()
 
-multicasts = []
 timesetup = {}
 
 dummy = 0
@@ -229,35 +228,6 @@ buttons_template_message5 = TemplateSendMessage(
 	)
 )
 
-#ตั้งค่าแจ้งเตือน 
-buttons_template_message6 = TemplateSendMessage(
-	alt_text='Buttons template',
-	template=ButtonsTemplate(
-		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--BRE04nGW--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124241/production/designs/1975184_1.jpg',
-		text='Please select',
-		actions=[
-			PostbackTemplateAction(
-				label='Add Notify',
-				data='add_noti',
-				text='Add success'
-			),
-			PostbackTemplateAction(
-				label='Remove Notify',
-				data='remove_noti',
-				text='Remove success'
-			),
-			MessageTemplateAction(
-				label='Check list', #ไว้เช็ค ID ต่างๆที่เก็บไว้ใน list multicasts
-				text='Check list'
-			),
-			MessageTemplateAction(
-				label='Nothing',
-				text='Cancel set up'
-			)
-		]
-	)
-)
-
 #ตั้งค่า MODE
 buttons_template_message7 = TemplateSendMessage(
 	alt_text='Buttons template',
@@ -298,7 +268,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage) 
 def handle_message(event):
 	message = event.message.text
-	#global multicasts
+	#global multicasts ไม่ต้องใส่
 	if(message == 'Home'): #แสดงเมนูห้องทั้งหมด 4 ห้อง
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -395,80 +365,7 @@ def handle_message(event):
 		detail_temp()
 	elif(message == 'Check Temp'):
 		detail_humi()
-		
-@handler.add(PostbackEvent)
-def handle_postback(event):
-	postback = event.postback.data
-	#global multicasts
-	if(postback == 'noti_postback'): #ตัวเลือกว่าต้องการตั้งค่าเกี่ยวกับการแจ้งเตือน
-		line_bot_api.reply_message(
-			event.reply_token, 
-			buttons_template_message6)		
-	elif(postback == 'add_noti'): #เมื่อต้องการรับค่าแจ้งเตือน
-		if isinstance(event.source, SourceUser): #ถ้าเป็นห้องแชทแบบ 1 ต่อ 1
-			if(event.source.user_id in multicasts): #ถ้ามี ID นั้นใน list อยู่แล้ว
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='you already on notify'))
-			else:
-				multicasts.append(event.source.user_id)#เพิ่ม ID ลงใน list
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your id is %s add' %event.source.user_id))
-				print (multicasts)
-		elif isinstance(event.source, SourceGroup):
-			if(event.source.group_id in multicasts):
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='you already on notify'))
-			else:
-				multicasts.append(event.source.group_id)
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your group id is %s add' %event.source.group_id))					
-		elif isinstance(event.source, SourceRoom):
-			if(event.source.room_id in multicasts):
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='you already on notify'))
-			else:
-				multicasts.append(event.source.room_id)
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your room id is %s add' %event.source.room_id))
-				print (multicasts)
-	elif(postback == 'remove_noti'): #ถ้าไม่ต้องการรับการแจ้งเตือนแล้ว
-		if isinstance(event.source, SourceUser):
-			if(event.source.user_id in multicasts): #ถ้ามี ID นั้นใน list อยู่แล้ว
-				multicasts.remove(event.source.user_id)#ลบ ID นั้นออกจาก list
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your id is %s re' %event.source.user_id))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="your notify didn't set"))
-		elif isinstance(event.source, SourceGroup):
-			if(event.source.group_id in multicasts):
-				multicasts.remove(event.source.group_id)
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your group id is %s re' %event.source.group_id))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="your notify didn't set"))
-		elif isinstance(event.source, SourceRoom):
-			if(event.source.room_id in multicasts):
-				multicasts.remove(event.source.room_id)
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text='your room id is %s re' %event.source.room_id))
-			else:
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="your notify didn't set"))
-					
+							
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
 	message = event.message.text
@@ -482,7 +379,6 @@ def handle_location_message(event):
 		)
 
 def notification():
-	global multicasts
 	global dummy #ตั้งเป็นตัวแปรหลอก
 	print ('dummy: ', dummy)
 	#last_detect = datetime.datetime.now()
@@ -497,46 +393,131 @@ def notification():
 		if(last_status != None):
 			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
 			print ('dummy1: ', dummy)
-			for i in range(len(multicasts)):
+			if isinstance(event.source, SourceUser):
+				id = event.source.user_id
 				if(last_status == '0'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Light Bedroom Off at ' +timeat))
 				elif(last_status == '1'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Light Bedroom On at ' +timeat))
 				elif(last_status == '2'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
 				elif(last_status == '3'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Light Stroageroom On at ' +timeat))
 				elif(last_status == '4'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
 				elif(last_status == '5'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Fan On at ' +timeat))
 				elif(last_status == '6'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Curtain Off at ' +timeat))
 				elif(last_status == '7'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Curtain On at ' +timeat))
 				elif(last_status == '8'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
 						TextSendMessage(text='Springer Off at ' +timeat))
 				elif(last_status == '9'):
 					line_bot_api.push_message(
-						multicasts[i], 
+						id, 
+						TextSendMessage(text='Springer On at ' +timeat))
+			if isinstance(event.source, SourceGroup):
+				id = event.source.group_id
+				if(last_status == '0'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				elif(last_status == '1'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Bedroom On at ' +timeat))
+				elif(last_status == '2'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				elif(last_status == '3'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				elif(last_status == '4'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
+				elif(last_status == '5'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Fan On at ' +timeat))
+				elif(last_status == '6'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Curtain Off at ' +timeat))
+				elif(last_status == '7'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Curtain On at ' +timeat))
+				elif(last_status == '8'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Springer Off at ' +timeat))
+				elif(last_status == '9'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Springer On at ' +timeat))
+			if isinstance(event.source, SourceRoom):
+				id = event.source.room_id
+				if(last_status == '0'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				elif(last_status == '1'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Bedroom On at ' +timeat))
+				elif(last_status == '2'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				elif(last_status == '3'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				elif(last_status == '4'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text="Fan Off at '{0}'".format(timeat)))
+				elif(last_status == '5'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Fan On at ' +timeat))
+				elif(last_status == '6'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Curtain Off at ' +timeat))
+				elif(last_status == '7'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Curtain On at ' +timeat))
+				elif(last_status == '8'):
+					line_bot_api.push_message(
+						id, 
+						TextSendMessage(text='Springer Off at ' +timeat))
+				elif(last_status == '9'):
+					line_bot_api.push_message(
+						id, 
 						TextSendMessage(text='Springer On at ' +timeat))
 						
 def detail_temp():
