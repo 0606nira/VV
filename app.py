@@ -3,7 +3,8 @@ import time, sys, datetime, os
 import asyncio
 import json
 import send
-import mode
+import Noty
+import detail
 import requests 
 import http.client, urllib
 from linebot import (
@@ -83,11 +84,11 @@ buttons_template_message1 = TemplateSendMessage(
 		actions=[            
 			MessageTemplateAction(
 				label='On',
-				text='Bedroom Light On'
+				text='LED Bedroom On'
 			),
 			MessageTemplateAction(
 				label='Off',
-				text='Bedroom Light Off'
+				text='LED Bedroom Off'
 			)
 		]
 	)
@@ -116,7 +117,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 	)
 )
 
-# ผ้าม่าน
+# ผ้าม่าน จากแสง
 buttons_template_message21 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
@@ -131,12 +132,20 @@ buttons_template_message21 = TemplateSendMessage(
 			MessageTemplateAction(
 				label='Off',
 				text='Curtain Off'
+			),
+			MessageTemplateAction(
+				label='Sunlight Sensor',
+				text='Sunlight Sensor On'
+			),
+			MessageTemplateAction(
+				label='Check Lux',
+				text='Check Lux'
 			)
 		]
 	)
 )
 
-# พัดลม *******
+# พัดลม จากอุณหภูมิ
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
@@ -151,6 +160,10 @@ buttons_template_message22 = TemplateSendMessage(
 			MessageTemplateAction(
 				label='Off',
 				text='Fan Off'
+			),
+			MessageTemplateAction(
+				label='Temp Sensor',
+				text='Temp Sensor On'
 			),
 			MessageTemplateAction(
 				label='Check Temp',
@@ -175,6 +188,10 @@ buttons_template_message3 = TemplateSendMessage(
 			MessageTemplateAction(
 				label='Off',
 				text='Storageroom Light Off'
+			),
+			MessageTemplateAction(
+				label='PIR Sensor',
+				text='PIR Sensor On'
 			)
 		]
 	)
@@ -195,6 +212,10 @@ buttons_template_message4 = TemplateSendMessage(
 			MessageTemplateAction(
 				label='Off',
 				text='Springer Off'
+			),
+			MessageTemplateAction(
+				label='Humi Sensor',
+				text='Humi Sensor On'
 			),
 			MessageTemplateAction(
 				label='Check Humidity',
@@ -272,26 +293,26 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message1)
-	elif(message == 'Bedroom Light On'):
-		send.send_values(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
-		if(notification() == '1'):
+	elif(message == 'LED Bedroom On'):
+		send.send_values1(1) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 1 คือเปิด
+		if(Noty.notification1() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Light Bedroom On at ' +timeat))
+				TextSendMessage(text='LED Bedroom On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Light Bedroom can't on"))
-	elif(message == 'Bedroom Light Off'):
-		send.send_values(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
-		if (notification() == '0'):
+				TextSendMessage(text="LED Bedroom didn't on"))
+	elif(message == 'LED Bedroom Off'):
+		send.send_values1(0) #ส่งคำสั่งไปอัพเดทข้อมูลในเว็บ Thingspeak ให้เป็น 0 คือเปิด
+		if (Noty.notification1() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Light Bedroom Off at ' +timeat))
+				TextSendMessage(text='LED Bedroom Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Light Bedroom can't off"))
+				TextSendMessage(text="LED Bedroom didn't off"))
 	elif(message == 'Living Room'): #แสดงเมนูห้องนั่งเล่น มี 2 อุปกรณ์ คือม่านกับพัดลม
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -301,85 +322,143 @@ def handle_message(event):
 			event.reply_token,
 			buttons_template_message21)
 	elif(message == 'Curtain On'):
-		send.send_values(7)
-		notification()
+		send.send_values4(1)
+		if(Noty.notification4() == '1'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Curtain On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Curtain didn't on"))
+		detail.detail_lux()	
 	elif(message == 'Curtain Off'):
-		send.send_values(6)
-		notification()
+		send.send_values4(0)
+		if(Noty.notification4() == '0'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Curtain Off at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Curtain didn't off"))
+		detail.detail_lux()	
+	elif(message == 'Sunlight Sensor On'):
+		send.send_values4(2)
+		if(Noty.notification4() == '2'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Sunlight Sensor On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Sunlight Sensor didn't on"))
 	elif(message == 'Fan'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message22)
 	elif(message == 'Fan On'):
-		send.send_values(5)
-		if(notification() == '5'):
+		send.send_values3(1)
+		if(Noty.notification3() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text='Fan On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Fan can't on"))
-		detail_temp()
+				TextSendMessage(text="Fan didn't on"))
+		detail.detail_temp()
 	elif(message == 'Fan Off'):
-		send.send_values(4)
-		if(notification() == '4'):
+		send.send_values3(0)
+		if(Noty.notification3() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text='Fan Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Fan can't off"))
-		detail_temp()
+				TextSendMessage(text="Fan didn't off"))
+		detail.detail_temp()
+	elif(message == 'Temp Sensor On'):
+		send.send_values3(2)
+		if(Noty.notification3() == '2'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Temp Sensor On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Temp Sensor didn't on"))
 	elif(message == 'Storage Room'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message3)
 	elif(message == 'Storageroom Light On'):
-		send.send_values(3)
-		if(notification() == '3'):
+		send.send_values2(1)
+		if(Noty.notification2() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Light Stroageroom On at ' +timeat))
+				TextSendMessage(text='LED Stroageroom On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Light Stroageroom can't on"))
+				TextSendMessage(text="LED Stroageroom can't on"))
 	elif(message == 'Storageroom Light Off'):
-		send.send_values(2)
-		if(notification() == '2'):
+		send.send_values2(0)
+		if(Noty.notification2() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Light Stroageroom Off at ' +timeat))
+				TextSendMessage(text='LED Stroageroom Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Light Stroageroom can't off"))
+				TextSendMessage(text="LED Stroageroom didn't off"))
+	elif(message == 'PIR Sensor On'):
+		send.send_values2(2)
+		if(Noty.notification2() == '2'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='PIR Sensor On at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="PIR Sensor didn't on"))
 	elif(message == 'Landscape'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message4)
 	elif(message == 'Springer On'):
-		send.send_values(9)
-		if(notification() == '9'):
+		send.send_values5(1)
+		if(Noty.notification5() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text='Springer On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Springer can't on"))
+				TextSendMessage(text="Springer didn't on"))
+		detail.detail_humi()
 	elif(message == 'Springer Off'):
-		send.send_values(8)	
-		if(notification() == '8'):
+		send.send_values5(0)	
+		if(Noty.notification5() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text='Springer Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Springer can't off"))		
+				TextSendMessage(text="Springer didn't off"))
+		detail.detail_humi()
+	elif(message == 'Humi Sensor on'):
+		send.send_values5(2)	
+		if(Noty.notification5() == '2'):
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text='Humi Sensor on at ' +timeat))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				TextSendMessage(text="Humi Sensor didn't on"))
 	elif(message == 'Bye'): #เตะ bot ออกจากกลุุ่มหรือห้องแชท
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
@@ -413,10 +492,11 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token, TextMessage(text='%s' %multicasts))
 	elif(message == 'Check Temp'):
-		detail_temp()
-	elif(message == 'Check Temp'):
-		detail_humi()
-							
+		detail.detail_temp()
+	elif(message == 'Check Humidity'):
+		detail.detail_humi()
+	elif(message == 'Check Lux'):
+		detail.detail_lux()					
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
 	message = event.message.text
@@ -429,50 +509,9 @@ def handle_location_message(event):
 			)
 		)
 
-def notification():
-	global dummy #ตั้งเป็นตัวแปรหลอก
-	print ('dummy: ', dummy)
-	#last_detect = datetime.datetime.now()
-	#url GET อ่านข้อมูล
-	url = 'https://api.thingspeak.com/channels/455279/feeds.json?api_key=ZDDJL90IXYJOIQ3S&results=2'
-	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-	entry_status = data['feeds'][1]['entry_id']
-	print ('entry_status: ', entry_status)
-	last_status = data['feeds'][1]['field1'] #อ่านสถานะของอุปกรณ์
-	if(entry_status != dummy): #ถ้าไม่เท่ากันแสดงว่ามีการเปลี่ยนแปลงค่าใน channel
-		if(last_status != None):
-			dummy = entry_status #ให้dummy เท่ากับentry_status(คือจำนวนที่มีการเปลี่ยนแปลงใน channelนั้นๆ)
-			print ('dummy1: ', dummy)
-			return last_status
-				
-def detail_temp():
-	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
-	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-	entry_status = data['entry_id']
-	print ('entry_status: ', entry_status)
-	last_temp = data['field2']
-	#last_humi = data['feeds'][0]['field3']
-	#last_pir = data['feeds'][0]['field4']
-	#last_lux = data['feeds'][0]['field5']
-	line_bot_api.reply_message(
-		event.reply_token, 
-		TextSendMessage(text='Temp. is ' +last_temp))
 
-def detail_humi():
-	url = 'https://api.thingspeak.com/channels/455279/fields/2/last.json?api_key=ZDDJL90IXYJOIQ3S'
-	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
-	entry_status = data['entry_id']
-	print ('entry_status: ', entry_status)
-	#last_temp = data['field2']
-	last_humi = data['field3']
-	#last_pir = data['feeds'][0]['field4']
-	#last_lux = data['feeds'][0]['field5']
-	line_bot_api.reply_message(
-		event.reply_token, 
-		TextSendMessage(text='Humidity is ' +last_humi))
+				
+
 
 	#@handler.add(MessageEvent, message=LocationMessage)
 #def handle_location_message(event):
