@@ -25,7 +25,7 @@ def detail_humi():
 	last_humi = data['field2']
 	line_bot_api.reply_message(
 		event.reply_token, 
-		TextSendMessage(text="Humidity is '{0}' check at '{1}'".format(last_humi, timeat))
+		TextSendMessage(text="Humidity is '{0}' check at '{1}'".format(last_humi, timeat)))
 
 def detail_lux():
 	url = 'https://api.thingspeak.com/channels/455279/fields/4/last.json?api_key=ZDDJL90IXYJOIQ3S'
