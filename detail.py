@@ -33,7 +33,7 @@ def detail_lux():
 	data = json.load(response) #แปลงข้อมูล json ที่ได้รับมา
 	entry_status = data['entry_id']
 	print ('entry_status: ', entry_status)
-	last_lux = data['field3']
+	last_lux = data['field4']
 	line_bot_api.reply_message(
 		event.reply_token, 
 		TextSendMessage(text="LUX is '{0}' check at '{1}'".format(last_lux, timeat)))		
