@@ -532,6 +532,14 @@ def handle_location_message(event):
 				latitude=event.message.latitude, longitude=event.message.longitude
 			)
 		)
+	elif(message == 'Mahidol'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationMessage(
+				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+				latitude=13.796024, longitude=100.325066
+			)
+		)				
 
 
 #@handler.add(MessageEvent, message=LocationMessage)
