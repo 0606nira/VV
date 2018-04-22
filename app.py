@@ -491,42 +491,9 @@ def handle_message(event):
 			event.reply_token, 
 			TextSendMessage(text="LUX. is '{0}' check at '{1}'".format(detail.detail_lux(), timeat)))
 	elif(message == 'Monitor'):
-		g = ['LED Bedroom', 'LED Stroageroom', 'Fan', 'Curtain', 'Springer']
-		l = ['Off', 'On', 'Sensor Mode']
-		j = 0
-		for n in range(len(g)):
-			while(j <= 2):
-				if(Noty.notification1() == str(j)):
-					print("{0}'s status is {1}".format(g[n], l[j]))
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-					n += 1
-				if(Noty.notification2() == str(j)):
-					print("{0}'s status is {1}".format(g[n], l[j]))
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-					n += 1
-				if(Noty.notification3() == str(j)):
-					print("{0}'s status is {1}".format(g[n], l[j]))
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-					n += 1
-				if(Noty.notification4() == str(j)):
-					print("{0}'s status is {1}".format(g[n], l[j]))
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-					n += 1
-				if(Noty.notification5() == str(j)):
-					print("{0}'s status is {1}".format(g[n], l[j]))
-					line_bot_api.reply_message(
-						event.reply_token, 
-						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-					#n += 1
-				j += 1
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text=Noty.monitor()))
 	elif(message == 'Weather'):
 		line_bot_api.reply_message(
 			event.reply_token,
