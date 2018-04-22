@@ -49,41 +49,5 @@ def notification5(): #
 	last_status = data['field5'] #อ่านสถานะของอุปกรณ์
 	return last_status
 
-def monitor():
-	g = ['LED Bedroom', 'LED Stroageroom', 'Fan', 'Curtain', 'Springer']
-	l = ['Off', 'On', 'Sensor Mode']
-	j = 0
-	for n in range(len(g)):
-		while(j <= 2):
-			if(notification1() == str(j)):
-				print("{0}'s status is {1}".format(g[n], l[j]))
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-				n += 1
-			if(notification2() == str(j)):
-				print("{0}'s status is {1}".format(g[n], l[j]))
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-				n += 1
-			if(notification3() == str(j)):
-				print("{0}'s status is {1}".format(g[n], l[j]))
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-				n += 1
-			if(notification4() == str(j)):
-				print("{0}'s status is {1}".format(g[n], l[j]))
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-				n += 1
-			if(notification5() == str(j)):
-				print("{0}'s status is {1}".format(g[n], l[j]))
-				line_bot_api.reply_message(
-					event.reply_token, 
-					TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
-				#n += 1
-			j += 1
+	
 					

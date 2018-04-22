@@ -240,6 +240,33 @@ buttons_template_message5 = TemplateSendMessage(
 	)
 )
 
+#อากาศ
+buttons_template_message5 = TemplateSendMessage(
+	alt_text='Buttons template',
+	template=ButtonsTemplate(
+		thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Weather_Rounded.svg/1024px-Weather_Rounded.svg.png',
+		text='Which station you would like to?',
+		actions=[
+			MessageTemplateAction(
+				label='Bangkok',
+				text='BANGKOK'
+			),
+			MessageTemplateAction(
+				label='Nakhonpathom',
+				text='NAKHONPATHOM'
+			),
+			MessageTemplateAction(
+				label='Chiang Mai',
+				text='CHIANG MAI'
+			),
+			MessageTemplateAction(
+				label='Phuket',
+				text='PHUKET'
+			),
+		]
+	)
+)
+
 @app.route("/callback", methods=['POST'])
 def callback():
 	# get X-Line-Signature header value
@@ -450,15 +477,68 @@ def handle_message(event):
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
 	elif(message == 'Check Temp'):
-		detail.detail_temp()
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="Temp. is '{0}' check at '{1}'".format(detail.detail_temp(), timeat)))
 	elif(message == 'Check Humidity'):
-		detail.detail_humi()
+		#detail.detail_humi()
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="Humidity. is '{0}' check at '{1}'".format(detail.detail_humi(), timeat)))
 	elif(message == 'Check Lux'):
-		detail.detail_lux()
+		#detail.detail_lux()
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="LUX. is '{0}' check at '{1}'".format(detail.detail_lux(), timeat)))
 	elif(message == 'Monitor'):
-		Noty.monitor()
+		g = ['LED Bedroom', 'LED Stroageroom', 'Fan', 'Curtain', 'Springer']
+		l = ['Off', 'On', 'Sensor Mode']
+		j = 0
+		for n in range(len(g)):
+			while(j <= 2):
+				if(Noty.notification1() == str(j)):
+					print("{0}'s status is {1}".format(g[n], l[j]))
+					line_bot_api.reply_message(
+						event.reply_token, 
+						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
+					n += 1
+				if(Noty.notification2() == str(j)):
+					print("{0}'s status is {1}".format(g[n], l[j]))
+					line_bot_api.reply_message(
+						event.reply_token, 
+						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
+					n += 1
+				if(Noty.notification3() == str(j)):
+					print("{0}'s status is {1}".format(g[n], l[j]))
+					line_bot_api.reply_message(
+						event.reply_token, 
+						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
+					n += 1
+				if(Noty.notification4() == str(j)):
+					print("{0}'s status is {1}".format(g[n], l[j]))
+					line_bot_api.reply_message(
+						event.reply_token, 
+						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
+					n += 1
+				if(Noty.notification5() == str(j)):
+					print("{0}'s status is {1}".format(g[n], l[j]))
+					line_bot_api.reply_message(
+						event.reply_token, 
+						TextSendMessage(text="{0}'s status is {1}".format(g[n], l[j])))
+					#n += 1
+				j += 1
 	elif(message == 'Weather'):
-		weather.weather()
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message6)
+	elif(message == 'BANGKOK'):
+		weather.weather('BANGKOK')
+	elif(message == 'NAKHONPATHOM'):
+		weather.weather('NAKHONPATHOM')
+	elif(message == 'CHIANG MAI'):
+		weather.weather('CHIANG MAI')
+	elif(message == 'PHUKET'):
+		weather.weather('PHUKET')
 	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
 		line_bot_api.reply_message(
 			event.reply_token,
