@@ -518,6 +518,22 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
+	elif(message == 'Location'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationMessage(
+				title=event.message.title, address=event.message.address,
+				latitude=event.message.latitude, longitude=event.message.longitude
+			)
+		)
+	elif(message == 'Mahidol'):
+		line_bot_api.reply_message(
+			event.reply_token,
+			LocationMessage(
+				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+				latitude=13.796024, longitude=100.325066
+			)
+		)				
 		
 		
 		
