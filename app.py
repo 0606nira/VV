@@ -1,8 +1,8 @@
 ﻿from flask import Flask, request, abort
 import time, sys, datetime, os
-import asyncio
 import json
 import send
+import weather
 import Noty
 import detail
 import requests 
@@ -137,10 +137,6 @@ buttons_template_message21 = TemplateSendMessage(
 				label='Sunlight Sensor',
 				text='Sunlight Sensor On'
 			),
-			MessageTemplateAction(
-				label='Check Lux',
-				text='Check Lux'
-			)
 		]
 	)
 )
@@ -165,10 +161,6 @@ buttons_template_message22 = TemplateSendMessage(
 				label='Temp Sensor',
 				text='Temp Sensor On'
 			),
-			MessageTemplateAction(
-				label='Check Temp',
-				text='Check Temp'
-			)
 		]
 	)
 )
@@ -217,10 +209,6 @@ buttons_template_message4 = TemplateSendMessage(
 				label='Humi Sensor',
 				text='Humi Sensor On'
 			),
-			MessageTemplateAction(
-				label='Check Humidity',
-				text='Check Humidity'
-			)
 		]
 	)
 )
@@ -233,32 +221,21 @@ buttons_template_message5 = TemplateSendMessage(
 		text='What do you want to set up?',
 		actions=[
 			MessageTemplateAction(
-				label='MODE',
-				text='Set up MODE'
+				label='Check Temp',
+				text='Check Temp'
 			),
 			MessageTemplateAction(
-				label='Nothing',
-				text='Cancel set up'
-			)
-		]
-	)
-)
-
-#ตั้งค่า MODE
-buttons_template_message7 = TemplateSendMessage(
-	alt_text='Buttons template',
-	template=ButtonsTemplate(
-		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--BRE04nGW--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124241/production/designs/1975184_1.jpg',
-		text='Please select',
-		actions=[
-			MessageTemplateAction(
-				label='Turn On Automation',
-				text='Turn On Automation'
+				label='Check Humidity',
+				text='Check Humidity'
 			),
 			MessageTemplateAction(
-				label='Turn Off Automation',
-				text='Turn Off Automation'
-			)
+				label='Check Lux',
+				text='Check Lux'
+			),
+			MessageTemplateAction(
+				label='Monitor',
+				text='Monitor'
+			),
 		]
 	)
 )
@@ -472,31 +449,23 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token,
 				TextMessage(text="Can't Leave"))
-	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message5)
-	elif(message == 'Set up MODE'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			buttons_template_message7)
-	elif(message == 'Turn Off Automation'):
-		line_bot_api.reply_message(
-			event.reply_token, TextMessage(text='Turn Off Automation'))
-		mode.mode(0)
-	elif(message == 'Turn On Automation'):
-		line_bot_api.reply_message(
-			event.reply_token, TextMessage(text='Turn On Automation'))
-		mode.mode(1)
-	elif(message == 'Check list'):
-		line_bot_api.reply_message(
-			event.reply_token, TextMessage(text='%s' %multicasts))
 	elif(message == 'Check Temp'):
 		detail.detail_temp()
 	elif(message == 'Check Humidity'):
 		detail.detail_humi()
 	elif(message == 'Check Lux'):
-		detail.detail_lux()					
+		detail.detail_lux()
+	elif(message == 'Monitor'):
+		Noty.monitor()
+	elif(message == 'Weather'):
+		weather.weather()
+	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
+		line_bot_api.reply_message(
+			event.reply_token,
+			buttons_template_message5)
+		
+		
+		
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
 	message = event.message.text
@@ -504,13 +473,23 @@ def handle_location_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationMessage(
-				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
-				latitude=13.796024, longitude=100.325066
+				title=event.message.title, address=event.message.address,
+				latitude=event.message.latitude, longitude=event.message.longitude
 			)
 		)
 
 
-				
+#@handler.add(MessageEvent, message=LocationMessage)
+#def handle_location_message(event):
+	#message = event.message.text
+	#if(message == 'Location'):
+	#line_bot_api.reply_message(
+		#	event.reply_token,
+			#LocationMessage(
+			#	title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+			#	latitude=13.796024, longitude=100.325066
+			#)
+		#)				
 
 
 	#@handler.add(MessageEvent, message=LocationMessage)
