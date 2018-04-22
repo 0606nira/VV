@@ -37,7 +37,7 @@ at '{3}'.""".format(Temp, Max_Temp, Min_temp, lastbuild))
 					TextSendMessage(text="""Temp is '{0}'.
 Max Temp is '{1}'.
 Min Temp is '{2}'.
-at '{3}'.""".format(Temp, Max_Temp, Min_temp, lastbuild))
+at '{3}'.""".format(Temp, Max_Temp, Min_temp, lastbuild)))
 			break
 		else:
 			i += 1
