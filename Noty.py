@@ -50,33 +50,33 @@ def notification5(): #
 	return last_status
 
 def monitor():
-        g = ['LED Bedroom', 'LED Stroageroom', 'Fan', 'Curtain', 'Springer']
+        #g = ['LED Bedroom', 'LED Stroageroom', 'Fan', 'Curtain', 'Springer']
         l = ['Off', 'On', 'Sensor Mode']
         j = 0
         nl = '\n'
         while(j <= 2):
                         if(notification1() == str(j)):
-                                ans1 = "LED Bedroom's status is {0}\n".format(l[j])
+                                ans1 = "LED Bedroom's status is {0}".format(l[j])
                                 #print (ans1)
                         if(notification2() == str(j)):
-                                ans2 = "LED Stroageroom's status is {0}\n".format(l[j])
+                                ans2 = "LED Stroageroom's status is {0}".format(l[j])
                                 #print (ans2)
                         if(notification3() == str(j)):
-                                ans3 = "Fan's status is {0}\n".format(l[j])
+                                ans3 = "Fan's status is {0}".format(l[j])
                                 #print (ans3)
                         if(notification4() == str(j)):
-                                ans4 = "Curtain's status is {0}\n".format(l[j])
+                                ans4 = "Curtain's status is {0}".format(l[j])
                                 #print (ans4)
                         if(notification5() == str(j)):
                                 ans5 = "Springer's status is {0}".format(l[j])
 
                         j += 1
-        return ans1, ans2, ans3, ans4, ans5
+        return ('{0}\n{1}\n{2}\n{3}\n{4}').format(ans1, ans2, ans3, ans4, ans5)
 
 
 
                                 
-
+("LED Bedroom's status is On\n", "LED Stroageroom's status is Off\n", "Fan's status is On\n", "Curtain's status is Off\n", "Springer's status is Off")
 
 
 
