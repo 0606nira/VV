@@ -22,11 +22,11 @@ def weather(city):
 		stanameen = c['StationNameEng']
 		#print (staname.find(station))
 		if(stanameen.find(name) >= 0):
-                    ans = """Station's Name is '{4}'
+			ans = """Station's Name is '{4}'
 Temp is '{0}'.
 Max Temp is '{1}'.
 Min Temp is '{2}'.
 at '{3}'.""".format(Temp, Max_Temp, Min_temp, lastbuild, stanameth)
-                    return ans
-                else:
-                    i += 1
+			return ans
+		else:
+			i += 1
