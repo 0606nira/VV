@@ -493,19 +493,27 @@ def handle_message(event):
 	elif(message == 'Monitor'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text=Noty.monitor()))
+			TextSendMessage(text="{}".format(Noty.monitor())))
 	elif(message == 'Weather'):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message6)
 	elif(message == 'BANGKOK'):
-		weather.weather('BANGKOK')
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="{}".format(weather.weather('BANGKOK'))))
 	elif(message == 'NAKHONPATHOM'):
-		weather.weather('NAKHONPATHOM')
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="{}".format(weather.weather('NAKHONPATHOM'))))
 	elif(message == 'CHIANG MAI'):
-		weather.weather('CHIANG MAI')
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="{}".format(weather.weather('CHIANG MAI'))))
 	elif(message == 'PHUKET'):
-		weather.weather('PHUKET')
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="{}".format(weather.weather('PHUKET'))))
 	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
 		line_bot_api.reply_message(
 			event.reply_token,
