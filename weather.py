@@ -21,7 +21,7 @@ def weather(city):
 		stanameth = c['StationNameTh']
 		stanameen = c['StationNameEng']
 		#print (staname.find(station))
-		if(stanameen.find(name) >= 0):
+		if(stanameen == name):
 			ans = """Station's Name is '{4}'
 Temp is '{0}'.
 Max Temp is '{1}'.

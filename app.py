@@ -241,7 +241,7 @@ buttons_template_message5 = TemplateSendMessage(
 )
 
 #อากาศ
-buttons_template_message5 = TemplateSendMessage(
+buttons_template_message6 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
 		thumbnail_image_url='https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Weather_Rounded.svg/1024px-Weather_Rounded.svg.png',
