@@ -213,12 +213,12 @@ buttons_template_message4 = TemplateSendMessage(
 	)
 )
 
-#ตั้งค่า
+#Check Home
 buttons_template_message5 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
 		thumbnail_image_url='https://res.cloudinary.com/teepublic/image/private/s--bAhU43hA--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124002/production/designs/1975176_1.jpg',
-		text='What do you want to set up?',
+		text='What do you want to check?',
 		actions=[
 			MessageTemplateAction(
 				label='Check Temp',
@@ -240,6 +240,7 @@ buttons_template_message5 = TemplateSendMessage(
 	)
 )
 
+#Set Up
 image_carousel_template_message3 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
