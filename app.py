@@ -501,7 +501,7 @@ def handle_message(event):
 	elif(message == 'BANGKOK'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text="{}".format(weather.weather('BANGKOK'))))
+			TextSendMessage(text="{}".format(weather.weather('BANGKOK METROPOLIS'))))
 	elif(message == 'NAKHONPATHOM'):
 		line_bot_api.reply_message(
 			event.reply_token, 
@@ -518,7 +518,7 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
-	elif(message == 'Location'):
+	elif(message == 'Location'): #ใช้ไม่ได้
 		line_bot_api.reply_message(
 			event.reply_token,
 			LocationMessage(
@@ -537,25 +537,25 @@ def handle_message(event):
 		
 		
 		
-@handler.add(MessageEvent, message=LocationMessage)
-def handle_location_message(event):
-	message = event.message.text
-	if(message == 'Location'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			LocationMessage(
-				title=event.message.title, address=event.message.address,
-				latitude=event.message.latitude, longitude=event.message.longitude
-			)
-		)
-	elif(message == 'Mahidol'):
-		line_bot_api.reply_message(
-			event.reply_token,
-			LocationMessage(
-				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
-				latitude=13.796024, longitude=100.325066
-			)
-		)				
+#@handler.add(MessageEvent, message=LocationMessage)
+#def handle_location_message(event):
+	#message = event.message.text
+	#if(message == 'Location'):
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#LocationMessage(
+				#title=event.message.title, address=event.message.address,
+				#latitude=event.message.latitude, longitude=event.message.longitude
+			#)
+		#)
+	#elif(message == 'Mahidol'):
+		#line_bot_api.reply_message(
+			#event.reply_token,
+			#LocationMessage(
+				#title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
+				#latitude=13.796024, longitude=100.325066
+			#)
+		#)				
 
 
 #@handler.add(MessageEvent, message=LocationMessage)
