@@ -236,6 +236,10 @@ buttons_template_message5 = TemplateSendMessage(
 				label='Monitor',
 				text='Monitor'
 			),
+			MessageTemplateAction(
+				label='Mahidol',
+				text='Mahidol'
+			)
 		]
 	)
 )
@@ -518,14 +522,6 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message5)
-	elif(message == 'Location'): #ใช้ไม่ได้
-		line_bot_api.reply_message(
-			event.reply_token,
-			LocationSendMessage(
-				title=event.message.title, address=event.message.address,
-				latitude=event.message.latitude, longitude=event.message.longitude
-			)
-		)
 	elif(message == 'Mahidol'):
 		line_bot_api.reply_message(
 			event.reply_token,
