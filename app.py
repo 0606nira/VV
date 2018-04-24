@@ -235,11 +235,29 @@ buttons_template_message5 = TemplateSendMessage(
 			MessageTemplateAction(
 				label='Monitor',
 				text='Monitor'
-			),
-			MessageTemplateAction(
-				label='Mahidol',
-				text='Mahidol'
 			)
+		]
+	)
+)
+
+image_carousel_template_message3 = TemplateSendMessage(
+	alt_text='ImageCarousel template',
+	template=ImageCarouselTemplate(
+		columns=[
+			ImageCarouselColumn(
+				image_url='https://orig00.deviantart.net/06f8/f/2012/052/9/e/yuuko_ichihara__s_magic_circle_by_earthstar01-d4qj5jv.png',
+				action=MessageTemplateAction(
+					label='Check Home',
+					text='Check Home',
+							)
+					),
+			ImageCarouselColumn(
+				image_url='http://campus.campus-star.com/app/uploads/2016/05/%E0%B8%A5%E0%B8%AD%E0%B8%94%E0%B8%99%E0%B9%87%E0%B8%AD%E0%B8%95%E0%B8%AD%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89%E0%B9%80%E0%B8%82%E0%B8%B2%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%88%E0%B8%B0%E0%B9%84%E0%B8%94%E0%B9%89%E0%B9%81%E0%B8%9F%E0%B8%99%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81-EG-%E0%B8%99%E0%B8%B0.jpg',
+				action=MessageTemplateAction(
+					label='Mahidol',
+					text='Mahidol',								
+				)
+			),
 		]
 	)
 )
@@ -498,6 +516,10 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token, 
 			TextSendMessage(text="{}".format(Noty.monitor())))
+	elif(message == 'Check Home'):
+		line_bot_api.reply_message(
+			event.reply_token, 
+			buttons_template_message5)
 	elif(message == 'Weather'):
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -521,7 +543,7 @@ def handle_message(event):
 	elif(message == 'Set Up'): #เมื่อต้องการตั้งค่า
 		line_bot_api.reply_message(
 			event.reply_token,
-			buttons_template_message5)
+			image_carousel_template_message3)
 	elif(message == 'Mahidol'):
 		line_bot_api.reply_message(
 			event.reply_token,
