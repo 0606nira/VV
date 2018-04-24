@@ -521,7 +521,7 @@ def handle_message(event):
 	elif(message == 'Location'): #ใช้ไม่ได้
 		line_bot_api.reply_message(
 			event.reply_token,
-			LocationMessage(
+			LocationSendMessageMessage(
 				title=event.message.title, address=event.message.address,
 				latitude=event.message.latitude, longitude=event.message.longitude
 			)
