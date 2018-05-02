@@ -476,7 +476,7 @@ def handle_message(event):
 				event.reply_token, 
 				TextSendMessage(text="Springer didn't off"))
 		detail.detail_humi()
-	elif(message == 'Humi Sensor on'):
+	elif(message == 'Humi Sensor On'):
 		send.send_values5(2)	
 		if(Noty.notification5() == '2'):
 			line_bot_api.reply_message(
