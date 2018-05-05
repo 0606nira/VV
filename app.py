@@ -270,6 +270,28 @@ image_carousel_template_message3 = TemplateSendMessage(
 	)
 )
 
+image_carousel_template_message4 = TemplateSendMessage(
+	alt_text='ImageCarousel template',
+	template=ImageCarouselTemplate(
+		columns=[
+			ImageCarouselColumn(
+				image_url='https://i.pinimg.com/736x/d3/2b/6f/d32b6f83b1b8fedb83af385b5eeb8e9f--magic-symbols-card-captor.jpg',
+				action=MessageTemplateAction(
+					label='HumidityAir',
+					text='Check Humidity in the Air',
+					)
+			),
+			ImageCarouselColumn(
+				image_url='https://i.pinimg.com/736x/d3/2b/6f/d32b6f83b1b8fedb83af385b5eeb8e9f--magic-symbols-card-captor.jpg',
+				action=MessageTemplateAction(
+					label='HumiditySoil',
+					text='Check Humidity in the Soil',
+					)
+			),
+		]
+	)
+)
+
 #อากาศ
 buttons_template_message6 = TemplateSendMessage(
 	alt_text='Buttons template',
@@ -513,8 +535,16 @@ def handle_message(event):
 	elif(message == 'Check Humidity'):
 		#detail.detail_humi()
 		line_bot_api.reply_message(
+			event.reply_token,
+			image_carousel_template_message4)
+	elif(message == 'Check Humidity in the Soil'):
+		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text="Humidity. is '{0}' check at '{1}'".format(detail.detail_humi(), timeat)))
+			TextSendMessage(text="Humidity Soil is '{0}' check at '{1}'".format(detail.detail_humi_soil(), timeat)))
+	elif(message == 'Check Humidity in the Air'):
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="Humidity Air is '{0}' check at '{1}'".format(detail.detail_humi_air(), timeat)))
 	elif(message == 'Check Lux'):
 		#detail.detail_lux()
 		line_bot_api.reply_message(
