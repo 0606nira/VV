@@ -98,9 +98,9 @@ def bill():
 		unit = (total_watt*time)/3600
 		bill_day = unit*7
 		bill_month = unit*7*30
-		ans_day = "Bill/Day is {0}".format(bill_day)
+		ans_day = "Bill/Day is {0} Bath".format(round(bill_day,2))
 		#print (ans_day)
-		ans_month = "Bill/Month is {0}".format(bill_month)
+		ans_month = "Bill/Month is {0} Bath".format(round(bill_month,2))
 		return('{0}\n{1}').format(ans_day, ans_month)
 	elif(time == 0):
 		ans_none = "Today you do not have to pay"
