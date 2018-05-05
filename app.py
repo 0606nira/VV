@@ -255,7 +255,7 @@ image_carousel_template_message3 = TemplateSendMessage(
 			ImageCarouselColumn(
 				image_url='https://orig00.deviantart.net/06f8/f/2012/052/9/e/yuuko_ichihara__s_magic_circle_by_earthstar01-d4qj5jv.png',
 				action=MessageTemplateAction(
-					label='Check Electricity Bill',
+					label='Check E-Bill',
 					text='Check Bill',
 					)
 			),
