@@ -59,7 +59,7 @@ def monitor():
                                 ans1 = "LED Bedroom's status is {0}".format(l[j])
                                 #print (ans1)
                         if(notification2() == str(j)):
-                                ans2 = "LED Stroageroom's status is {0}".format(l[j])
+                                ans2 = "LED Garage's status is {0}".format(l[j])
                                 #print (ans2)
                         if(notification3() == str(j)):
                                 ans3 = "Fan's status is {0}".format(l[j])
