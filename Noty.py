@@ -79,19 +79,19 @@ import requests
 import http.client, urllib
 
 def bill():
-    url = 'https://api.thingspeak.com/channels/455279/fields/6/last.json?api_key=ZDDJL90IXYJOIQ3S&result=1'
-    response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
-    data = json.load(response)
-    time = data['field6']
+	url = 'https://api.thingspeak.com/channels/455279/fields/6/last.json?api_key=ZDDJL90IXYJOIQ3S&result=1'
+	response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+	data = json.load(response)
+	time = data['field6']
     #[(กำลังไฟฟ้า (วัตต์)ชนิดนั้นๆ  x จำนวนเครื่องใช้ไฟฟ้า) ÷1000] x จำนวนชั่วโมงที่ใช้งานใน 1 วัน ÷ 3600 = จำนวนหน่วยหรือยูนิต
     #กำหนดให้ไฟ 50 วัตต์ จำนวน 1 หลอด ยูนิตละ 7 บาท.
     #ค่าไฟต่อวัน = จำนวนยูนิต x 7
     #ค่าไฟต่อเดือน = จำนวนยูนิต x7x30
-    time = int(time)
+	time = int(time)
     #print (type(time))
-    watt = 50
-    amount = 1
-    if(time != 0):
+	watt = 50
+	amount = 1
+	if(time != 0):
 		#print ("here")
 		total_watt = (watt*amount)/1000
 		#print (total_watt)
