@@ -505,7 +505,7 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text="Springer didn't off"))
-		detail.detail_humi()
+		detail.detail_humi_soil()
 	elif(message == 'Humi Sensor On'):
 		send.send_values5(2)	
 		if(Noty.notification5() == '2'):
