@@ -59,8 +59,8 @@ image_carousel_template_message1 = TemplateSendMessage(
 				ImageCarouselColumn(
 						image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
 						action=MessageTemplateAction(
-								label='Storage Room',
-								text='Storage Room',								
+								label='Garage',
+								text='Garage',								
 							)
 					),
 				ImageCarouselColumn(
@@ -94,7 +94,7 @@ buttons_template_message1 = TemplateSendMessage(
 	)
 )
 
-# ห้องสัตว์เลี้ยง มีม่าน จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
+# ห้องสัตว์เลี้ยง มีพัดลม จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
 image_carousel_template_message2 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -102,8 +102,8 @@ image_carousel_template_message2 = TemplateSendMessage(
 			ImageCarouselColumn(
 				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
 				action=MessageTemplateAction(
-					label='Curtain',
-					text='Curtain',
+					label='Window',
+					text='Window',
 							)
 					),
 			ImageCarouselColumn(
@@ -117,21 +117,21 @@ image_carousel_template_message2 = TemplateSendMessage(
 	)
 )
 
-# ผ้าม่าน จากแสง
+# หน้าต่าง จากแสง
 buttons_template_message21 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
 		thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
-		title='Curtain',
+		title='Window',
 		text='Please select',
 		actions=[            
 			MessageTemplateAction(
 				label='On',
-				text='Curtain On'
+				text='Window On'
 			),
 			MessageTemplateAction(
 				label='Off',
-				text='Curtain Off'
+				text='Window Off'
 			),
 			MessageTemplateAction(
 				label='Sunlight Sensor',
@@ -175,11 +175,11 @@ buttons_template_message3 = TemplateSendMessage(
 		actions=[            
 			MessageTemplateAction(
 				label='On',
-				text='Storageroom Light On'
+				text='Garage Light On'
 			),
 			MessageTemplateAction(
 				label='Off',
-				text='Storageroom Light Off'
+				text='Garage Light Off'
 			),
 			MessageTemplateAction(
 				label='PIR Sensor',
@@ -250,6 +250,13 @@ image_carousel_template_message3 = TemplateSendMessage(
 				action=MessageTemplateAction(
 					label='Check Home',
 					text='Check Home',
+					)
+			),
+			ImageCarouselColumn(
+				image_url='https://orig00.deviantart.net/06f8/f/2012/052/9/e/yuuko_ichihara__s_magic_circle_by_earthstar01-d4qj5jv.png',
+				action=MessageTemplateAction(
+					label='Check Electricity Bill',
+					text='Check Bill',
 					)
 			),
 			ImageCarouselColumn(
@@ -344,31 +351,31 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			image_carousel_template_message2)
-	elif(message == 'Curtain'): 
+	elif(message == 'Window'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message21)
-	elif(message == 'Curtain On'):
+	elif(message == 'Window On'):
 		send.send_values4(1)
 		if(Noty.notification4() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Curtain On at ' +timeat))
+				TextSendMessage(text='Window On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Curtain didn't on"))
+				TextSendMessage(text="Window didn't on"))
 		detail.detail_lux()	
-	elif(message == 'Curtain Off'):
+	elif(message == 'Window Off'):
 		send.send_values4(0)
 		if(Noty.notification4() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Curtain Off at ' +timeat))
+				TextSendMessage(text='Window Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Curtain didn't off"))
+				TextSendMessage(text="window didn't off"))
 		detail.detail_lux()	
 	elif(message == 'Sunlight Sensor On'):
 		send.send_values4(2)
@@ -416,30 +423,30 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text="Temp Sensor didn't on"))
-	elif(message == 'Storage Room'): 
+	elif(message == 'Garage'): 
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message3)
-	elif(message == 'Storageroom Light On'):
+	elif(message == 'Garage Light On'):
 		send.send_values2(1)
 		if(Noty.notification2() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='LED Stroageroom On at ' +timeat))
+				TextSendMessage(text='LED Garage On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="LED Stroageroom can't on"))
-	elif(message == 'Storageroom Light Off'):
+				TextSendMessage(text="LED Garage can't on"))
+	elif(message == 'Garage Light Off'):
 		send.send_values2(0)
 		if(Noty.notification2() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='LED Stroageroom Off at ' +timeat))
+				TextSendMessage(text='LED Garage Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="LED Stroageroom didn't off"))
+				TextSendMessage(text="LED Garage didn't off"))
 	elif(message == 'PIR Sensor On'):
 		send.send_values2(2)
 		if(Noty.notification2() == '2'):
@@ -552,7 +559,12 @@ def handle_message(event):
 				title='Faculty of Engineering, Mahidol University', address='Salaya, Phutthamonthon District, Nakhon Pathom 73170',
 				latitude=13.796024, longitude=100.325066
 			)
-		)				
+		)
+	elif(message == 'Check Bill'):
+		line_bot_api.reply_message(
+			event.reply_token, 
+			TextSendMessage(text="{}".format(Noty.bill())))
+
 		
 #@handler.add(MessageEvent, message=LocationMessage)
 #def handle_location_message(event):

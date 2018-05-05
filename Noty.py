@@ -65,7 +65,7 @@ def monitor():
                                 ans3 = "Fan's status is {0}".format(l[j])
                                 #print (ans3)
                         if(notification4() == str(j)):
-                                ans4 = "Curtain's status is {0}".format(l[j])
+                                ans4 = "Window's status is {0}".format(l[j])
                                 #print (ans4)
                         if(notification5() == str(j)):
                                 ans5 = "Springer's status is {0}".format(l[j])
@@ -73,10 +73,42 @@ def monitor():
                         j += 1
         return ('{0}\n{1}\n{2}\n{3}\n{4}').format(ans1, ans2, ans3, ans4, ans5)
 
+import json
+import time, sys, datetime
+import requests
+import http.client, urllib
 
-
+def bill():
+    url = 'https://api.thingspeak.com/channels/455279/fields/6/last.json?api_key=ZDDJL90IXYJOIQ3S&result=1'
+    response = urllib.request.urlopen(url) #ส่งคำขอขอข้อมูล
+    data = json.load(response)
+    time = data['field6']
+    #[(กำลังไฟฟ้า (วัตต์)ชนิดนั้นๆ  x จำนวนเครื่องใช้ไฟฟ้า) ÷1000] x จำนวนชั่วโมงที่ใช้งานใน 1 วัน ÷ 3600 = จำนวนหน่วยหรือยูนิต
+    #กำหนดให้ไฟ 50 วัตต์ จำนวน 1 หลอด ยูนิตละ 7 บาท.
+    #ค่าไฟต่อวัน = จำนวนยูนิต x 7
+    #ค่าไฟต่อเดือน = จำนวนยูนิต x7x30
+    time = int(time)
+    #print (type(time))
+    watt = 50
+    amount = 1
+    if(time != 0):
+		#print ("here")
+		total_watt = (watt*amount)/1000
+		#print (total_watt)
+		unit = (total_watt*time)/3600
+		bill_day = unit*7
+		bill_month = unit*7*30
+		ans_day = "Bill/Day is {0}".format(bill_day)
+		#print (ans_day)
+		ans_month = "Bill/Month is {0}".format(bill_month)
+		return('{0}\n{1}').format(ans_day, ans_month)
+    if(time == 0):
+		ans_none = "Today you do not have to pay"
+		return(ans_none)
+            
+		
                                 
-("LED Bedroom's status is On\n", "LED Stroageroom's status is Off\n", "Fan's status is On\n", "Curtain's status is Off\n", "Springer's status is Off")
+#("LED Bedroom's status is On\n", "LED Stroageroom's status is Off\n", "Fan's status is On\n", "Curtain's status is Off\n", "Springer's status is Off")
 
 
 

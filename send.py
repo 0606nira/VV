@@ -72,7 +72,7 @@ def send_values3(sta_3):#ส่งค่าพัดลม 0 =ปิด, 1 =เ�
     except:
         print ("connection failed", sys.exc_info())
 		
-def send_values4(sta_4):#ส่งค่าผ้าม่าน 0 =ปิด, 1 =เปิด, 2=อัตโนมัติ 
+def send_values4(sta_4):#ส่งค่าหน้าต่าง 0 =ปิด, 1 =เปิด, 2=อัตโนมัติ 
     global API_KEY_WRITE
     params = urllib.parse.urlencode(
              {'field4': sta_4, 
