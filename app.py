@@ -31,7 +31,7 @@ line_bot_api = LineBotApi('MEMIUEV7R2dzmxXVTkQRcgply61mFF16A/BEXFbh01XuuN1oGwhLH
 handler = WebhookHandler('13c1dcf5fa5fe8495b15f1ab271791f5')
 
 timeis = time.localtime()
-timeat = time.strftime('%A %d %B %Y, %H:%M:%S', timeis) # กำหนดรูปแบบเวลา
+timeat = time.strftime('%A %d %B %Y', timeis) # กำหนดรูปแบบเวลา
 now = datetime.datetime.now()
 
 timesetup = {}
@@ -424,6 +424,7 @@ def handle_message(event):
 				event.reply_token, 
 				TextSendMessage(text="Fan didn't on"))
 		detail.detail_temp()
+		detail.detail_humi_air()
 	elif(message == 'Fan Off'):
 		send.send_values3(0)
 		if(Noty.notification3() == '0'):
@@ -493,7 +494,7 @@ def handle_message(event):
 			line_bot_api.reply_message(
 				event.reply_token, 
 				TextSendMessage(text="Springer didn't on"))
-		detail.detail_humi()
+		detail.detail_humi_soil()
 	elif(message == 'Springer Off'):
 		send.send_values5(0)	
 		if(Noty.notification5() == '0'):
