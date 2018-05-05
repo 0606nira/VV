@@ -102,7 +102,7 @@ def bill():
 		#print (ans_day)
 		ans_month = "Bill/Month is {0}".format(bill_month)
 		return('{0}\n{1}').format(ans_day, ans_month)
-    if(time == 0):
+	elif(time == 0):
 		ans_none = "Today you do not have to pay"
 		return(ans_none)
             
