@@ -43,28 +43,28 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+				image_url='http://www.ebizbydesign.com/data/img/perfect-modern-bedrooms-modern-bedroom-design-ideas-remodels-photos-houzz.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
 				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
 							)
 					),
 					ImageCarouselColumn(
-						image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+						image_url='https://st.hzcdn.com/simgs/bbc1af3d04086530_4-3375/contemporary-family-room.jpg', #https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg
 						action=MessageTemplateAction(
 								label='Living Room',
 								text='Living Room',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+						image_url='http://www.secretentourage.com/wp-content/uploads/2010/10/458_extralarge.jpg', #https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg
 						action=MessageTemplateAction(
 								label='Garage',
 								text='Garage',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+						image_url='http://www.hannam-thehill.com/images/landscape_img02.jpg', #https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg
 						action=MessageTemplateAction(
 								label='Landscape',
 								text='Landscape',								
@@ -78,7 +78,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg',
+		thumbnail_image_url='https://cdn.pixabay.com/photo/2015/07/13/16/49/night-table-lamp-843461_960_720.jpg',
 		title='Light',
 		text='Please select',
 		actions=[            
@@ -100,14 +100,14 @@ image_carousel_template_message2 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+				image_url='http://residencestyle.com/wp-content/uploads/2016/07/Broken-Window-Interior-Design.jpg',
 				action=MessageTemplateAction(
 					label='Window',
 					text='Window',
 							)
 					),
 			ImageCarouselColumn(
-				image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+				image_url='http://static.oprah.com/images/home/201011/20101119-tom-kraeutler-12-easy-fall-fix-ups-3-600x411.jpg',
 				action=MessageTemplateAction(
 					label='Fan',
 					text='Fan',								
@@ -121,7 +121,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 buttons_template_message21 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+		thumbnail_image_url='http://residencestyle.com/wp-content/uploads/2016/07/Broken-Window-Interior-Design.jpg',
 		title='Window',
 		text='Please select',
 		actions=[            
@@ -145,7 +145,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg',
+		thumbnail_image_url='http://static.oprah.com/images/home/201011/20101119-tom-kraeutler-12-easy-fall-fix-ups-3-600x411.jpg',
 		title='Fan',
 		text='Please select',
 		actions=[            
@@ -169,7 +169,7 @@ buttons_template_message22 = TemplateSendMessage(
 buttons_template_message3 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg',
+		thumbnail_image_url='https://images.pexels.com/photos/185699/pexels-photo-185699.jpeg?auto=compress&cs=tinysrgb&h=350',
 		title='Light',
 		text='Please select',
 		actions=[            
@@ -193,7 +193,7 @@ buttons_template_message3 = TemplateSendMessage(
 buttons_template_message4 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg',
+		thumbnail_image_url='https://images.pexels.com/photos/212324/pexels-photo-212324.jpeg?auto=compress&cs=tinysrgb&h=350',
 		title='Springer',
 		text='Please select',
 		actions=[            
@@ -246,7 +246,7 @@ image_carousel_template_message3 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://orig00.deviantart.net/06f8/f/2012/052/9/e/yuuko_ichihara__s_magic_circle_by_earthstar01-d4qj5jv.png',
+				image_url='https://res.cloudinary.com/teepublic/image/private/s--bAhU43hA--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1508124002/production/designs/1975176_1.jpg',
 				action=MessageTemplateAction(
 					label='Check Home',
 					text='Check Home',
