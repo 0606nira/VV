@@ -43,7 +43,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='http://manohome.com/wp-content/uploads/2014/12/bedroom-gorgeous-picture-of-classy-bedroom-decoration-using-solid-oak-wood-vinyl-bedroom-flooring-including-white-glass-crystal-bedroom-chandelier-and-light-grey-bedroom-wall-paint-awesome-classy-bedr-936x702.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
+				image_url='https://i.pinimg.com/originals/e0/b4/6f/e0b46f97680a9fa9a72028b3844555aa.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
 				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
@@ -57,7 +57,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 							)
 					),
 				ImageCarouselColumn(
-						image_url='http://www.secretentourage.com/wp-content/uploads/2010/10/458_extralarge.jpg', #https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg
+						image_url='https://i.pinimg.com/originals/bb/29/f0/bb29f0a08a40a5f8e5b5aab01300421d.jpg', #https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg
 						action=MessageTemplateAction(
 								label='Garage',
 								text='Garage',								
