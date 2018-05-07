@@ -100,14 +100,14 @@ image_carousel_template_message2 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='http://residencestyle.com/wp-content/uploads/2016/07/Broken-Window-Interior-Design.jpg',
+				image_url='https://www.reggie.net/photos/england/cambridgeshire/cambridge/downing_college/east_range/10021415_bicycle_window_boxes_sandstone_downing_college_cambridge-600.jpg',
 				action=MessageTemplateAction(
 					label='Window',
 					text='Window',
 							)
 					),
 			ImageCarouselColumn(
-				image_url='http://static.oprah.com/images/home/201011/20101119-tom-kraeutler-12-easy-fall-fix-ups-3-600x411.jpg',
+				image_url='https://cdn.pixabay.com/photo/2015/12/25/18/30/ceiling-1107862_960_720.jpg',
 				action=MessageTemplateAction(
 					label='Fan',
 					text='Fan',								
@@ -121,7 +121,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 buttons_template_message21 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='http://residencestyle.com/wp-content/uploads/2016/07/Broken-Window-Interior-Design.jpg',
+		thumbnail_image_url='https://www.reggie.net/photos/england/cambridgeshire/cambridge/downing_college/east_range/10021415_bicycle_window_boxes_sandstone_downing_college_cambridge-600.jpg',
 		title='Window',
 		text='Please select',
 		actions=[            
@@ -145,7 +145,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='http://static.oprah.com/images/home/201011/20101119-tom-kraeutler-12-easy-fall-fix-ups-3-600x411.jpg',
+		thumbnail_image_url='https://cdn.pixabay.com/photo/2015/12/25/18/30/ceiling-1107862_960_720.jpg',
 		title='Fan',
 		text='Please select',
 		actions=[            
