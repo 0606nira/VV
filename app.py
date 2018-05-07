@@ -43,7 +43,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='http://www.ebizbydesign.com/data/img/perfect-modern-bedrooms-modern-bedroom-design-ideas-remodels-photos-houzz.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
+				image_url='http://manohome.com/wp-content/uploads/2014/12/bedroom-gorgeous-picture-of-classy-bedroom-decoration-using-solid-oak-wood-vinyl-bedroom-flooring-including-white-glass-crystal-bedroom-chandelier-and-light-grey-bedroom-wall-paint-awesome-classy-bedr-936x702.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
 				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
@@ -64,7 +64,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 							)
 					),
 				ImageCarouselColumn(
-						image_url='http://www.hannam-thehill.com/images/landscape_img02.jpg', #https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg
+						image_url='https://2p2bboli8d61fqhjiqzb8p1a-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/iron-man-2-audi-r8-680x481.jpg', #https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg
 						action=MessageTemplateAction(
 								label='Landscape',
 								text='Landscape',								
