@@ -203,8 +203,8 @@ buttons_template_message4 = TemplateSendMessage(
 				text='Springer Off'
 			),
 			MessageTemplateAction(
-				label='Humi Sensor',
-				text='Humi Sensor On'
+				label='Moisture Sensor',
+				text='Moisture Sensor On'
 			),
 		]
 	)
@@ -442,7 +442,7 @@ def handle_message(event):
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Temp Sensor didn't on"))
+				TextSendMessage(text="DHT11 Sensor didn't on"))
 	elif(message == 'Garage'): 
 		line_bot_api.reply_message(
 			event.reply_token,
@@ -503,16 +503,16 @@ def handle_message(event):
 				event.reply_token, 
 				TextSendMessage(text="Springer didn't off"))
 		detail.detail_humi_soil()
-	elif(message == 'Humi Sensor On'):
+	elif(message == 'Moisture Sensor On'):
 		send.send_values5(2)	
 		if(Noty.notification5() == '2'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Humi Sensor on at ' +timeat))
+				TextSendMessage(text='Moisture Sensor on at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Humi Sensor didn't on"))
+				TextSendMessage(text="Moisture Sensor didn't on"))
 	elif(message == 'Bye'): #เตะ bot ออกจากกลุุ่มหรือห้องแชท
 		if isinstance(event.source, SourceGroup):
 			line_bot_api.reply_message(
