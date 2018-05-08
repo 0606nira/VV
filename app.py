@@ -155,8 +155,8 @@ buttons_template_message22 = TemplateSendMessage(
 				text='Fan Off'
 			),
 			MessageTemplateAction(
-				label='Temp Sensor',
-				text='Temp Sensor On'
+				label='DHT11 Sensor',
+				text='DHT11 Sensor On'
 			),
 		]
 	)
@@ -433,12 +433,12 @@ def handle_message(event):
 				event.reply_token, 
 				TextSendMessage(text="Fan didn't off"))
 		detail.detail_temp()
-	elif(message == 'Temp Sensor On'):
+	elif(message == 'DHT11 Sensor On'):
 		send.send_values3(2)
 		if(Noty.notification3() == '2'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Temp Sensor On at ' +timeat))
+				TextSendMessage(text='DHT11 Sensor On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
