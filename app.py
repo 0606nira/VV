@@ -34,9 +34,6 @@ timeis = time.localtime()
 timeat = time.strftime('%A %d %B %Y', timeis) # กำหนดรูปแบบเวลา
 now = datetime.datetime.now()
 
-timesetup = {}
-
-dummy = 0
 
 image_carousel_template_message1 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
@@ -78,7 +75,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://cdn.pixabay.com/photo/2015/07/13/16/49/night-table-lamp-843461_960_720.jpg',
+		thumbnail_image_url='http://blogs.elon.edu/technology/files/2015/03/4212105696_6397e60a5b_b.jpg',
 		title='Light',
 		text='Please select',
 		actions=[            
@@ -107,7 +104,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 							)
 					),
 			ImageCarouselColumn(
-				image_url='https://cdn.pixabay.com/photo/2015/12/25/18/30/ceiling-1107862_960_720.jpg',
+				image_url='http://www.freepressjournal.in/wp-content/uploads/2016/09/fan.jpg',
 				action=MessageTemplateAction(
 					label='Fan',
 					text='Fan',								
@@ -145,7 +142,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='https://cdn.pixabay.com/photo/2015/12/25/18/30/ceiling-1107862_960_720.jpg',
+		thumbnail_image_url='http://www.freepressjournal.in/wp-content/uploads/2016/09/fan.jpg',
 		title='Fan',
 		text='Please select',
 		actions=[            
