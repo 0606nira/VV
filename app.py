@@ -104,7 +104,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 							)
 					),
 			ImageCarouselColumn(
-				image_url='http://images.indianexpress.com/2016/09/electric-fan_759-422.jpg',
+				image_url='https://ceilingfancomparison.com/wp-content/uploads/2017/01/Buying-a-Ceiling-Fan-with-Lights.jpg',
 				action=MessageTemplateAction(
 					label='Fan',
 					text='Fan',								
@@ -142,7 +142,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='http://images.indianexpress.com/2016/09/electric-fan_759-422.jpg',
+		thumbnail_image_url='https://ceilingfancomparison.com/wp-content/uploads/2017/01/Buying-a-Ceiling-Fan-with-Lights.jpg',
 		title='Fan',
 		text='Please select',
 		actions=[            
