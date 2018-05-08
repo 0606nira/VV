@@ -75,7 +75,7 @@ image_carousel_template_message1 = TemplateSendMessage(
 buttons_template_message1 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='http://blogs.elon.edu/technology/files/2015/03/4212105696_6397e60a5b_b.jpg',
+		thumbnail_image_url='https://techannouncer.com/wp-content/uploads/2017/09/Darkroom-lamp-Market-1.jpg',
 		title='Light',
 		text='Please select',
 		actions=[            
@@ -91,7 +91,7 @@ buttons_template_message1 = TemplateSendMessage(
 	)
 )
 
-# ห้องสัตว์เลี้ยง มีพัดลม จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
+# ห้องนั่งเล่น มีพัดลม จากวัดแสง กับ พัดลม จากวัดอุณหภูมิ
 image_carousel_template_message2 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -104,7 +104,7 @@ image_carousel_template_message2 = TemplateSendMessage(
 							)
 					),
 			ImageCarouselColumn(
-				image_url='http://www.freepressjournal.in/wp-content/uploads/2016/09/fan.jpg',
+				image_url='http://images.indianexpress.com/2016/09/electric-fan_759-422.jpg',
 				action=MessageTemplateAction(
 					label='Fan',
 					text='Fan',								
@@ -142,7 +142,7 @@ buttons_template_message21 = TemplateSendMessage(
 buttons_template_message22 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
-		thumbnail_image_url='http://www.freepressjournal.in/wp-content/uploads/2016/09/fan.jpg',
+		thumbnail_image_url='http://images.indianexpress.com/2016/09/electric-fan_759-422.jpg',
 		title='Fan',
 		text='Please select',
 		actions=[            
