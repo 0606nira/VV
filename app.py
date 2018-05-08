@@ -591,7 +591,7 @@ def handle_message(event):
 	elif(message == 'Check Bill'):
 		line_bot_api.reply_message(
 			event.reply_token, 
-			TextSendMessage(text="{}".format(Noty.bill())))
+			TextSendMessage(text="{0}\n{1}".format(timeat, Noty.bill())))
 
 		
 #@handler.add(MessageEvent, message=LocationMessage)
