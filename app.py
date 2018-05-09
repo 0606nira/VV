@@ -594,8 +594,20 @@ def handle_message(event):
 			TextSendMessage(text="{0}\n{1}".format(timeat, Noty.bill())))
 	else:
 		line_bot_api.reply_message(
-			event.reply_token,
-			TextSendMessage(text=message))
+			event.reply_token, 
+			StickerSendMessage(
+				package_id='2',
+				sticker_id='149'
+				))
+				
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_sticker_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        StickerSendMessage(
+            package_id=event.message.package_id,
+            sticker_id=event.message.sticker_id)
+    )	
 
 		
 #@handler.add(MessageEvent, message=LocationMessage)
