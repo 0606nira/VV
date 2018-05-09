@@ -68,7 +68,7 @@ def monitor():
                                 ans4 = "Window's status is {0}".format(l[j])
                                 #print (ans4)
                         if(notification5() == str(j)):
-                                ans5 = "Springer's status is {0}".format(l[j])
+                                ans5 = "Sprinkler's status is {0}".format(l[j])
 
                         j += 1
         return ('{0}\n{1}\n{2}\n{3}\n{4}').format(ans1, ans2, ans3, ans4, ans5)
