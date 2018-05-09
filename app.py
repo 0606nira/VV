@@ -191,16 +191,16 @@ buttons_template_message4 = TemplateSendMessage(
 	alt_text='Buttons template',
 	template=ButtonsTemplate(
 		thumbnail_image_url='https://images.pexels.com/photos/212324/pexels-photo-212324.jpeg?auto=compress&cs=tinysrgb&h=350',
-		title='Springer',
+		title='Sprinkler',
 		text='Please select',
 		actions=[            
 			MessageTemplateAction(
 				label='On',
-				text='Springer On'
+				text='Sprinkler On'
 			),
 			MessageTemplateAction(
 				label='Off',
-				text='Springer Off'
+				text='Sprinkler Off'
 			),
 			MessageTemplateAction(
 				label='Moisture Sensor',
@@ -266,7 +266,7 @@ image_carousel_template_message3 = TemplateSendMessage(
 		]
 	)
 )
-
+#Humidity
 image_carousel_template_message4 = TemplateSendMessage(
 	alt_text='ImageCarousel template',
 	template=ImageCarouselTemplate(
@@ -481,27 +481,27 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token,
 			buttons_template_message4)
-	elif(message == 'Springer On'):
+	elif(message == 'Sprinkler On'):
 		send.send_values5(1)
 		if(Noty.notification5() == '1'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Springer On at ' +timeat))
+				TextSendMessage(text='Sprinkler On at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Springer didn't on"))
+				TextSendMessage(text="Sprinkler didn't on"))
 		detail.detail_humi_soil()
-	elif(message == 'Springer Off'):
+	elif(message == 'Sprinkler Off'):
 		send.send_values5(0)	
 		if(Noty.notification5() == '0'):
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text='Springer Off at ' +timeat))
+				TextSendMessage(text='Sprinkler Off at ' +timeat))
 		else:
 			line_bot_api.reply_message(
 				event.reply_token, 
-				TextSendMessage(text="Springer didn't off"))
+				TextSendMessage(text="Sprinkler didn't off"))
 		detail.detail_humi_soil()
 	elif(message == 'Moisture Sensor On'):
 		send.send_values5(2)	
@@ -592,6 +592,10 @@ def handle_message(event):
 		line_bot_api.reply_message(
 			event.reply_token, 
 			TextSendMessage(text="{0}\n{1}".format(timeat, Noty.bill())))
+	else:
+		line_bot_api.reply_message(
+			event.reply_token,
+			TextSendMessage(text=message))
 
 		
 #@handler.add(MessageEvent, message=LocationMessage)
