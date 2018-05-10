@@ -40,28 +40,25 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://i.pinimg.com/originals/e0/b4/6f/e0b46f97680a9fa9a72028b3844555aa.jpg', #https://i1.wp.com/www.kmusic2blog.com/wp-content/uploads/2017/02/cover.jpg
-				action=MessageTemplateAction(
+				image_url='https://i.pinimg.com/originals/e0/b4/6f/e0b46f97680a9fa9a72028b3844555aa.jpg', 
 					label='Bed Room',
 					text='Bed Room',
 							)
 					),
 					ImageCarouselColumn(
-						image_url='https://st.hzcdn.com/simgs/bbc1af3d04086530_4-3375/contemporary-family-room.jpg', #https://pm1.narvii.com/6584/47a73dddb85c1deeff58e76a1223f6d5b12bfd0b_hq.jpg
-						action=MessageTemplateAction(
+						image_url='https://st.hzcdn.com/simgs/bbc1af3d04086530_4-3375/contemporary-family-room.jpg', 
 								label='Living Room',
 								text='Living Room',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='https://2p2bboli8d61fqhjiqzb8p1a-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/iron-man-2-audi-r8-680x481.jpg', #https://img00.deviantart.net/09f6/i/2016/141/d/0/bts___the_most_beautiful_moment_in_life__yf_by_5secondsofdemi-da3a3br.jpg
-						action=MessageTemplateAction(
+						image_url='https://2p2bboli8d61fqhjiqzb8p1a-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/iron-man-2-audi-r8-680x481.jpg', 
 								label='Garage',
 								text='Garage',								
 							)
 					),
 				ImageCarouselColumn(
-						image_url='https://avatars.mds.yandex.net/get-pdb/251121/85e9f348-b5ff-41ae-8ad8-0db1a8db8293/s800', #https://i0.wp.com/www.kmusic2blog.com/wp-content/uploads/2016/10/cover-1024x1024.jpg
+						image_url='https://avatars.mds.yandex.net/get-pdb/251121/85e9f348-b5ff-41ae-8ad8-0db1a8db8293/s800', 
 						action=MessageTemplateAction(
 								label='Garden',
 								text='Garden',								
@@ -609,7 +606,10 @@ def handle_sticker_message(event):
             sticker_id=event.message.sticker_id)
     )	
 
-		
+if __name__ == "__main__":
+	app.run(debug=True)
+
+	
 #@handler.add(MessageEvent, message=LocationMessage)
 #def handle_location_message(event):
 	#message = event.message.text
@@ -662,5 +662,3 @@ def handle_sticker_message(event):
 		#	sticker_id=event.message.sticker_id
 	# )
 	
-if __name__ == "__main__":
-	app.run(debug=True)
