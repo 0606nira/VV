@@ -624,7 +624,7 @@ Please send the following text with the same alphabet.
 	»»————-　　————-««
 "Home" : control your house.
 "Set Up" : check any data.
-"Weather" : check a temp(TMD).
+"Weather" : check temp(TMD).
 "Bye" : delete me.
 		"""))
 
