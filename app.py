@@ -599,7 +599,8 @@ def handle_message(event):
 				package_id='2',
 				sticker_id='149'
 				))
-				
+
+#ตอบกลับสติ๊กเกอร์				
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     line_bot_api.reply_message(
@@ -609,6 +610,7 @@ def handle_sticker_message(event):
             sticker_id=event.message.sticker_id)
     )	
 
+#Greeting for group/room	
 @handler.add(JoinEvent)
 def handle_join(event):
     line_bot_api.reply_message(
@@ -625,7 +627,8 @@ Please send the following text with the same alphabet.
 "Weather" : check a temp from TMD.
 "Bye" : delete me.
 		"""))
-		
+
+#Greeting for friend		
 @handler.add(FollowEvent)
 def handle_follow(event):
     line_bot_api.reply_message(
