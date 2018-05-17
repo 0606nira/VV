@@ -622,10 +622,10 @@ Hello I'm Sweet Home IEMU ☆*:.｡.o(≧▽≦)o.｡.:*☆
 *+:｡For Group/Room｡:+*
 Please send the following text with the same alphabet.
 	»»————-　　————-««
-"Home" : control your house.
-"Set Up" : check any data.
-"Weather" : check temp(TMD).
-"Bye" : delete me.
+"Home" : control appliance in your house.
+"Set Up" : check environment, E-bill and Mahidol's Location.
+"Weather" : check a temperature from TMD.
+"Bye" : eliminate me from this chat.
 		"""))
 
 #Greeting for friend		
