@@ -619,12 +619,12 @@ def handle_join(event):
 Hello I'm Sweet Home IEMU ☆*:.｡.o(≧▽≦)o.｡.:*☆
 	Thank for invited me.
 	｡☆✼★━━━━━━━━━━━━★✼☆｡
-*+:｡For Group/Room chat｡:+*
+*+:｡For Group/Room｡:+*
 Please send the following text with the same alphabet.
 	»»————-　　————-««
 "Home" : control your house.
 "Set Up" : check any data.
-"Weather" : check a temp from TMD.
+"Weather" : check a temp(TMD).
 "Bye" : delete me.
 		"""))
 
