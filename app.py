@@ -40,30 +40,33 @@ image_carousel_template_message1 = TemplateSendMessage(
 	template=ImageCarouselTemplate(
 		columns=[
 			ImageCarouselColumn(
-				image_url='https://i.pinimg.com/originals/e0/b4/6f/e0b46f97680a9fa9a72028b3844555aa.jpg', 
+				image_url='https://i.pinimg.com/originals/e0/b4/6f/e0b46f97680a9fa9a72028b3844555aa.jpg',
+				action=MessageTemplateAction(
 					label='Bed Room',
 					text='Bed Room',
-							)
-					),
-					ImageCarouselColumn(
-						image_url='https://st.hzcdn.com/simgs/bbc1af3d04086530_4-3375/contemporary-family-room.jpg', 
-								label='Living Room',
-								text='Living Room',								
-							)
-					),
-				ImageCarouselColumn(
-						image_url='https://2p2bboli8d61fqhjiqzb8p1a-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/iron-man-2-audi-r8-680x481.jpg', 
-								label='Garage',
-								text='Garage',								
-							)
-					),
-				ImageCarouselColumn(
-						image_url='https://avatars.mds.yandex.net/get-pdb/251121/85e9f348-b5ff-41ae-8ad8-0db1a8db8293/s800', 
-						action=MessageTemplateAction(
-								label='Garden',
-								text='Garden',								
-							)
 					)
+				),
+			ImageCarouselColumn(
+				image_url='https://st.hzcdn.com/simgs/bbc1af3d04086530_4-3375/contemporary-family-room.jpg',
+				action=MessageTemplateAction(				
+					label='Living Room',
+					text='Living Room',
+					)					
+				),
+			ImageCarouselColumn(
+				image_url='https://2p2bboli8d61fqhjiqzb8p1a-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/iron-man-2-audi-r8-680x481.jpg', 
+				action=MessageTemplateAction(
+					label='Garage',
+					text='Garage',	
+					)					
+				),
+			ImageCarouselColumn(
+				image_url='https://avatars.mds.yandex.net/get-pdb/251121/85e9f348-b5ff-41ae-8ad8-0db1a8db8293/s800', 
+				action=MessageTemplateAction(
+					label='Garden',
+					text='Garden',								
+					)
+				)
 			]
 		)
 )
