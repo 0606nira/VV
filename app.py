@@ -598,7 +598,7 @@ def handle_message(event):
 				event.reply_token, TextMessage(text="""\
 What would you like to order?				
 	｡☆✼★━━━━━━━━━━━━★✼☆｡
-*+:｡For Group/Room｡:+*
+*+:｡For Group Chat｡:+*
 Please send the following text with the same alphabet.
 	»»————-　　————-««
 "Home" : control appliance in your house.
@@ -611,7 +611,7 @@ Please send the following text with the same alphabet.
 				event.reply_token, TextMessage(text="""\
 What would you like to order?				
 	｡☆✼★━━━━━━━━━━━━★✼☆｡
-*+:｡For Group/Room｡:+*
+*+:｡For Room Chat｡:+*
 Please send the following text with the same alphabet.
 	»»————-　　————-««
 "Home" : control appliance in your house.
