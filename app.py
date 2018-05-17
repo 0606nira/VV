@@ -593,12 +593,39 @@ def handle_message(event):
 			event.reply_token, 
 			TextSendMessage(text="{0}\n{1}".format(timeat, Noty.bill())))
 	else:
-		line_bot_api.reply_message(
-			event.reply_token, 
-			StickerSendMessage(
-				package_id='2',
-				sticker_id='149'
-				))
+		if isinstance(event.source, SourceGroup):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text="""\
+What would you like to order?				
+	｡☆✼★━━━━━━━━━━━━★✼☆｡
+*+:｡For Group/Room｡:+*
+Please send the following text with the same alphabet.
+	»»————-　　————-««
+"Home" : control appliance in your house.
+"Set Up" : check environment, E-bill and Mahidol's Location.
+"Weather" : check a temperature from TMD.
+"Bye" : eliminate me from this chat.
+				"""))
+		elif isinstance(event.source, SourceRoom):
+			line_bot_api.reply_message(
+				event.reply_token, TextMessage(text="""\
+What would you like to order?				
+	｡☆✼★━━━━━━━━━━━━★✼☆｡
+*+:｡For Group/Room｡:+*
+Please send the following text with the same alphabet.
+	»»————-　　————-««
+"Home" : control appliance in your house.
+"Set Up" : check environment, E-bill and Mahidol's Location.
+"Weather" : check a temperature from TMD.
+"Bye" : eliminate me from this chat.				
+				"""))
+		else:
+			line_bot_api.reply_message(
+				event.reply_token, 
+				StickerSendMessage(
+					package_id='2',
+					sticker_id='149'
+					))
 
 #ตอบกลับสติ๊กเกอร์				
 @handler.add(MessageEvent, message=StickerMessage)
