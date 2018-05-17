@@ -606,6 +606,35 @@ def handle_sticker_message(event):
             sticker_id=event.message.sticker_id)
     )	
 
+@handler.add(JoinEvent)
+def handle_join(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="""\
+		Hello I'm Sweet Home IEMU ☆*:.｡.o(≧▽≦)o.｡.:*☆
+		Thank for invited me.
+		｡☆✼★━━━━━━━━━━━━★✼☆｡
+		*+:｡.｡For Group/Room chat｡.｡:+*
+		Please send the following text with the same alphabet.
+		"Home" : use for control your house.
+		"Set Up" : use for check any data and information.
+		"Weather" : use for check a temperature from TMD.
+		"Bye" : use for delete me from this chat.
+		"""))
+		
+@handler.add(FollowEvent)
+def handle_follow(event):
+    line_bot_api.reply_message(
+        event.reply_token, TextSendMessage(text="""\
+		Hello to Sweet Home IEMU ☆*:.｡.o(≧▽≦)o.｡.:*☆
+		Thank for added me.
+		｡☆✼★━━━━━━━━━━━━★✼☆｡
+		You don't need to interact with me by a text.
+		Just try to use Rich Menu from below.
+		"""))
+		
+
+
 if __name__ == "__main__":
 	app.run(debug=True)
 
